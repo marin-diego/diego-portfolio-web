@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diego Marin | Mechanical Engineering &amp; Hardware Systems</title>
+<meta name="description" content="Mechanical engineering student and co-founder of MAPC Technologies. Rockets, capsules, and robots I've designed, 3D printed, and tested.">
+<meta name="theme-color" content="#0A0A0C">
+<link rel="canonical" href="https://diegomarin.dev/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Diego Marin">
+<meta property="og:url" content="https://diegomarin.dev/">
+<meta property="og:title" content="Diego Marin | Mechanical Engineering &amp; Hardware Systems">
+<meta property="og:description" content="Mechanical engineering student and co-founder of MAPC Technologies. Rockets, capsules, and robots I've designed, 3D printed, and tested.">
+<meta property="og:image" content="https://diegomarin.dev/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Diego Marin: Print. Test. Fly.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Diego Marin | Mechanical Engineering &amp; Hardware Systems">
+<meta name="twitter:description" content="Mechanical engineering student and co-founder of MAPC Technologies. Rockets, capsules, and robots I've designed, 3D printed, and tested.">
+<meta name="twitter:image" content="https://diegomarin.dev/assets/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<script>
+  const ALWAYS_ANIMATE = true;
+  const r = document.documentElement;
+  if (ALWAYS_ANIMATE) r.classList.add('force-motion');
+  if (ALWAYS_ANIMATE || !matchMedia('(prefers-reduced-motion: reduce)').matches) r.classList.add('js');
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      fontFamily: { sans: ['"Space Grotesk"', 'system-ui', 'sans-serif'], mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'] },
+      colors: { bg: '#0A0A0C', panel: '#18181B', line: '#27272A', ink: '#EDEDED', mute: '#8B8B94', orange: '#FF5500' }
+    } }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; background: #0A0A0C; }
+  body { background-color: #0A0A0C; color: #EDEDED;
+         background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+         background-size: 56px 56px; }
+  ::selection { background: #FF5500; color: #0A0A0C; }
+  .h-mega { font-size: clamp(2.6rem, 7.4vw, 7.5rem); letter-spacing: -0.045em; line-height: .95; }
+  .h-sec { font-size: clamp(2.5rem, 5.5vw, 5rem); letter-spacing: -0.04em; line-height: .95; }
+  .contact-title { font-size: clamp(2.75rem, 6vw, 5.25rem); letter-spacing: -0.04em; line-height: .95; }
+
+  .card, .spot { background: #18181B; border: 1px solid #27272A; transition: border-color .35s, box-shadow .35s; }
+  .card:hover, .spot:hover { border-color: #FF5500; box-shadow: 0 0 0 1px rgba(255,85,0,.3), 0 0 44px -12px rgba(255,85,0,.45); }
+  .pill { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .03em; border: 1px solid #27272A; background: #0F0F12; padding: .3rem .55rem; color: #fff; }
+
+  .img-slot { position: relative; overflow: hidden; background-color: #101013; border: 1px solid #27272A; }
+  .img-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; }
+  .img-slot img.active { opacity: 1; }
+  .img-slot.contain img { object-fit: contain; }
+
+  .slide-bars { position: absolute; left: 12px; right: 12px; bottom: 12px; display: flex; gap: 4px; z-index: 3; }
+  .slide-bars i { flex: 1; height: 3px; background: rgba(255,255,255,.28); transition: background .4s; }
+  .slide-bars i.on { background: #FF5500; }
+
+  @keyframes pulse-dot { 0% { box-shadow: 0 0 0 0 rgba(255,85,0,.7); } 100% { box-shadow: 0 0 0 10px rgba(255,85,0,0); } }
+  .dot { width: 8px; height: 8px; border-radius: 9999px; background: #FF5500; animation: pulse-dot 1.6s infinite; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid #FF5500; outline-offset: 3px; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .marquee { animation: marquee 45s linear infinite; }
+
+
+  /* ---- media tabs: PHOTOS / VIDEO / 3D ---- */
+  .media-tabs { position: absolute; top: 12px; left: 12px; z-index: 12; display: flex; gap: 4px; }
+  .media-tab { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .06em; padding: .35rem .65rem; color: #EDEDED;
+               background: rgba(10,10,12,.82); border: 1px solid #27272A; cursor: pointer; backdrop-filter: blur(4px); transition: color .2s, border-color .2s, background .2s; }
+  .media-tab:hover { border-color: #FF5500; color: #FF5500; }
+  .media-tab[aria-pressed="true"] { background: #FF5500; border-color: #FF5500; color: #0A0A0C; }
+  .media-panel { position: absolute; inset: 0; z-index: 10; background: #101013; border: 1px solid #27272A; }
+  .media-panel[hidden] { display: none; }
+  .media-panel video { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
+  .media-panel model-viewer { width: 100%; height: 100%; --poster-color: transparent; background: radial-gradient(circle at 50% 40%, #1c1c21 0%, #101013 70%); }
+  .media-msg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1.5rem;
+               font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: .06em; color: #8B8B94; }
+  .media-hint { position: absolute; left: 12px; bottom: 12px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .06em; color: #8B8B94; pointer-events: none; }
+
+  /* ---- slideshow: manual controls ---- */
+  .slide-bars { bottom: 4px; }
+  .slide-bars i { box-sizing: content-box; padding: 8px 0; background-clip: content-box; cursor: pointer; }
+  .slide-bars i.on { background-clip: content-box; }
+  .slide-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 40px; height: 56px; display: flex; align-items: center; justify-content: center;
+               font-family: "JetBrains Mono", monospace; font-size: 22px; line-height: 1; color: #fff; background: rgba(10,10,12,.55); border: 1px solid #27272A;
+               cursor: pointer; opacity: .55; transition: opacity .2s, border-color .2s, color .2s; }
+  .slide-nav:hover, .slide-nav:focus-visible { opacity: 1; border-color: #FF5500; color: #FF5500; }
+  .slide-nav.prev { left: 12px; }
+  .slide-nav.next { right: 12px; }
+
+  /* ---- what went wrong ---- */
+  .wrong { border: 1px solid #27272A; background: #0F0F12; }
+  .wrong summary { list-style: none; cursor: pointer; padding: .7rem .9rem; display: flex; justify-content: space-between; align-items: center;
+                   font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .06em; color: #EDEDED; }
+  .wrong summary::-webkit-details-marker { display: none; }
+  .wrong summary::after { content: "+"; color: #FF5500; font-size: 15px; }
+  .wrong[open] summary::after { content: "\\2212"; }
+  .wrong summary:hover { color: #FF5500; }
+  .wrong .wrong-body { padding: 0 .9rem .9rem; font-size: .95rem; line-height: 1.6; color: #C9C9CF; }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div id="progress" class="fixed top-0 left-0 h-[3px] w-full bg-orange z-[60] origin-left" style="transform:scaleX(0)"></div>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="sticky top-0 z-50 bg-bg/85 backdrop-blur border-b border-line">
+  <nav class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-3 font-bold tracking-tight text-white"><span class="w-3 h-3 bg-orange"></span>Diego Marin</a>
+    <ul class="hidden md:flex gap-5 lg:gap-8 font-mono text-xs">
+      <li><a href="#projects" class="hover:text-orange">Projects</a></li>
+      <li><a href="#skills" class="hover:text-orange">Skills</a></li>
+      <li><a href="#leadership" class="hover:text-orange">Leadership &amp; Sponsorships</a></li>
+      <li><a href="#astrophotography" class="hover:text-orange">Astrophotography</a></li>
+      <li><a href="#human" class="hover:text-orange">Human Side</a></li>
+      <li><a href="#about" class="hover:text-orange">About &amp; Honors</a></li>
+      <li><a href="#contact" class="hover:text-orange">Contact</a></li>
+    </ul>
+    <a href="#contact" class="md:hidden font-mono text-xs text-orange">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="max-w-7xl mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-20">
+  <div class="status-row flex flex-wrap items-center justify-between gap-4 font-mono text-xs border-b border-line pb-4">
+    <span class="flex items-center gap-3 text-white"><span class="dot"></span>STATUS: HARDWARE ITERATION ACTIVE</span>
+    <span class="flex items-center gap-4"><a href="#contact" class="pill border-orange/60 text-orange hover:bg-orange hover:text-bg transition-colors">OPEN TO INTERNSHIPS</a><span class="text-mute">LOS ANGELES</span></span>
+  </div>
+
+  <h1 class="h-mega font-bold text-white mt-14 md:mt-20 max-w-6xl">Print. Test. Fly.</h1>
+
+  <div class="mt-12 grid md:grid-cols-12 gap-8">
+    <p class="hero-sub md:col-start-6 md:col-span-6 text-lg md:text-xl leading-relaxed text-ink">
+      Co-founder of MAPC Technologies, specialized in advanced 3D CAD design, 3D printing, and physical prototype development for aerospace and robotics.
+    </p>
+  </div>
+
+  <div class="hero-cta mt-10 md:ml-[41.6%] flex flex-wrap gap-4">
+    <a href="#projects" class="btn bg-orange text-bg px-7 py-3.5 font-mono text-sm font-medium hover:bg-white">Explore projects</a>
+    <a href="#contact" class="btn border border-ink/40 text-white px-7 py-3.5 font-mono text-sm hover:border-orange hover:text-orange">Get in touch</a>
+  </div>
+
+  <div class="hero-stats mt-16 grid sm:grid-cols-3 gap-px bg-line border border-line font-mono text-xs">
+    <div class="bg-bg p-5"><p class="text-mute">INSTITUTION</p><p class="mt-2 text-white">CSUN / B.S. MECHANICAL ENGINEERING</p></div>
+    <div class="bg-bg p-5"><p class="text-mute">TEAM</p><p class="mt-2 text-white">MAPC TECHNOLOGIES / CO-FOUNDER SINCE 2021</p></div>
+    <div class="bg-bg p-5"><p class="text-mute">METHOD</p><p class="mt-2 text-white">BUILD. TEST. REDESIGN.</p></div>
+  </div>
+
+  <!-- SPOTLIGHT GRID -->
+  <div class="mt-20 grid md:grid-cols-12 gap-6 items-end">
+    <a href="#project-rover" class="spot group md:col-span-4 block">
+      <div class="img-slot aspect-[4/5]"><img src="assets/images/rover-detail.jpg" alt="NASA Perseverance Rover CAD Model" class="active"></div>
+      <div class="p-5">
+        <p class="font-mono text-[11px] text-orange">ROBOTICS / MECHANICAL SUSPENSION</p>
+        <h3 class="mt-1 text-xl font-bold text-white group-hover:text-orange transition-colors">NASA Perseverance Rover Model</h3>
+      </div>
+    </a>
+    <a href="#project-humanoid" class="spot group md:col-span-4 block md:mb-16">
+      <div class="img-slot aspect-[3/4]"><img src="assets/images/humanoid-detail.jpg" alt="Humanoid" class="active"></div>
+      <div class="p-5">
+        <p class="font-mono text-[11px] text-orange">ROBOTICS / 20-DOF MECHANICAL DESIGN</p>
+        <h3 class="mt-1 text-xl font-bold text-white group-hover:text-orange transition-colors">Humanoid Robot</h3>
+      </div>
+    </a>
+    <a href="#project-lcc3" class="spot group md:col-span-4 block">
+      <div class="img-slot aspect-[4/5]"><img src="assets/images/lcc-3-1.jpg" alt="LCC-3" class="active"></div>
+      <div class="p-5">
+        <p class="font-mono text-[11px] text-orange">AEROSPACE / FLIGHT-TESTED HARDWARE</p>
+        <h3 class="mt-1 text-xl font-bold text-white group-hover:text-orange transition-colors">Ehécatl LCC-3</h3>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ KEYWORD STRIP ============ -->
+<div class="marquee-wrap border-y border-line overflow-hidden py-6" aria-hidden="true">
+  <div class="marquee flex w-max">
+    <div class="flex items-center gap-10 pr-10">
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">ITZANMA III</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">EHÉCATL LCC-3</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-4 CAPSULE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">TVC ROCKET ENGINE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-2 CAPSULE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-1 &amp; EARLY PATHFINDERS</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">AUTONOMOUS MODEL CAR</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">HUMANOID ROBOT</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">NASA PERSEVERANCE ROVER MODEL</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+    </div>
+    <div class="flex items-center gap-10 pr-10">
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">ITZANMA III</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">EHÉCATL LCC-3</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-4 CAPSULE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">TVC ROCKET ENGINE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-2 CAPSULE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-1 &amp; EARLY PATHFINDERS</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">AUTONOMOUS MODEL CAR</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">HUMANOID ROBOT</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">NASA PERSEVERANCE ROVER MODEL</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-24">
+    <h2 class="h-sec font-bold text-white">Projects</h2>
+
+    <!-- AEROSPACE & PROPULSION HARDWARE -->
+    <h3 class="mt-20 font-mono text-sm text-orange border-b border-line pb-4">[ AEROSPACE &amp; PROPULSION HARDWARE ]</h3>
+    
+    <!-- Itzanma III (Slideshow) -->
+    <article class="card grid md:grid-cols-12 mt-8" data-video="assets/videos/itzanma-iii.mp4" data-model="assets/models/itzanma-iii.glb">
+      <div class="md:col-span-7 order-1">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/itzanma-III-1.jpg" alt="Itzanma III" class="active">
+          <img src="assets/images/itzanma-III-2.jpg" alt="Itzanma III">
+          <img src="assets/images/itzanma-III-3.jpg" alt="Itzanma III">
+          <img src="assets/images/itzanma-III-4.jpg" alt="Itzanma III">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 01 // LATE 2025 – 2026</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">Itzanma III</h4>
+        <p class="mt-4 leading-relaxed text-ink">Fully redesigned and fully autonomous atmospheric research capsule. Fully 3D printed with PA6-CF (carbon fiber nylon). Features a completely re-engineered active descent control assembly relocated to the base of the vehicle, integrating 3 independently controlled aerodynamic stabilization surfaces for precise trajectory and attitude control during descent.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> GROUND TESTED ]</span><span class="pill">[ <span class="text-mute">PEAK THRUST:</span> 47.1 N ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 3.01 LBS ]</span><span class="pill">[ <span class="text-mute">MATERIAL:</span> PA6-CF ]</span><span class="pill">[ <span class="text-mute">CONSTRUCTION:</span> 3D PRINTED ]</span><span class="pill">[ <span class="text-mute">STABILIZERS:</span> 3 INDEPENDENT ]</span><span class="pill">[ <span class="text-mute">CONTROL:</span> FULLY AUTONOMOUS ]</span><span class="pill">[ <span class="text-mute">DESIGN:</span> FULLY RE-DESIGNED ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Ehecatl LCC-3 (Slideshow) -->
+    <article id="project-lcc3" class="card grid md:grid-cols-12 mt-8" data-video="assets/videos/lcc-3.mp4" data-model="assets/models/lcc-3.glb">
+      <div class="md:col-span-7 order-1 md:order-2">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/lcc-3-1.jpg" alt="LCC-3" class="active">
+          <img src="assets/images/lcc-3-2.jpg" alt="LCC-3">
+          <img src="assets/images/lcc-3-3.jpg" alt="LCC-3">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 md:order-1 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 02 // 2024</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">Ehécatl LCC-3</h4>
+        <p class="mt-4 leading-relaxed text-ink">Fully autonomous, flight-tested experimental research vehicle. Achieved milestone as a pioneering 3D-printed cargo capsule to successfully flight-test. Features a fully integrated mechanical payload door release system, precision drogue parachute deployment architecture, and a three-solid-rocket-motor landing integration system for controlled landing and reuse.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> FLIGHT-PROVEN ]</span><span class="pill">[ <span class="text-mute">PEAK THRUST:</span> 47.1 N ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 4.85 LBS ]</span><span class="pill">[ <span class="text-mute">SYSTEMS:</span> PAYLOAD DOOR / DROGUE CHUTE / SOLID ROCKET LANDING ]</span><span class="pill">[ <span class="text-mute">CONTROL:</span> FULLY AUTONOMOUS ]</span><span class="pill">[ <span class="text-mute">CLASSIFICATION:</span> EXPERIMENTAL CARGO CAPSULE ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CTS-4 (Slideshow) -->
+    <article class="card grid md:grid-cols-12 mt-8">
+      <div class="md:col-span-7 order-1">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/cts-4-1.jpg" alt="CTS-4" class="active">
+          <img src="assets/images/cts-4-2.jpg" alt="CTS-4">
+          <img src="assets/images/cts-4-3.jpg" alt="CTS-4">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 03 // 2023</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">CTS-4 Capsule</h4>
+        <p class="mt-4 leading-relaxed text-ink">Lightweight foam-board and fiberglass capsule featuring an apogee-triggered, mechanically deployable flap system designed to increase aerodynamic drag and reduce terminal descent velocity.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> GROUND TESTED ]</span><span class="pill">[ <span class="text-mute">MATERIAL:</span> FOAM BOARD + FIBERGLASS ]</span><span class="pill">[ <span class="text-mute">RELEASE:</span> FLAPS @ APOGEE ]</span><span class="pill">[ <span class="text-mute">MILESTONE:</span> FIRST CAPSULE WITH COMPOSITE MATERIAL ]</span><span class="pill">[ <span class="text-mute">GOAL:</span> DEVELOP FLAP RELEASE SYSTEM PROTOTYPE ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TVC Rocket Engine -->
+    <article class="card grid md:grid-cols-12 mt-8">
+      <div class="md:col-span-7 order-1 md:order-2">
+        <div class="img-slot aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/engine-1.jpg" alt="TVC Engine" class="active">
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 md:order-1 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 04 // 2023</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">TVC Rocket Engine</h4>
+        <p class="mt-4 leading-relaxed text-ink">A compact experimental solid rocket motor engineered to prototype thrust vector control capabilities. Built entirely from accessible workshop components, the system features a flexible-membrane TVC assembly actively controlled via an onboard Arduino microcontroller. Validated through 5 rigorous static fire test campaigns to evaluate vector actuation, structural resilience, and thrust management.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> GROUND TESTED ]</span><span class="pill">[ <span class="text-mute">ARCHITECTURE:</span> SOLID ROCKET MOTOR / TVC ]</span><span class="pill">[ <span class="text-mute">CONTROL:</span> ARDUINO ]</span><span class="pill">[ <span class="text-mute">VALIDATION:</span> 5x SUCCESSFUL STATIC FIRE TESTS ]</span><span class="pill">[ <span class="text-mute">FABRICATION:</span> ACCESSIBLE PROTOTYPE HARDWARE ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CTS-2 (Slideshow) -->
+    <article class="card grid md:grid-cols-12 mt-8">
+      <div class="md:col-span-7 order-1">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/cts-2-1.jpg" alt="CTS-2" class="active">
+          <img src="assets/images/cts-2-2.jpg" alt="CTS-2">
+          <img src="assets/images/cts-2-3.jpg" alt="CTS-2">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 05 // 2022</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">CTS-2 Capsule</h4>
+        <p class="mt-4 leading-relaxed text-ink">A $50-budget experimental flight capsule and a major milestone as the first vehicle in the program to integrate active electronics. Controlled via an onboard Arduino, the system successfully demonstrated braking engine activation during flight. Validated through two pre-flight static test campaigns.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> FLIGHT-PROVEN ]</span><span class="pill">[ <span class="text-mute">PEAK THRUST:</span> 10.8 N ]</span><span class="pill">[ <span class="text-mute">BUDGET:</span> $50 PROTOTYPE ]</span><span class="pill">[ <span class="text-mute">AVIONICS:</span> ARDUINO-CONTROLLED ELECTRONICS ]</span><span class="pill">[ <span class="text-mute">MILESTONE:</span> FIRST ELECTRONICS-INTEGRATED FLIGHT CAPSULE ]</span><span class="pill">[ <span class="text-mute">VALIDATION:</span> 2x STATIC TESTS / 1x FLIGHT TEST ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CTS-1 & Early Pathfinders (Slideshow) -->
+    <article class="card grid md:grid-cols-12 mt-8">
+      <div class="md:col-span-7 order-1 md:order-2">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/others-1.jpg" alt="Pathfinders" class="active">
+          <img src="assets/images/others-2.jpg" alt="Pathfinders">
+          <img src="assets/images/others-3.jpg" alt="Pathfinders">
+          <img src="assets/images/others-4.jpg" alt="Pathfinders">
+          <img src="assets/images/others-5.jpg" alt="Pathfinders">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 md:order-1 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 06 // 2021</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">CTS-1 &amp; Early Pathfinders</h4>
+        <p class="mt-4 leading-relaxed text-ink">The first prototypes were built at age 12 from foam board, metal tape, and hot glue, then advanced to fiberglass, and then to 3D printing. Together they show my progress over the years and my learning curve.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">MATERIAL:</span> FOAM BOARD + METAL TAPE + HOT GLUE ]</span><span class="pill">[ <span class="text-mute">PROGRESSION:</span> FOAM BOARD → FIBERGLASS → 3D PRINTING ]</span><span class="pill">[ <span class="text-mute">YEAR ONE:</span> 2021 ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ROBOTICS & MECHANICAL SYSTEMS -->
+    <h3 class="mt-24 font-mono text-sm text-orange border-b border-line pb-4">[ ROBOTICS &amp; MECHANICAL SYSTEMS ]</h3>
+
+    <!-- Telescope Filter Wheel (Slideshow) -->
+    <article id="project-filter-wheel" class="card grid md:grid-cols-12 mt-8" data-video="assets/videos/wheel.mp4">
+      <div class="md:col-span-7 order-1 md:order-2">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/wheel-1.jpg" alt="Telescope filter wheel" class="active">
+          <img src="assets/images/wheel-2.jpg" alt="Telescope filter wheel, second view">
+          <img src="assets/images/wheel-3.jpg" alt="Telescope filter wheel, third view">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 md:order-1 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 01 // 2026</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">Telescope Filter Wheel</h4>
+        <!-- DRAFT: edit this description -->
+        <p class="mt-4 leading-relaxed text-ink">A filter wheel for my telescope camera. It has nine slots: seven for filters, one empty for a clear view, and one closed slot that blocks the light completely. The design is modular, and an Arduino controls it. I also designed a companion app for the telescope. It pairs with the wheel, tells it which filter to rotate into place, and takes the pictures, so a set of shots through different filters runs without touching the setup.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> BUILT AND WORKING ]</span><span class="pill">[ <span class="text-mute">FILTER SLOTS:</span> 9 ]</span><span class="pill">[ <span class="text-mute">FILTERS:</span> 7 ]</span><span class="pill">[ <span class="text-mute">CLEAR VIEW:</span> 1 ]</span><span class="pill">[ <span class="text-mute">DARK / CLOSED:</span> 1 ]</span><span class="pill">[ <span class="text-mute">DESIGN:</span> MODULAR ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 600 G ]</span><span class="pill">[ <span class="text-mute">CONTROL:</span> ARDUINO ]</span></div>
+        </div>
+      </div>
+    </article>
+    
+    <!-- Autonomous RC Car -->
+    <article class="card grid md:grid-cols-12 mt-8" data-model="assets/models/car.glb">
+      <div class="md:col-span-7 order-1">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/rc-car-1.jpg" alt="RC Car" class="active">
+          <img src="assets/images/rc-car-2.jpg" alt="RC Car">
+          <img src="assets/images/rc-car-3.jpg" alt="RC Car">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 02 // 2025 – 2026</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">Autonomous Model Car (In Development)</h4>
+        <p class="mt-4 leading-relaxed text-ink">A custom 1/10-scale 4WD mechanical chassis engineered for outdoor autonomous navigation, powered by a Raspberry Pi 5 and BTS7960 high-current motor drivers. Features custom structural mounting brackets integrating an advanced sensor suite: a NEO-M8N GPS for real-world route navigation, an MPU9250 IMU for precise heading and orientation, and a COIN-D6 LiDAR dedicated to real-time environmental mapping and obstacle avoidance.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> IN DEVELOPMENT ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 11 LBS ]</span><span class="pill">[ <span class="text-mute">SCALE:</span> 1/10 ]</span><span class="pill">[ <span class="text-mute">DRIVE:</span> 4WD ]</span><span class="pill">[ <span class="text-mute">COMPUTE:</span> RASPBERRY PI 5 ]</span><span class="pill">[ <span class="text-mute">MOTOR DRIVERS:</span> BTS7960 ]</span><span class="pill">[ <span class="text-mute">NAVIGATION:</span> NEO-M8N GPS ]</span><span class="pill">[ <span class="text-mute">ORIENTATION:</span> MPU9250 IMU ]</span><span class="pill">[ <span class="text-mute">PERCEPTION:</span> COIN-D6 LIDAR ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Humanoid Robot (Slideshow) -->
+    <article id="project-humanoid" class="card grid md:grid-cols-12 mt-8" data-video="assets/videos/humanoid.mp4" data-model="assets/models/humanoid.glb">
+      <div class="md:col-span-7 order-1 md:order-2">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/humanoid-detail.jpg" alt="Humanoid" class="active">
+          <img src="assets/images/humanoid-1.jpg" alt="Humanoid">
+          <img src="assets/images/humanoid-2.jpg" alt="Humanoid">
+          <img src="assets/images/humanoid-3.jpg" alt="Humanoid">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 md:order-1 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 03 // 2025</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">Humanoid Robot</h4>
+        <p class="mt-4 leading-relaxed text-ink">Designed in Fusion 360 in one week and assembled in four days. Features 20 degrees of freedom (DOF) with a modular joint architecture actuated by MG996R servos, 3D printed entirely in carbon-fiber engineering filaments.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> FULLY BUILT &amp; TESTED / SOFTWARE IN DEVELOPMENT ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 8 LBS ]</span><span class="pill">[ <span class="text-mute">CAD:</span> FUSION 360 ]</span><span class="pill">[ <span class="text-mute">DOF:</span> 20 ]</span><span class="pill">[ <span class="text-mute">ACTUATORS:</span> MG996R SERVOS ]</span><span class="pill">[ <span class="text-mute">MATERIAL:</span> CARBON-FIBER FILAMENT ]</span><span class="pill">[ <span class="text-mute">BUILD:</span> 1 WK DESIGN / 4 DAYS ASSEMBLY ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Perseverance Rover (Slideshow) -->
+    <article id="project-rover" class="card grid md:grid-cols-12 mt-8" data-video="assets/videos/rover.mp4" data-model="assets/models/rover.glb">
+      <div class="md:col-span-7 order-1">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/rover-detail.jpg" alt="Rover" class="active">
+          <img src="assets/images/rover-1.jpg" alt="Rover">
+          <img src="assets/images/rover-2.jpg" alt="Rover">
+          <img src="assets/images/rover-3.jpg" alt="Rover">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 04 // 2023</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">NASA Perseverance Rover Model</h4>
+        <p class="mt-4 leading-relaxed text-ink">Designed from scratch in under two months while teaching myself Fusion 360. Features a fully functional, 3D-printed mechanical rocker-bogie suspension system accurately mimicking NASA's rover geometry. Engineered with autonomous self-driving capabilities utilizing onboard sonic sensors for real-time obstacle avoidance, alongside live data transmission telemetry loops.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">This was my first time 3D printing and designing, so I had a lot of trouble with tolerances. I also didn’t know about print layer orientation, so some parts that were exposed to high forces failed. All of these problems were solved through iteration, but most importantly, they taught me many skills that I now frequently use when working on other projects.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> GROUND TESTED ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 20 LBS ]</span><span class="pill">[ <span class="text-mute">CAD:</span> FUSION 360 ]</span><span class="pill">[ <span class="text-mute">MECHANISM:</span> ROCKER-BOGIE ]</span><span class="pill">[ <span class="text-mute">AUTONOMY:</span> SONIC SENSORS / OBSTACLE AVOIDANCE ]</span><span class="pill">[ <span class="text-mute">TELEMETRY:</span> REAL-TIME DATA TRANSMISSION ]</span><span class="pill">[ <span class="text-mute">DESIGN TIME:</span> &lt; 2 MONTHS ]</span></div>
+        </div>
+      </div>
+    </article>
+
+
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="border-t border-line bg-[#0F0F12]">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-24">
+    <h2 class="h-sec font-bold text-white">Skills</h2>
+    <div class="mt-14 grid md:grid-cols-2 gap-6">
+      <div class="skill card p-6 md:p-8 flex flex-col"><span class="font-mono text-[11px] text-orange">[ PROTOTYPING ]</span><h3 class="mt-4 text-xl font-bold text-white">Rapid prototyping</h3><p class="mt-2 leading-relaxed text-ink/80">Fast conceptualization, iteration, and physical prototype development for complex hardware.</p></div>
+      <div class="skill card p-6 md:p-8 flex flex-col"><span class="font-mono text-[11px] text-orange">[ CAD ]</span><h3 class="mt-4 text-xl font-bold text-white">2D to 3D design transformation</h3><p class="mt-2 leading-relaxed text-ink/80">Efficiently converting 2D concepts into precise, functional 3D digital models.</p></div>
+      <div class="skill card p-6 md:p-8 flex flex-col"><span class="font-mono text-[11px] text-orange">[ CAD ]</span><h3 class="mt-4 text-xl font-bold text-white">3D model creation (Fusion 360)</h3><p class="mt-2 leading-relaxed text-ink/80">Extensive experience modeling intricate mechanical assemblies, structural chassis, and aerospace components from scratch.</p></div>
+      <div class="skill card p-6 md:p-8 flex flex-col"><span class="font-mono text-[11px] text-orange">[ ADDITIVE ]</span><h3 class="mt-4 text-xl font-bold text-white">Advanced additive manufacturing</h3><p class="mt-2 leading-relaxed text-ink/80">Multi-material 3D printing utilizing PA6-CF (carbon-fiber nylon), PLA, PETG, TPU, ABS, and resin, powered by hardware like the Anycubic Kobra S1 Combo.</p></div>
+      <div class="skill card p-6 md:p-8 flex flex-col"><span class="font-mono text-[11px] text-orange">[ COMPOSITES ]</span><h3 class="mt-4 text-xl font-bold text-white">Composite material handling</h3><p class="mt-2 leading-relaxed text-ink/80">Hand-layup and structural fabrication using high-strength composite materials like fiberglass and carbon fiber.</p></div>
+      <div class="skill card p-6 md:p-8 flex flex-col"><span class="font-mono text-[11px] text-orange">[ INTEGRATION ]</span><h3 class="mt-4 text-xl font-bold text-white">Aerospace &amp; robotics hardware integration</h3><p class="mt-2 leading-relaxed text-ink/80">Designing, assembling, and structural-testing complex mechanisms, descent control systems, and mechanical linkages.</p></div>
+      <div class="skill card p-6 md:p-8 flex flex-col"><span class="font-mono text-[11px] text-orange">[ ITERATION ]</span><h3 class="mt-4 text-xl font-bold text-white">Efficiency under pressure &amp; creative problem solving</h3><p class="mt-2 leading-relaxed text-ink/80">Diagnosing physical structural failures and rapidly executing design iterations under tight deadlines.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEADERSHIP, SPONSORSHIPS & GRANTS ============ -->
+<section id="leadership" class="border-t border-line max-w-7xl mx-auto px-6 md:px-10 py-24 md:py-40">
+  <h2 class="h-sec font-bold text-white max-w-4xl">Leadership, sponsorships &amp; grants</h2>
+
+  <div class="mt-24 md:mt-32 grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+    <div class="md:col-span-7">
+      <div class="img-slot aspect-square md:aspect-[4/3]"><img src="assets/images/mapc.jpg" alt="MAPC Technologies" class="active"></div>
+    </div>
+    <div class="md:col-span-5">
+      <p class="font-mono text-xs text-orange">CO-FOUNDER &amp; TEAM LEAD // 2021 – PRESENT</p>
+      <h3 class="mt-3 text-3xl font-bold tracking-tight text-white">MAPC Technologies</h3>
+      <p class="mt-4 leading-relaxed text-ink">Co-founded a student aerospace team at age 12 to design, build, and test experimental flight capsules, pathfinder rockets, and recovery systems. Responsible for developing all electronic systems, including the complete design, fabrication, and testing of all capsule second-stages. Independently driven through the full engineering cycle of over 10 flight capsules, alongside custom systems for launch pad automation.</p>
+    </div>
+  </div>
+
+  <div class="mt-24 md:mt-40 grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+    <div class="md:col-span-5 order-2 md:order-1">
+      <p class="font-mono text-xs text-orange">SENIOR BOARD // 2025 – 2026</p>
+      <h3 class="mt-3 text-3xl font-bold tracking-tight text-white">Grover Cleveland Charter High School</h3>
+      <p class="mt-4 leading-relaxed text-ink">Senior Board member and multi-committee chair, leading the Senior Class Apparel Committee to manage the end-to-end design, production, and distribution of custom class wear for a student body of over 600. Spearheaded direct coordination with manufacturing vendors to optimize production timelines, while engineering an efficient logistics and distribution framework to handle high-volume delivery under tight deadlines.</p>
+    </div>
+    <div class="md:col-span-7 order-1 md:order-2">
+      <div class="img-slot aspect-square md:aspect-[4/3]"><img src="assets/images/senior board.jpg" alt="Senior Board" class="active"></div>
+    </div>
+  </div>
+
+  <div class="mt-24 md:mt-40 border-t border-line pt-10 grid md:grid-cols-12 gap-8">
+    <div class="md:col-span-5">
+      <p class="font-mono text-xs text-orange">2025</p>
+      <h3 class="mt-3 text-3xl font-bold tracking-tight text-white">Industry sponsorships &amp; equipment</h3>
+    </div>
+    <ul class="md:col-span-6 md:col-start-7 text-lg space-y-3">
+      <li><span class="text-white font-semibold">SUNLU:</span> <span class="text-ink">PA6-CF and PA12-CF nylon</span></li>
+      <li><span class="text-white font-semibold">AMOLEN:</span> <span class="text-ink">PLA Carbon Fiber &amp; High-Speed PLA</span></li>
+      <li><span class="text-white font-semibold">ANYCUBIC:</span> <span class="text-ink">Kobra S1 Combo enclosed 3D printer and 6 spools of assorted materials</span></li>
+    </ul>
+  </div>
+
+  <div class="mt-24 md:mt-40 border-t border-line pt-10">
+    <h3 class="text-3xl font-bold tracking-tight text-white">Grants received</h3>
+    <div class="mt-16 grid md:grid-cols-2 gap-20 md:gap-0 text-center">
+      <div class="flex flex-col items-center md:px-10">
+        <h4 class="text-2xl font-bold tracking-tight text-white">Bagel Fund Grantee</h4>
+        <p class="mt-2 font-mono text-sm text-orange">$450 // 2025</p>
+        <div class="img-slot contain w-full max-w-xs aspect-square mt-8"><img src="assets/images/bagel-fund.jpg" alt="Bagel Fund" class="active"></div>
+      </div>
+      <div class="flex flex-col items-center md:px-10">
+        <h4 class="text-2xl font-bold tracking-tight text-white">Medici Project Grantee</h4>
+        <p class="mt-2 font-mono text-sm text-orange">1517 FUND // $1,000 // 2024</p>
+        <div class="img-slot contain w-full max-w-xs aspect-square mt-8"><img src="assets/images/1517-fund.jpg" alt="1517 Fund" class="active"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASTROPHOTOGRAPHY ============ -->
+<section id="astrophotography" class="border-t border-line max-w-7xl mx-auto px-6 md:px-10 py-24">
+  <h2 class="h-sec font-bold text-white">Astrophotography</h2>
+  <div class="mt-14 grid md:grid-cols-12 gap-8 md:gap-16">
+    <div class="md:col-span-5">
+      <p class="font-mono text-xs text-orange">OUTSIDE THE WORKSHOP // SINCE AGE 7</p>
+      <h3 class="mt-3 text-3xl font-bold tracking-tight text-white">Pointing the telescope up.</h3>
+      <p class="mt-4 leading-relaxed text-ink">I started astrophotography at age 7 when I received my first telescope, a 127EQ reflector. At 12, I upgraded to a refractor scope and began capturing planetary targets, alongside deep sky photography using a DSLR and a 55-250mm lens to pull in targets like the Andromeda Galaxy and the Orion Nebula. Now, I've got my hands on a vintage 1980s 8-inch C8 Cassegrain. With it, I'm planning to capture high-detail planetary images, build time-lapses, and explore concepts like planetary rotation using entirely my own collected data.</p>
+    </div>
+    <div class="md:col-span-7 space-y-8">
+      <div><p class="font-mono text-[11px] text-mute mb-3">TARGETS</p><div class="flex flex-wrap gap-2"><span class="pill">ANDROMEDA GALAXY</span><span class="pill">ORION NEBULA</span><span class="pill">SATURN</span><span class="pill">JUPITER</span><span class="pill">MARS</span><span class="pill">VENUS</span><span class="pill">MOON</span><span class="pill">SUN</span></div></div>
+      <div><p class="font-mono text-[11px] text-mute mb-3">PROCESSING</p><p class="leading-relaxed text-ink">Deep sky images are built from long-exposure image stacking (integration): many individual exposures, aligned and combined to pull faint detail out of the noise. Planets are captured as video and stacked from only the sharpest frames, a technique known as lucky imaging.</p></div>
+      <div><p class="font-mono text-[11px] text-mute mb-3">SOFTWARE</p><div class="flex flex-wrap gap-2"><span class="pill">PIPP</span><span class="pill">AUTOSTAKKERT!</span><span class="pill">DEEPSKYSTACKER</span><span class="pill">REGISTAX</span><span class="pill">PHOTOSHOP</span></div></div>
+    </div>
+  </div>
+  <div class="mt-16"><h4 class="font-mono text-sm text-orange border-b border-line pb-4">[ GALLERY: PLANETARY ]</h4><p class="mt-4 text-ink/80">Gas giants, rocky planets, and Venus, stacked from video.</p><div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4"><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Saturn</span><img src="assets/images/saturn.jpg" alt="Saturn" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">SATURN</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Jupiter</span><img src="assets/images/jupiter.jpg" alt="Jupiter" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">JUPITER</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Mars</span><img src="assets/images/mars.jpg" alt="Mars" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">MARS</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Venus</span><img src="assets/images/venus.jpg" alt="Venus" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">VENUS</figcaption></figure></div></div>
+  <div class="mt-16"><h4 class="font-mono text-sm text-orange border-b border-line pb-4">[ GALLERY: MOON ]</h4><p class="mt-4 text-ink/80">Lunar surface detail.</p><div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4"><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">MINERAL MOON</span><img src="assets/images/moon-1.jpg" alt="MINERAL MOON" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">MINERAL MOON</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">FULL MOON</span><img src="assets/images/moon-2.jpg" alt="FULL MOON" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">FULL MOON</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">WAXING GIBBOUS</span><img src="assets/images/moon-3.jpg" alt="WAXING GIBBOUS" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">WAXING GIBBOUS</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">WANING GIBBOUS</span><img src="assets/images/moon-4.jpg" alt="WANING GIBBOUS" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">WANING GIBBOUS</figcaption></figure></div></div>
+  <div class="mt-16"><h4 class="font-mono text-sm text-orange border-b border-line pb-4">[ GALLERY: DEEP SKY ]</h4><p class="mt-4 text-ink/80">Long-exposure stacks of galaxies and nebulae.</p><div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4"><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Andromeda Galaxy</span><img src="assets/images/andromeda.jpg" alt="Andromeda Galaxy" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">ANDROMEDA GALAXY</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Orion Nebula</span><img src="assets/images/orion.jpg" alt="Orion Nebula" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">ORION NEBULA</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">PLEIADES</span><img src="assets/images/deepsky-3.jpg" alt="PLEIADES" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">PLEIADES </figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">HORSEHEAD NEBULA</span><img src="assets/images/deepsky-4.jpg" alt="HORSEHEAD NEBULA" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">HORSEHEAD NEBULA</figcaption></figure></div></div>
+</section>
+
+<!-- ============ MY HUMAN SIDE ============ -->
+<section id="human" class="border-t border-line max-w-7xl mx-auto px-6 md:px-10 py-24 md:py-32">
+  <h2 class="h-sec font-bold text-white">My human side</h2>
+
+  <blockquote class="mt-12 md:mt-16 max-w-5xl">
+    <p class="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.1]"><span class="text-orange">&ldquo;</span>Nothing is impossible, you are just not spending enough time on it.<span class="text-orange">&rdquo;</span></p>
+  </blockquote>
+
+  <div class="mt-16 grid md:grid-cols-12 gap-6">
+    <div class="card p-6 md:p-8 md:col-span-4">
+      <p class="font-mono text-xs text-orange">[ FREE TIME ]</p>
+      <ul class="mt-5 space-y-3 font-mono text-sm text-white">
+        <li><span class="text-orange">//</span> Working out</li>
+        <li><span class="text-orange">//</span> Listening to music</li>
+        <li><span class="text-orange">//</span> Evening walks</li>
+	<li><span class="text-orange">//</span> Cooking</li>
+	<li><span class="text-orange">//</span> Photography</li>
+	<li><span class="text-orange">//</span> Video-making</li>
+	<li><span class="text-orange">//</span> Listening to podcasts</li>
+        <li><span class="text-orange">//</span> Biking</li>
+      </ul>
+    </div>
+
+    <div class="card p-6 md:p-8 md:col-span-4">
+      <p class="font-mono text-xs text-orange">[ ON REPEAT ]</p>
+      <p class="mt-5 font-mono text-[11px] text-mute">FAVORITE ARTIST</p>
+      <!-- EDIT ME: your favorite artist -->
+      <p class="mt-1 text-xl font-bold text-white">Latin Mafia</p>
+      <p class="mt-5 font-mono text-[11px] text-mute">FAVORITE SONG</p>
+      <!-- EDIT ME: your favorite song -->
+      <p class="mt-1 text-xl font-bold text-white">Vivo Si Me Exiges</p>
+      <button type="button" id="song-btn" class="mt-6 border border-ink/40 text-white px-4 py-2.5 font-mono text-xs hover:border-orange hover:text-orange transition-colors">&#9654; PLAY CLIP</button>
+      <div class="mt-3 h-[3px] bg-line"><div id="song-prog" class="h-full bg-orange" style="width:0"></div></div>
+      <p id="song-msg" class="mt-2 font-mono text-[11px] text-mute" role="status" aria-live="polite"></p>
+      <!-- EDIT ME: put your clip at assets/audio/song-clip.mp3 and set the start/end seconds below -->
+      <audio id="song-audio" src="assets/audio/song-clip.mp3" preload="none" data-start="23" data-end="60"></audio>
+    </div>
+
+    <div class="card p-6 md:p-8 md:col-span-4">
+      <p class="font-mono text-xs text-orange">[ THE GOAL ]</p>
+      <!-- EDIT ME: draft goal paragraph -->
+      <p class="mt-5 leading-relaxed text-ink">Working toward a B.S. in Mechanical Engineering and a future M.S. in Aerospace Engineering at UCLA. My goal is to design reusable flight hardware for aerospace companies focusing on rapid reusability launch systems, contributing to humanity’s efforts of expanding to outer space.</p>
+    </div>
+  </div>
+
+  <div class="mt-6 grid md:grid-cols-2 gap-6">
+    <div class="card p-6 md:p-8 flex items-center justify-between gap-6">
+      <div>
+        <p class="font-mono text-xs text-orange">[ AVAILABILITY ]</p>
+        <p class="mt-3 flex items-center gap-3 text-xl font-bold text-white"><span class="dot"></span>Open to internships</p>
+      </div>
+      <a href="#contact" class="shrink-0 border border-ink/40 text-white px-4 py-2.5 font-mono text-xs hover:border-orange hover:text-orange transition-colors">Get in touch</a>
+    </div>
+    <div class="card p-6 md:p-8">
+      <p class="font-mono text-xs text-orange">[ NOW BUILDING ]</p>
+      <p class="mt-3 text-xl font-bold text-white">Astrophotography Setup</p>
+      <p class="mt-1 font-mono text-xs text-mute">PUTTING TOGETHER MY DREAM ASTROPHOTOGRAPHY SETUP FOR BOTH DEEP SKY AND PLANETARY IMAGING</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT, EDUCATION, HONORS ============ -->
+<section id="about" class="border-t border-line bg-[#0F0F12]">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-24 grid md:grid-cols-12 gap-12">
+    <div class="md:col-span-4">
+      <h2 class="h-sec font-bold text-white">About &amp; honors</h2>
+      <div class="img-slot aspect-[4/5] mt-10"><img src="assets/images/portrait.jpg" alt="Portrait" class="active"></div>
+    </div>
+    <div class="md:col-span-7 md:col-start-6 space-y-16">
+      <div>
+        <h3 class="font-mono text-sm text-orange border-b border-line pb-4">[ EDUCATION ]</h3>
+        <div class="mt-6"><h4 class="text-xl font-bold tracking-tight text-white">California State University, Northridge (CSUN)</h4><p class="mt-1 font-mono text-sm text-mute">B.S. MECHANICAL ENGINEERING / MINOR: ELECTRICAL ENGINEERING</p></div>
+        <div class="mt-8"><h4 class="text-xl font-bold tracking-tight text-white">Grover Cleveland Charter High School</h4><p class="mt-1 font-mono text-sm text-mute">GRADUATED WITH HONORS</p><p class="mt-4 leading-relaxed text-ink"><span class="text-white font-semibold">Relevant AP coursework:</span> AP Calculus BC, AP Statistics, AP Computer Science, AP Physics, AP Lit, AP Spanish Language &amp; Lit, AP European History, APUSH, AP Government.</p></div>
+      </div>
+      <div>
+       <h3 class="font-mono text-sm text-orange border-b border-line pb-4">[ HONORS &amp; AWARDS ]</h3>
+        <ul class="mt-2 divide-y divide-line">
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">HSF Scholar</span><span class="font-mono text-sm text-orange shrink-0">2026</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">AP Scholar with Distinction Award</span><span class="font-mono text-sm text-orange shrink-0">2026</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">Graduated high school with honors</span><span class="font-mono text-sm text-orange shrink-0">2026</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">State Seal of Biliteracy for Spanish</span><span class="font-mono text-sm text-orange shrink-0">2025/2026</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">Bagel Fund Grantee</span><span class="font-mono text-sm text-orange shrink-0">2025</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">1517 Medici Grantee</span><span class="font-mono text-sm text-orange shrink-0">2024</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">Invited Scholar, National Youth Leadership Forum: Engineering</span><span class="font-mono text-sm text-orange shrink-0">2023, 2024, 2025</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="border-t border-line">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-24 grid md:grid-cols-12 gap-12 md:gap-16">
+    <div class="md:col-span-6 min-w-0">
+      <h2 class="contact-title font-bold text-white break-words">Let's build something.</h2>
+      <div class="mt-12 space-y-3 font-mono text-sm">
+        <p><span class="text-mute">EMAIL:</span> <a class="text-white underline underline-offset-4 decoration-orange hover:text-orange" href="mailto:dmarin0013j@gmail.com">dmarin0013j@gmail.com</a></p>
+        <p><span class="text-mute">LINKEDIN:</span> <a class="text-white underline underline-offset-4 decoration-orange hover:text-orange" href="https://www.linkedin.com/in/marin-diego" target="_blank" rel="noopener">linkedin.com/in/marin-diego</a></p>
+        <div>
+          <p><span class="text-mute">RESUME:</span> <button type="button" id="resume-toggle" aria-expanded="false" aria-controls="resume-form" class="text-white underline underline-offset-4 decoration-orange hover:text-orange">Request a copy</button></p>
+          <form id="resume-form" class="mt-4 space-y-4 border border-line bg-panel p-5 max-w-md" hidden>
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="_subject" value="Resume request">
+            <input type="hidden" name="_captcha" value="false">
+            <div>
+              <label for="rname" class="block font-mono text-xs text-mute">NAME</label>
+              <input id="rname" name="name" type="text" required class="mt-2 w-full bg-bg border border-line px-3 py-2.5 text-white focus:border-orange">
+            </div>
+            <div>
+              <label for="remail" class="block font-mono text-xs text-mute">EMAIL</label>
+              <input id="remail" name="email" type="email" required class="mt-2 w-full bg-bg border border-line px-3 py-2.5 text-white focus:border-orange">
+            </div>
+            <div>
+              <label for="rnote" class="block font-mono text-xs text-mute">COMPANY OR REASON (OPTIONAL)</label>
+              <input id="rnote" name="company_or_reason" type="text" class="mt-2 w-full bg-bg border border-line px-3 py-2.5 text-white focus:border-orange">
+            </div>
+            <button type="submit" class="bg-orange text-bg px-6 py-2.5 font-mono text-xs font-medium hover:bg-white">Send request</button>
+            <p id="resume-status" class="font-mono text-xs" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <form id="contact-form" class="md:col-span-6 min-w-0 md:pt-4 space-y-8" action="https://formsubmit.co/dmarin0013j@gmail.com" method="POST">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="_subject" value="New portfolio message">
+      <input type="hidden" name="_captcha" value="false">
+      <div>
+        <label for="name" class="block font-mono text-xs text-mute">NAME</label>
+        <input id="name" name="name" type="text" required class="mt-2 w-full bg-panel border border-line px-4 py-3 text-white focus:border-orange">
+      </div>
+      <div>
+        <label for="email" class="block font-mono text-xs text-mute">EMAIL</label>
+        <input id="email" name="email" type="email" required class="mt-2 w-full bg-panel border border-line px-4 py-3 text-white focus:border-orange">
+      </div>
+      <div>
+        <label for="message" class="block font-mono text-xs text-mute">MESSAGE</label>
+        <textarea id="message" name="message" rows="4" required class="mt-2 w-full bg-panel border border-line px-4 py-3 text-white focus:border-orange"></textarea>
+      </div>
+      <button type="submit" class="btn bg-orange text-bg px-8 py-3.5 font-mono text-sm font-medium hover:bg-white">Send message</button>
+      <p id="form-status" class="font-mono text-xs" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="border-t border-line">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-8 font-mono text-xs text-mute flex justify-between">
+    <span>DIEGO MARIN // LOS ANGELES </span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+<!-- SLIDESHOW SCRIPT: auto-advance plus manual arrows, dots and swipe -->
+<script>
+document.querySelectorAll('.slideshow').forEach(slot => {
+  const imgs = slot.querySelectorAll('img');
+  const bars = slot.querySelectorAll('.slide-bars i');
+  if (imgs.length < 2) return;
+  let idx = 0, timer = null;
+
+  const show = n => {
+    imgs[idx].classList.remove('active');
+    if (bars[idx]) bars[idx].classList.remove('on');
+    idx = (n + imgs.length) % imgs.length;
+    imgs[idx].classList.add('active');
+    if (bars[idx]) bars[idx].classList.add('on');
+  };
+  const start = () => { clearInterval(timer); timer = setInterval(() => show(idx + 1), 4500); };
+  const manual = n => { show(n); start(); };   // restarts the countdown so your pick stays for a full interval
+
+  [['prev', '\u2039', 'Previous image', -1], ['next', '\u203A', 'Next image', 1]].forEach(([cls, ch, label, d]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'slide-nav ' + cls; btn.textContent = ch; btn.setAttribute('aria-label', label);
+    btn.addEventListener('click', () => manual(idx + d));
+    slot.appendChild(btn);
+  });
+  bars.forEach((bar, i) => bar.addEventListener('click', () => manual(i)));
+
+  let x0 = null;
+  slot.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  slot.addEventListener('touchend', e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) manual(idx + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  start();
+});
+</script>
+
+<!-- MEDIA TABS: PHOTOS / VIDEO / 3D -->
+<script>
+(() => {
+  let mvLoader = null;
+  const loadModelViewer = () => mvLoader || (mvLoader = new Promise((res, rej) => {
+    const sc = document.createElement('script');
+    sc.type = 'module';
+    sc.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js';
+    sc.onload = res; sc.onerror = rej;
+    document.head.appendChild(sc);
+  }));
+
+  document.querySelectorAll('article[data-video], article[data-model]').forEach(card => {
+    const slot = card.querySelector('.img-slot.slideshow');
+    if (!slot) return;
+    const col = slot.parentElement;
+    col.classList.add('relative');
+    const name = card.querySelector('h4').textContent.trim();
+    const poster = slot.querySelector('img') ? slot.querySelector('img').getAttribute('src') : '';
+
+    const defs = [];
+    if (card.dataset.model) defs.push(['model', '3D']);
+    if (card.dataset.video) defs.push(['video', 'VIDEO']);
+    defs.push(['photos', 'PHOTOS']);
+
+    const bar = document.createElement('div');
+    bar.className = 'media-tabs';
+    const buttons = {}, panels = {};
+    let current = defs[0][0];
+    let userPicked = false;
+
+    const message = (panel, text) => { panel.innerHTML = '<div class="media-msg">[ ' + text + ' ]</div>'; };
+
+    const build = {
+      video() {
+        const p = document.createElement('div');
+        p.className = 'media-panel'; p.hidden = true;
+        const v = document.createElement('video');
+        v.controls = true; v.playsInline = true; v.preload = 'metadata';
+        v.setAttribute('aria-label', name + ' test footage');
+        v.addEventListener('error', () => { message(p, 'VIDEO COMING SOON'); if (!userPicked && current === 'video') show('photos', true); });
+        v.src = card.dataset.video + '#t=0.1';   // shows the video's own first frame as the preview
+        p.appendChild(v);
+        return p;
+      },
+      model() {
+        const p = document.createElement('div');
+        p.className = 'media-panel'; p.hidden = true;
+        message(p, 'LOADING 3D MODEL...');
+        loadModelViewer().then(() => {
+          const mv = document.createElement('model-viewer');
+          mv.setAttribute('src', card.dataset.model);
+          mv.setAttribute('alt', 'Interactive 3D model of ' + name);
+          mv.setAttribute('camera-controls', '');
+          mv.setAttribute('auto-rotate', '');
+          mv.setAttribute('auto-rotate-delay', '2500');
+          mv.setAttribute('environment-image', 'neutral');
+          mv.setAttribute('exposure', '1.05');
+          mv.setAttribute('shadow-intensity', '1.2');
+          mv.setAttribute('shadow-softness', '0.9');
+          mv.setAttribute('touch-action', 'pan-y');
+          mv.setAttribute('interaction-prompt', 'none');
+          mv.setAttribute('disable-zoom', '');
+          // zoom only while the pointer is actively on the model, so page scrolling is never hijacked
+          mv.addEventListener('pointerdown', () => mv.removeAttribute('disable-zoom'));
+          mv.addEventListener('pointerleave', () => mv.setAttribute('disable-zoom', ''));
+          mv.addEventListener('load', () => {
+            // log what the file actually contains (open the browser console, F12, to inspect)
+            if (mv.model) console.log('[3D] ' + name, mv.model.materials.map(m => ({
+              name: m.name,
+              baseColor: m.pbrMetallicRoughness.baseColorFactor.map(v => +v.toFixed(2)),
+              hasTexture: !!m.pbrMetallicRoughness.baseColorTexture.texture
+            })));
+            p.querySelectorAll('.media-msg').forEach(n => n.remove());
+            const h = document.createElement('div');
+            h.className = 'media-hint';
+            h.textContent = 'DRAG TO ROTATE // CLICK + SCROLL TO ZOOM';
+            p.appendChild(h);
+          });
+          mv.addEventListener('error', () => { mv.remove(); message(p, '3D MODEL COMING SOON'); if (!userPicked && current === 'model') show('photos', true); });
+          p.innerHTML = '';
+          p.appendChild(mv);
+        }).catch(() => { message(p, '3D VIEWER UNAVAILABLE'); if (!userPicked && current === 'model') show('photos', true); });
+        return p;
+      }
+    };
+
+    const show = (key, quiet) => {
+      if (key !== 'photos' && !panels[key]) {
+        panels[key] = build[key]();
+        col.appendChild(panels[key]);
+      }
+      Object.keys(panels).forEach(k => {
+        panels[k].hidden = (k !== key);
+        const v = panels[k].querySelector('video');
+        if (v && k !== key) v.pause();
+      });
+      Object.keys(buttons).forEach(k => buttons[k].setAttribute('aria-pressed', String(k === key)));
+      if (key === 'video' && !quiet) {
+        const vid = panels.video.querySelector('video');
+        if (vid) { const pr = vid.play(); if (pr && pr.catch) pr.catch(() => {}); }
+      }
+      current = key;
+    };
+
+    defs.forEach(([key, label]) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'media-tab';
+      b.textContent = label;
+      b.setAttribute('aria-pressed', String(key === defs[0][0]));
+      b.addEventListener('click', () => { userPicked = true; show(key); });
+      buttons[key] = b;
+      bar.appendChild(b);
+    });
+    col.appendChild(bar);
+
+    const first = defs[0][0];
+    if (first !== 'photos') {
+      const io = new IntersectionObserver(entries => {
+        if (entries.some(e => e.isIntersecting)) {
+          io.disconnect();
+          if (!userPicked) show(first, true);
+        }
+      }, { rootMargin: '300px' });
+      io.observe(card);
+    }
+  });
+})();
+</script>
+
+<!-- RESUME REQUEST + SONG CLIP -->
+<script>
+(() => {
+  const t = document.getElementById('resume-toggle'), f = document.getElementById('resume-form');
+  if (t && f) {
+    t.addEventListener('click', () => {
+      f.hidden = !f.hidden;
+      t.setAttribute('aria-expanded', String(!f.hidden));
+      if (!f.hidden) f.querySelector('input[name=name]').focus();
+    });
+    f.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = f.querySelector('button[type=submit]'), st = document.getElementById('resume-status');
+      btn.disabled = true; st.className = 'font-mono text-xs text-mute'; st.textContent = '[ SENDING... ]';
+      const data = Object.fromEntries(new FormData(f));
+      try {
+        const r = await fetch('https://formsubmit.co/ajax/dmarin0013j@gmail.com', {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data)
+        });
+        const d = await r.json().catch(() => ({}));
+        if (!r.ok || d.success === 'false' || d.success === false) throw new Error(d.message || ('HTTP ' + r.status));
+        f.reset(); st.className = 'font-mono text-xs text-orange'; st.textContent = '[ REQUEST SENT. I WILL EMAIL IT TO YOU ]';
+      } catch (err) {
+        console.error('[resume request] send failed:', err);
+        const href = 'mailto:dmarin0013j@gmail.com?subject=' + encodeURIComponent('Resume request from ' + (data.name || '')) +
+                     '&body=' + encodeURIComponent('Hi Diego, could I get a copy of your resume?\n\n' + (data.name || '') + ' / ' + (data.email || '') + (data.company_or_reason ? '\n' + data.company_or_reason : ''));
+        st.className = 'font-mono text-xs text-orange'; st.textContent = '[ SEND FAILED. ';
+        const a = document.createElement('a'); a.href = href; a.textContent = 'EMAIL ME DIRECTLY'; a.className = 'underline underline-offset-4';
+        st.appendChild(a); st.appendChild(document.createTextNode(' ]'));
+      } finally { btn.disabled = false; }
+    });
+  }
+
+  const a = document.getElementById('song-audio'), b = document.getElementById('song-btn'),
+        p = document.getElementById('song-prog'), m = document.getElementById('song-msg');
+  if (a && b) {
+    const s0 = +a.dataset.start || 0, e0 = +a.dataset.end || 30;
+    const label = on => { b.innerHTML = on ? '&#10074;&#10074; PAUSE' : '&#9654; PLAY CLIP'; };
+    b.addEventListener('click', () => {
+      if (!a.paused) { a.pause(); label(false); return; }
+      if (a.currentTime < s0 || a.currentTime >= e0) a.currentTime = s0;
+      m.textContent = '';
+      const pr = a.play();
+      if (pr && pr.then) pr.then(() => label(true)).catch(() => { m.textContent = '[ CLIP COMING SOON ]'; label(false); });
+    });
+    a.addEventListener('timeupdate', () => {
+      p.style.width = Math.min(100, Math.max(0, (a.currentTime - s0) / (e0 - s0) * 100)) + '%';
+      if (a.currentTime >= e0) { a.pause(); a.currentTime = s0; p.style.width = '0'; label(false); }
+    });
+    a.addEventListener('ended', () => { p.style.width = '0'; label(false); });
+    a.addEventListener('error', () => { m.textContent = '[ CLIP COMING SOON ]'; label(false); });
+  }
+})();
+</script>
+
+<!-- CONTACT FORM SCRIPT -->
+<script>
+const cf = document.getElementById('contact-form');
+cf.addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = cf.querySelector('button[type=submit]'), st = document.getElementById('form-status');
+  btn.disabled = true; btn.textContent = 'Sending...'; st.textContent = ''; st.className = 'font-mono text-xs text-mute';
+  try {
+    const r = await fetch('https://formsubmit.co/ajax/dmarin0013j@gmail.com', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(cf)))
+    });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok || d.success === 'false' || d.success === false) throw new Error(d.message || ('HTTP ' + r.status));
+    cf.reset(); st.textContent = '[ MESSAGE SENT ]'; st.className = 'font-mono text-xs text-orange';
+  } catch (err) {
+    console.error('[contact form] send failed:', err);
+    const data = Object.fromEntries(new FormData(cf));
+    const href = 'mailto:dmarin0013j@gmail.com?subject=' + encodeURIComponent('Portfolio message from ' + (data.name || '')) +
+                 '&body=' + encodeURIComponent((data.message || '') + '\n\n' + (data.name || '') + ' / ' + (data.email || ''));
+    st.className = 'font-mono text-xs text-orange';
+    st.textContent = '[ SEND FAILED. ';
+    const a = document.createElement('a');
+    a.href = href; a.textContent = 'EMAIL ME DIRECTLY'; a.className = 'underline underline-offset-4';
+    st.appendChild(a); st.appendChild(document.createTextNode(' ]'));
+  }
+  btn.disabled = false; btn.textContent = 'Send message';
+});
+</script>
+
+</body>
+</html>

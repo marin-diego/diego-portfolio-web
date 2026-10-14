@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0A0C">
+<title>404 | Diego Marin</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body { background-color: #0A0A0C; color: #EDEDED; font-family: "Space Grotesk", system-ui, sans-serif;
+         background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+         background-size: 56px 56px; display: flex; flex-direction: column; }
+  .bar { border-bottom: 1px solid #27272A; padding: 0 clamp(1.5rem, 5vw, 2.5rem); height: 64px; display: flex; align-items: center; }
+  .bar a { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-weight: 700; letter-spacing: -.01em; }
+  .sq { width: 12px; height: 12px; background: #FF5500; }
+  main { flex: 1; width: 100%; max-width: 80rem; margin: 0 auto; padding: clamp(2.5rem, 8vw, 6rem) clamp(1.5rem, 5vw, 2.5rem); display: flex; flex-direction: column; justify-content: center; }
+  .status { display: flex; align-items: center; gap: 12px; font-family: "JetBrains Mono", monospace; font-size: 12px; color: #fff; border-bottom: 1px solid #27272A; padding-bottom: 16px; }
+  .dot { width: 8px; height: 8px; border-radius: 9999px; background: #FF5500; animation: pulse 1.6s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,85,0,.7); } 100% { box-shadow: 0 0 0 10px rgba(255,85,0,0); } }
+  h1 { margin: 3rem 0 0; font-size: clamp(5rem, 22vw, 16rem); line-height: .9; letter-spacing: -.05em; color: #fff; }
+  h1 span { color: #FF5500; }
+  p.lead { margin: 2rem 0 0; max-width: 34rem; font-size: clamp(1.1rem, 2.2vw, 1.4rem); line-height: 1.5; }
+  .meta { margin-top: 1rem; font-family: "JetBrains Mono", monospace; font-size: 12px; color: #8B8B94; }
+  .cta { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 16px; }
+  .btn { font-family: "JetBrains Mono", monospace; font-size: 14px; padding: 14px 28px; text-decoration: none; transition: background .2s, color .2s, border-color .2s; }
+  .btn.solid { background: #FF5500; color: #0A0A0C; font-weight: 500; }
+  .btn.solid:hover { background: #fff; }
+  .btn.ghost { border: 1px solid rgba(237,237,237,.4); color: #fff; }
+  .btn.ghost:hover { border-color: #FF5500; color: #FF5500; }
+  a:focus-visible { outline: 2px solid #FF5500; outline-offset: 3px; }
+</style>
+</head>
+<body>
+  <div class="bar"><a href="/"><span class="sq"></span>Diego Marin</a></div>
+  <main>
+    <div class="status"><span class="dot"></span>STATUS: SIGNAL LOST</div>
+    <h1>4<span>0</span>4</h1>
+    <p class="lead">This page didn't survive testing. It's either gone, moved, or it never made it past the drawing board.</p>
+    <p class="meta">ERROR 404 // PAGE NOT FOUND</p>
+    <div class="cta">
+      <a class="btn solid" href="/">Back to base</a>
+      <a class="btn ghost" href="/#projects">See the projects</a>
+    </div>
+  </main>
+</body>
+</html>
