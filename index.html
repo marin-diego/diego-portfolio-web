@@ -390,7 +390,7 @@
         <details class="wrong mt-6">
           <summary>WHAT WENT WRONG</summary>
           <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
-          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+          <p class="wrong-body">Initially controlled wheel positioning using an open-loop step-count method. However, accumulated motor slip and step drift over multiple rotations led to filter slot misalignment. Resolved this by designing a custom mechanical indexing pattern that triggers limit switches upon exact slot alignment, providing reliable closed-loop position feedback to the Arduino for precise slot registration</p>
         </details>
         <div class="mt-auto pt-8">
           <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
@@ -416,7 +416,7 @@
         <details class="wrong mt-6">
           <summary>WHAT WENT WRONG</summary>
           <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
-          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+          <p class="wrong-body">Ran into normal issues with component tolerances due to a lack of precision on some spec sheets, magnified through 3D printing. Also dealt with an issue on the 7.4V-to-5V step-down converter to make sure the microcontroller and 5V components could operate safely. Faced some problems printing the wheels with TPU as well, but it turned out to be a slicer setup issue rather than a design flaw. </p>
         </details>
         <div class="mt-auto pt-8">
           <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
@@ -443,11 +443,11 @@
         <details class="wrong mt-6">
           <summary>WHAT WENT WRONG</summary>
           <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
-          <p class="wrong-body">Add what went wrong here: what failed, why it happened, and what changed in the next version.</p>
+          <p class="wrong-body">Had no issues during design and fabrication. However, while adapting the IR camera module to fit inside the head space, the light sensors broke; I desoldered them and soldered new ones to fix it. During testing, I noticed a lot of servo jitter in parts facing high stress because the hinges were mounted directly onto the servo shafts. </p>
         </details>
         <div class="mt-auto pt-8">
           <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
-          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> FULLY BUILT &amp; TESTED / SOFTWARE IN DEVELOPMENT ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 8 LBS ]</span><span class="pill">[ <span class="text-mute">CAD:</span> FUSION 360 ]</span><span class="pill">[ <span class="text-mute">DOF:</span> 20 ]</span><span class="pill">[ <span class="text-mute">ACTUATORS:</span> MG996R SERVOS ]</span><span class="pill">[ <span class="text-mute">MATERIAL:</span> CARBON-FIBER FILAMENT ]</span><span class="pill">[ <span class="text-mute">BUILD:</span> 1 WK DESIGN / 4 DAYS ASSEMBLY ]</span></div>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> FULLY BUILT / SOFTWARE IN DEVELOPMENT ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 8 LBS ]</span><span class="pill">[ <span class="text-mute">CAD:</span> FUSION 360 ]</span><span class="pill">[ <span class="text-mute">DOF:</span> 20 ]</span><span class="pill">[ <span class="text-mute">ACTUATORS:</span> MG996R SERVOS ]</span><span class="pill">[ <span class="text-mute">MATERIAL:</span> CARBON-FIBER FILAMENT ]</span><span class="pill">[ <span class="text-mute">BUILD:</span> 1 WK DESIGN / 4 DAYS ASSEMBLY ]</span></div>
         </div>
       </div>
     </article>
