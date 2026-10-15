@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="flap" x1="48" y1="0" x2="64" y2="16" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFD2AE"/>
+      <stop offset="1" stop-color="#FF9448"/>
+    </linearGradient>
+  </defs>
+  <!-- orange tile with the top-right corner folded away -->
+  <path d="M0 0H48L64 16V64H0Z" fill="#FF5500"/>
+  <!-- soft shadow cast by the fold -->
+  <path d="M46 17.5H64V20Q54 20.5 46 17.5Z" fill="#000" opacity=".22"/>
+  <path d="M48 0V16H64Z" fill="#000" opacity=".0"/>
+  <!-- the folded-over flap (underside of the tile) -->
+  <path d="M48 0L64 16H48Z" fill="url(#flap)"/>
+  <!-- crisp fold line -->
+  <path d="M48 0L64 16" stroke="#FF5500" stroke-width=".8" fill="none"/>
+  <!-- bold geometric D, cut out in the dark background color -->
+  <path fill="#0A0A0C" fill-rule="evenodd" d="M16 14H31A18 18 0 0 1 31 50H16ZM25 23H31A9 9 0 0 1 31 41H25Z"/>
+</svg>
