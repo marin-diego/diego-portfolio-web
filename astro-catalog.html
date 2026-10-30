@@ -4,66 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Astrophotography Catalog | Diego Marin</title>
-<meta name="description" content="Full astrophotography catalog by Diego Marin, sorted by year with technique, frame counts and processing notes.">
-<meta name="theme-color" content="#0A0A0C">
+<meta name="description" content="Astrophotography by Diego Marin: Moon, planets and deep sky, with technique, frame counts and processing notes.">
+<meta name="theme-color" content="#111114">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
-  tailwind.config = {
-    theme: { extend: {
-      fontFamily: { sans: ['"Space Grotesk"', 'system-ui', 'sans-serif'], mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'] },
-      colors: { bg: '#0A0A0C', panel: '#18181B', line: '#27272A', ink: '#EDEDED', mute: '#8B8B94', orange: '#FF5500' }
-    } }
-  }
+  tailwind.config = { theme: { extend: {
+    fontFamily: { sans: ['"Space Grotesk"','system-ui','sans-serif'], mono: ['"JetBrains Mono"','ui-monospace','monospace'] },
+    colors: Object.fromEntries(['bg','panel','line','alt','ink','mute','orange'].map(k=>[k,`rgb(var(--${k}) / <alpha-value>)`]))
+  } } }
 </script>
 <style>
-  html { scroll-behavior: smooth; scroll-padding-top: 5rem; background: #0A0A0C; }
-  body { background-color: #0A0A0C; color: #EDEDED;
-         background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-         background-size: 56px 56px; }
-  ::selection { background: #FF5500; color: #0A0A0C; }
-  .h-sec { font-size: clamp(2.5rem, 5.5vw, 5rem); letter-spacing: -0.04em; line-height: .95; }
-  .card { background: #18181B; border: 1px solid #27272A; transition: border-color .35s, box-shadow .35s; }
-  .card:hover { border-color: #FF5500; box-shadow: 0 0 0 1px rgba(255,85,0,.3), 0 0 44px -12px rgba(255,85,0,.45); }
-  .pill { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .03em; border: 1px solid #27272A; background: #0F0F12; padding: .3rem .55rem; color: #fff; }
-  .shot { position: relative; background: #000; border-right: 1px solid #27272A; display: flex; align-items: center; justify-content: center; min-height: 18rem; }
-  .shot img { position: relative; z-index: 1; background: #000; width: 100%; height: auto; max-height: 80vh; object-fit: contain; display: block; cursor: zoom-in; }
-  .shot .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1rem;
-              font-family: "JetBrains Mono", monospace; font-size: 11px; color: #8B8B94; letter-spacing: .06em; pointer-events: none; }
-  a:focus-visible, button:focus-visible { outline: 2px solid #FF5500; outline-offset: 3px; }
-  #lightbox { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.92); display: none; align-items: center; justify-content: center; padding: 1.5rem; cursor: zoom-out; }
-  #lightbox.open { display: flex; }
-  #lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  :root{--bg:17 17 20;--panel:27 27 31;--line:46 46 52;--alt:21 21 24;--ink:242 242 244;--mute:163 163 173;--orange:255 85 0}
+  html[data-theme=light]{--bg:248 247 244;--panel:255 255 255;--line:226 224 218;--alt:241 239 234;--ink:24 24 27;--mute:96 96 104;--orange:217 72 0}
+  html[data-theme=light] .text-white{color:rgb(var(--ink))}
+  html{scroll-behavior:smooth;scroll-padding-top:5rem;background:rgb(var(--bg))}
+  body{background:rgb(var(--bg));color:rgb(var(--ink))}
+  ::selection{background:rgb(var(--orange));color:rgb(var(--bg))}
+  .h-sec{font-size:clamp(2.5rem,5.5vw,5rem);letter-spacing:-.04em;line-height:.95}
+  .pill{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.03em;border:1px solid rgb(var(--line));background:rgb(var(--alt));padding:.3rem .55rem;color:rgb(var(--ink))}
+  .chip{cursor:pointer}.chip[aria-pressed=true]{border-color:rgb(var(--orange));color:rgb(var(--orange))}
+  .tile{display:block;width:100%;text-align:left;background:rgb(var(--panel));border:1px solid rgb(var(--line));transition:border-color .25s;cursor:pointer}
+  .tile:hover{border-color:rgb(var(--orange))}
+  .thumb{position:relative;aspect-ratio:1;background:#000;overflow:hidden}
+  .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font:11px "JetBrains Mono",monospace;color:#8B8B94}
+  a:focus-visible,button:focus-visible{outline:2px solid rgb(var(--orange));outline-offset:3px}
+  #modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:1rem;overflow:auto}
+  #modal.open{display:flex}
+  #modal .box{background:rgb(var(--panel));border:1px solid rgb(var(--line));max-width:72rem;width:100%;max-height:92vh;overflow:auto}
+  #modal img{position:relative;z-index:1;width:100%;max-height:80vh;object-fit:contain;background:#000;display:block}
 </style>
 </head>
 <body class="font-sans antialiased">
-
 <header class="sticky top-0 z-50 bg-bg/85 backdrop-blur border-b border-line">
   <nav class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
     <a href="index.html" class="flex items-center gap-3 font-bold tracking-tight text-white"><span class="w-3 h-3 bg-orange"></span>Diego Marin</a>
-    <a href="index.html#astrophotography" class="font-mono text-xs hover:text-orange">&larr; Back to portfolio</a>
+    <div class="flex items-center gap-5 font-mono text-xs">
+      <a href="index.html#astrophotography" class="hover:text-orange">&larr; Portfolio</a>
+      <button id="theme-btn" type="button" aria-label="Switch between dark and light theme" class="border border-line px-2.5 py-1 hover:border-orange hover:text-orange">LIGHT</button>
+    </div>
   </nav>
 </header>
-
 <main class="max-w-7xl mx-auto px-6 md:px-10 pt-16 pb-24">
-  <p class="font-mono text-xs text-orange">[ ASTROPHOTOGRAPHY ARCHIVE ]</p>
-  <h1 class="h-sec font-bold text-white mt-4">Full catalog</h1>
-  <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink/90">Every capture, newest first, with the technique, frame count, and processing behind each one.</p>
-
-  <nav id="year-nav" class="mt-10 flex flex-wrap gap-2" aria-label="Jump to year"></nav>
+  <p class="font-mono text-xs text-orange">[ ASTROPHOTOGRAPHY ]</p>
+  <h1 class="h-sec font-bold text-white mt-4">Catalog</h1>
+  <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink/90">Everything I've captured, moon, planets, and deep sky.</p>
+  <div class="mt-10 flex flex-wrap gap-2" id="filters" role="group" aria-label="Filter by target"></div>
+  <p id="count" class="mt-4 font-mono text-[11px] text-mute"></p>
   <div id="catalog"></div>
 </main>
-
-<footer class="border-t border-line">
-  <div class="max-w-7xl mx-auto px-6 md:px-10 py-8 font-mono text-xs text-mute flex justify-between">
-    <span>DIEGO MARIN // LOS ANGELES </span>
-    <span>&copy; 2026</span>
-  </div>
-</footer>
-
-<div id="lightbox" role="dialog" aria-label="Enlarged photo"><img alt=""></div>
-
+<footer class="border-t border-line"><div class="max-w-7xl mx-auto px-6 md:px-10 py-8 font-mono text-xs text-mute flex justify-between"><span>DIEGO MARIN // LOS ANGELES</span><span>&copy; 2026</span></div></footer>
+<div id="modal" role="dialog" aria-modal="true" aria-label="Photo details"><div class="box"></div></div>
 <script>
 /* ==========================================================
    CATALOG DATA: edit here.
@@ -116,8 +110,7 @@ const ENTRIES = [
 const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt = d => { const [y, m, day] = d.split('-').map(Number); return MONTHS[m - 1] + ' ' + day + ', ' + y; };
-
-// tries every extension for the image id (and any alt ids); removes the img if none exist
+const catOf = e => /moon/i.test(e.title) ? 'Moon' : /saturn|jupiter|mars|venus|mercury|uranus|neptune/i.test(e.title) ? 'Planets' : 'Deep sky';
 const candidates = e => [e.id, ...(e.alt || [])].flatMap(n => EXTS.map(x => 'assets/astro-catalog/' + n + '.' + x));
 function tryNext(img) {
   const list = JSON.parse(img.dataset.list), i = Number(img.dataset.i) + 1;
@@ -125,40 +118,39 @@ function tryNext(img) {
   img.dataset.i = i; img.src = list[i];
 }
 window.tryNext = tryNext;
-
 const sorted = [...ENTRIES].sort((a, b) => b.date.localeCompare(a.date));
-const years = [...new Set(sorted.map(e => e.date.slice(0, 4)))];
-
-document.getElementById('year-nav').innerHTML = years.map(y =>
-  '<a href="#y' + y + '" class="pill hover:border-orange hover:text-orange">' + y + '</a>').join('');
-
-document.getElementById('catalog').innerHTML = years.map(y => {
-  const items = sorted.filter(e => e.date.startsWith(y));
-  return '<section id="y' + y + '" class="mt-16">' +
-    '<h2 class="font-mono text-sm text-orange border-b border-line pb-4">[ ' + y + ' ]</h2>' +
-    items.map(e =>
-      '<article class="card grid md:grid-cols-12 mt-8">' +
-        '<div class="shot md:col-span-7"><span class="ph">[ ' + esc(e.title) + ' ]</span>' +
-          '<img data-list=\'' + esc(JSON.stringify(candidates(e))).replace(/\'/g, "&#39;") + '\' data-i="0" src="' + esc(candidates(e)[0]) + '" alt="' + esc(e.title + ', ' + fmt(e.date)) + '" loading="lazy" onerror="tryNext(this)"></div>' +
-        '<div class="md:col-span-5 p-6 md:p-10 flex flex-col">' +
-          '<p class="font-mono text-xs text-orange">' + fmt(e.date) + '</p>' +
-          '<h3 class="mt-3 text-3xl font-bold tracking-tight text-white">' + esc(e.title) + '</h3>' +
-          '<p class="mt-4 leading-relaxed text-ink">' + esc(e.notes) + '</p>' +
-          '<div class="mt-auto pt-8"><p class="font-mono text-[11px] text-mute mb-3">DETAILS</p><div class="flex flex-wrap gap-2">' +
-            e.tags.map(t => '<span class="pill">[ <span class="text-mute">' + esc(t[0].toUpperCase()) + ':</span> ' + esc(t[1].toUpperCase()) + ' ]</span>').join('') +
-          '</div><p class="font-mono text-[10px] text-mute mt-4">IMAGE ID: ' + esc(e.id) + '</p></div>' +
-        '</div>' +
-      '</article>').join('') +
-    '</section>';
-}).join('');
-
-// click a photo to enlarge
-const lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
-document.getElementById('catalog').addEventListener('click', e => {
-  if (e.target.matches('.shot img')) { lbImg.src = e.target.src; lbImg.alt = e.target.alt; lb.classList.add('open'); }
+const img = (e, big) => '<img data-list=\'' + esc(JSON.stringify(candidates(e))).replace(/\'/g, '&#39;') + '\' data-i="0" src="' + esc(candidates(e)[0]) + '" alt="' + esc(e.title + ', ' + fmt(e.date)) + '"' + (big ? '' : ' loading="lazy"') + ' onerror="tryNext(this)">';
+let filter = 'All';
+function render() {
+  const list = sorted.filter(e => filter === 'All' || catOf(e) === filter);
+  document.getElementById('count').textContent = list.length + (list.length === 1 ? ' PHOTO' : ' PHOTOS');
+  const years = [...new Set(list.map(e => e.date.slice(0, 4)))];
+  document.getElementById('catalog').innerHTML = list.length ? years.map(y =>
+    '<section class="mt-12"><h2 class="font-mono text-sm text-orange border-b border-line pb-3">[ ' + y + ' ]</h2><div class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">' +
+    list.filter(e => e.date.startsWith(y)).map(e => '<button type="button" class="tile" data-id="' + esc(e.id) + '"><div class="thumb"><span class="ph">[ ' + esc(e.title) + ' ]</span>' + img(e) + '</div><div class="p-3"><p class="font-mono text-[10px] text-orange">' + fmt(e.date) + ' / ' + catOf(e).toUpperCase() + '</p><h3 class="mt-1 text-sm font-bold text-white leading-snug">' + esc(e.title) + '</h3></div></button>').join('') +
+    '</div></section>').join('') : '<p class="mt-12 text-mute">Nothing here yet.</p>';
+}
+const fl = document.getElementById('filters');
+fl.innerHTML = ['All', 'Moon', 'Planets', 'Deep sky'].map(c => '<button type="button" class="pill chip" aria-pressed="' + (c === 'All') + '">' + c.toUpperCase() + '</button>').join('');
+fl.addEventListener('click', ev => {
+  const b = ev.target.closest('.chip'); if (!b) return;
+  filter = b.textContent === 'ALL' ? 'All' : b.textContent === 'DEEP SKY' ? 'Deep sky' : b.textContent[0] + b.textContent.slice(1).toLowerCase();
+  fl.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === b)); render();
 });
-lb.addEventListener('click', () => lb.classList.remove('open'));
-document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+const modal = document.getElementById('modal'), box = modal.querySelector('.box');
+document.getElementById('catalog').addEventListener('click', ev => {
+  const t = ev.target.closest('.tile'); if (!t) return;
+  const e = ENTRIES.find(x => x.id === t.dataset.id);
+  box.innerHTML = '<div class="grid md:grid-cols-12"><div class="md:col-span-8 bg-black relative min-h-[14rem]"><span class="ph">[ ' + esc(e.title) + ' ]</span>' + img(e, true) + '</div><div class="md:col-span-4 p-6 flex flex-col"><button type="button" id="close" class="self-end font-mono text-xs text-mute hover:text-orange">CLOSE [ESC]</button><p class="mt-2 font-mono text-xs text-orange">' + fmt(e.date) + '</p><h3 class="mt-2 text-2xl font-bold text-white">' + esc(e.title) + '</h3><p class="mt-4 leading-relaxed text-ink">' + esc(e.notes) + '</p><div class="mt-6 flex flex-wrap gap-2">' + e.tags.map(g => '<span class="pill">[ <span class="text-mute">' + esc(g[0].toUpperCase()) + ':</span> ' + esc(g[1].toUpperCase()) + ' ]</span>').join('') + '</div></div></div>';
+  modal.classList.add('open'); document.getElementById('close').focus();
+});
+const closeM = () => modal.classList.remove('open');
+modal.addEventListener('click', ev => { if (ev.target === modal || ev.target.id === 'close') closeM(); });
+document.addEventListener('keydown', ev => { if (ev.key === 'Escape') closeM(); });
+const root = document.documentElement, tb = document.getElementById('theme-btn');
+const paint = () => tb.textContent = root.dataset.theme === 'light' ? 'DARK' : 'LIGHT';
+paint(); tb.onclick = () => { root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light'; try { localStorage.setItem('theme', root.dataset.theme) } catch (e) {} paint(); };
+render();
 </script>
 </body>
 </html>
