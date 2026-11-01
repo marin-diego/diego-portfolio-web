@@ -22,7 +22,7 @@
 <meta name="twitter:title" content="Diego Marin | Mechanical Engineering &amp; Hardware Systems">
 <meta name="twitter:description" content="Mechanical engineering student and co-founder of MAPC Technologies. Rockets, capsules, and robots I've designed, 3D printed, and tested.">
 <meta name="twitter:image" content="https://diegomarin.dev/assets/og-image.png">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <script>
   const ALWAYS_ANIMATE = true;
@@ -34,7 +34,7 @@
 <script>
   tailwind.config = {
     theme: { extend: {
-      fontFamily: { sans: ['"Space Grotesk"', 'system-ui', 'sans-serif'], mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'] },
+      fontFamily: { sans: ['"Geist"', 'system-ui', 'sans-serif'], mono: ['"Geist Mono"', 'ui-monospace', 'monospace'] },
       colors: Object.fromEntries(['bg','panel','line','alt','ink','mute','orange'].map(k=>[k,`rgb(var(--${k}) / <alpha-value>)`]))
     } }
   }
@@ -51,7 +51,7 @@
 
   .card, .spot { background: rgb(var(--panel)); border: 1px solid rgb(var(--line)); transition: border-color .35s, box-shadow .35s; }
   .card:hover, .spot:hover { border-color: rgb(var(--orange)); box-shadow: 0 0 0 1px rgba(255,85,0,.3), 0 0 44px -12px rgba(255,85,0,.45); }
-  .pill { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .03em; border: 1px solid rgb(var(--line)); background: rgb(var(--alt)); padding: .3rem .55rem; color: rgb(var(--ink)); }
+  .pill { font-family: "Geist Mono", monospace; font-size: 11px; letter-spacing: .03em; border: 1px solid rgb(var(--line)); background: rgb(var(--alt)); padding: .3rem .55rem; color: rgb(var(--ink)); }
 
   .img-slot { position: relative; overflow: hidden; background-color: rgb(var(--alt)); border: 1px solid rgb(var(--line)); }
   .img-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; }
@@ -71,7 +71,7 @@
 
   /* ---- media tabs: PHOTOS / VIDEO / 3D ---- */
   .media-tabs { position: absolute; top: 12px; left: 12px; z-index: 12; display: flex; gap: 4px; }
-  .media-tab { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .06em; padding: .35rem .65rem; color: rgb(var(--ink));
+  .media-tab { font-family: "Geist Mono", monospace; font-size: 11px; letter-spacing: .06em; padding: .35rem .65rem; color: rgb(var(--ink));
                background: rgba(10,10,12,.82); border: 1px solid rgb(var(--line)); cursor: pointer; backdrop-filter: blur(4px); transition: color .2s, border-color .2s, background .2s; }
   .media-tab:hover { border-color: rgb(var(--orange)); color: rgb(var(--orange)); }
   .media-tab[aria-pressed="true"] { background: rgb(var(--orange)); border-color: rgb(var(--orange)); color: rgb(var(--bg)); }
@@ -80,15 +80,15 @@
   .media-panel video { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
   .media-panel model-viewer { width: 100%; height: 100%; --poster-color: transparent; background: radial-gradient(circle at 50% 40%, rgb(var(--panel)) 0%, rgb(var(--alt)) 70%); }
   .media-msg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1.5rem;
-               font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: .06em; color: rgb(var(--mute)); }
-  .media-hint { position: absolute; left: 12px; bottom: 12px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .06em; color: rgb(var(--mute)); pointer-events: none; }
+               font-family: "Geist Mono", monospace; font-size: 12px; letter-spacing: .06em; color: rgb(var(--mute)); }
+  .media-hint { position: absolute; left: 12px; bottom: 12px; font-family: "Geist Mono", monospace; font-size: 10px; letter-spacing: .06em; color: rgb(var(--mute)); pointer-events: none; }
 
   /* ---- slideshow: manual controls ---- */
   .slide-bars { bottom: 4px; }
   .slide-bars i { box-sizing: content-box; padding: 8px 0; background-clip: content-box; cursor: pointer; }
   .slide-bars i.on { background-clip: content-box; }
   .slide-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 40px; height: 56px; display: flex; align-items: center; justify-content: center;
-               font-family: "JetBrains Mono", monospace; font-size: 22px; line-height: 1; color: #fff; background: rgba(10,10,12,.55); border: 1px solid rgb(var(--line));
+               font-family: "Geist Mono", monospace; font-size: 22px; line-height: 1; color: #fff; background: rgba(10,10,12,.55); border: 1px solid rgb(var(--line));
                cursor: pointer; opacity: .55; transition: opacity .2s, border-color .2s, color .2s; }
   .slide-nav:hover, .slide-nav:focus-visible { opacity: 1; border-color: rgb(var(--orange)); color: rgb(var(--orange)); }
   .slide-nav.prev { left: 12px; }
@@ -97,7 +97,7 @@
   /* ---- what went wrong ---- */
   .wrong { border: 1px solid rgb(var(--line)); background: rgb(var(--alt)); }
   .wrong summary { list-style: none; cursor: pointer; padding: .7rem .9rem; display: flex; justify-content: space-between; align-items: center;
-                   font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .06em; color: rgb(var(--ink)); }
+                   font-family: "Geist Mono", monospace; font-size: 11px; letter-spacing: .06em; color: rgb(var(--ink)); }
   .wrong summary::-webkit-details-marker { display: none; }
   .wrong summary::after { content: "+"; color: rgb(var(--orange)); font-size: 15px; }
   .wrong[open] summary::after { content: "\\2212"; }
@@ -115,7 +115,7 @@
   .card.compact:not(.open) details.wrong,.card.compact:not(.open) .mt-auto{display:none}
   .card.compact:not(.open) .desc-clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .card.compact:not(.open) .img-slot{min-height:18rem!important}
-  .more-btn{align-self:flex-start;margin-top:1rem;font:500 12px "JetBrains Mono",monospace;color:rgb(var(--orange))}
+  .more-btn{align-self:flex-start;margin-top:1rem;font:500 12px "Geist Mono",monospace;color:rgb(var(--orange))}
   html[data-theme=light] .media-tab{background:rgba(255,255,255,.9)}
   html[data-theme=light] .media-tab[aria-pressed="true"]{background:rgb(var(--orange));border-color:rgb(var(--orange));color:#fff}
   .wrong .wrong-body{color:rgb(var(--ink) / .85)!important}
@@ -131,6 +131,85 @@
   }
   input,textarea{font-size:16px}
   body{overflow-x:clip}
+</style>
+<style>
+:root{--ease:cubic-bezier(.16,1,.3,1);--display:"Bricolage Grotesque","Geist",system-ui,sans-serif}
+h1,h2,h3,h4{font-family:var(--display);font-optical-sizing:auto}
+.h-mega{letter-spacing:-.055em;line-height:.9;font-weight:700}
+.h-sec,.contact-title{letter-spacing:-.045em;font-weight:700}
+.font-mono,.pill,.media-tab{font-feature-settings:"zero" 1}
+#home{position:relative;isolation:isolate}
+.h-sec{background:linear-gradient(180deg,rgb(var(--ink)) 35%,rgb(var(--ink)/.5));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.wd{display:inline-block;opacity:0;transform:translateY(55%) rotate(2deg);animation:wordUp 1.2s var(--ease) forwards}
+.wd:nth-child(2){animation-delay:.12s}.wd:nth-child(3){animation-delay:.24s}
+.grad{background:linear-gradient(100deg,rgb(var(--orange)),#ffb27a 45%,rgb(var(--orange)) 90%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:wordUp 1.2s var(--ease) .24s forwards,sheen 7s linear 1.5s infinite}
+@keyframes wordUp{to{opacity:1;transform:none}}
+@keyframes sheen{to{background-position:220% center}}
+.traj{position:absolute;z-index:-1;right:0;top:8.5rem;width:min(44%,38rem);pointer-events:none}
+@media(max-width:1023px){.traj{opacity:.3;width:70%}}
+@media(max-width:767px){.traj{opacity:.35;width:130%;right:-20%;top:9rem}}
+.spot{position:relative;overflow:hidden}
+.spot .img-slot img{transition:transform 1.2s var(--ease),opacity 1s}.spot:hover .img-slot img{transform:scale(1.05)}
+.hero-stats>div{transition:background .4s}.hero-stats>div:hover{background:linear-gradient(135deg,rgb(var(--orange)/.10),rgb(var(--bg)))}
+.btn{transition:all .35s var(--ease)}.btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.97)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}.rv.in{opacity:1;transform:none}
+#projects .max-w-7xl>h3[data-cat]{margin-bottom:.5rem}
+.prow{position:relative;border-bottom:1px solid rgb(var(--line))}
+.prow::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgb(var(--orange)/.11),transparent 65%);opacity:0;transition:opacity .45s}
+.prow:hover::before,.prow.open::before{opacity:1}
+.prow::after{content:"";position:absolute;left:0;top:0;width:2px;height:0;background:rgb(var(--orange));transition:height .5s var(--ease)}
+.prow:hover::after,.prow.open::after{height:100%}
+.phead{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:3.5rem 1fr auto auto 2rem;gap:1rem;align-items:center;text-align:left;background:none;color:inherit;padding:1.7rem 0;cursor:pointer}
+.pn{font:400 .8rem "Geist Mono",monospace;color:rgb(var(--mute))}
+.pt{font-family:var(--display);font-size:clamp(1.9rem,4.6vw,3.8rem);font-weight:500;letter-spacing:-.045em;line-height:1;transition:transform .6s var(--ease),color .3s}
+.phead:hover .pt,.prow.open .pt{transform:translateX(.6rem);color:rgb(var(--orange))}
+.ps{font:500 .6875rem "Geist Mono",monospace;letter-spacing:.09em;text-transform:uppercase;border:1px solid rgb(var(--line));background:rgb(var(--alt));color:rgb(var(--mute));padding:.35rem .65rem;white-space:nowrap;max-width:20rem;overflow:hidden;text-overflow:ellipsis}
+.ps.live{border-color:rgb(var(--orange));color:rgb(var(--orange));background:rgb(var(--orange)/.07)}
+.pp{font:400 1.6rem "Geist Mono",monospace;color:rgb(var(--orange));text-align:right;transition:transform .5s var(--ease)}
+.prow.open .pp{transform:rotate(45deg)}
+.pbody{display:none;position:relative;z-index:1;padding:0 0 2.75rem}
+.prow.open .pbody{display:block;animation:rowIn .7s var(--ease)}
+.pbody>.card{margin-top:0!important}
+@keyframes rowIn{from{opacity:0;transform:translateY(-12px)}}
+@media(max-width:700px){.phead{grid-template-columns:2.25rem 1fr 1.5rem}.ps,.pth{display:none}}
+@media(prefers-reduced-motion:reduce){.rv,.wd,.grad{opacity:1;transform:none;animation:none}}
+</style>
+<style>
+.spot .img-slot{aspect-ratio:16/11!important}
+.spot .img-slot img{object-position:50% 30%}
+.spot>div.p-5{padding:.95rem 1.1rem 1.1rem!important}
+.spot h3{font-size:1.2rem!important;line-height:1.2}
+.spot{transition:transform .5s var(--ease),border-color .35s}.spot:hover{transform:translateY(-4px)}
+.h-sec{font-size:clamp(2.25rem,4.7vw,4.25rem)!important}
+@media(min-width:768px){[class*="py-24"]{padding-top:5rem!important;padding-bottom:5rem!important}[class*="md:py-40"]{padding-top:7rem!important;padding-bottom:7rem!important}[class*="md:py-32"]{padding-top:6rem!important;padding-bottom:6rem!important}}
+#progress{background:linear-gradient(90deg,rgb(var(--orange)),#ffb27a)!important}
+nav ul a{position:relative;transition:color .25s}
+nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:rgb(var(--orange));transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+nav ul a.is-active{color:rgb(var(--orange))}nav ul a.is-active::after,nav ul a:hover::after{transform:scaleX(1)}
+.pbody>.card{background:linear-gradient(180deg,rgb(var(--panel)),rgb(var(--alt)));box-shadow:0 30px 60px -40px rgba(0,0,0,.5)}
+.astro-hl .img-slot{transition:border-color .3s}.astro-hl figure:hover .img-slot{border-color:rgb(var(--orange))}
+.astro-hl img{transition:transform 1.2s var(--ease),opacity 1s}.astro-hl figure:hover img{transform:scale(1.05)}
+</style>
+<style>
+html{scrollbar-color:rgb(var(--line)) rgb(var(--bg))}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:rgb(var(--bg))}::-webkit-scrollbar-thumb{background:rgb(var(--line));border:2px solid rgb(var(--bg));border-radius:6px}::-webkit-scrollbar-thumb:hover{background:rgb(var(--orange))}
+body,header,section,.card,.pill,.prow,.hero-stats>div,.ps,.btn{transition-property:background-color,border-color,color,box-shadow,transform,opacity;transition-duration:.4s}
+header{transition:box-shadow .4s,background-color .4s,border-color .4s}header.scrolled{box-shadow:0 14px 30px -24px rgba(0,0,0,.55)}
+@keyframes blink{50%{opacity:0}}
+#home h1+p::after{content:"_";color:rgb(var(--orange));margin-left:.2em;animation:blink 1.1s steps(1) infinite}
+.pth{display:block;width:0;height:3.5rem;overflow:hidden;opacity:0;border:1px solid transparent;transition:width .55s var(--ease),opacity .4s,border-color .4s;background:rgb(var(--alt))}
+.pth img{width:100%;height:100%;object-fit:cover;display:block}
+.phead:hover .pth{width:6rem;opacity:1;border-color:rgb(var(--line))}.prow.open .pth{width:0;opacity:0}
+.ps.empty{visibility:hidden}
+.spot .img-slot img{transform:scale(1.08)}.spot.in .img-slot img{transform:scale(1)}.spot.in:hover .img-slot img{transform:scale(1.05)}
+.spot.rv{transition:opacity 1s var(--ease),transform .7s var(--ease),border-color .35s}
+.card.rv{transition:opacity 1s var(--ease),transform 1s var(--ease),border-color .35s,box-shadow .35s}
+.rv.in.card:hover,.rv.in.spot:hover{transform:translateY(-3px)}
+@media(min-width:768px){#leadership [class*="md:mt-40"]{margin-top:6rem!important}#leadership [class*="md:mt-32"]{margin-top:5rem!important}#leadership .mt-24{margin-top:5rem}}
+.img-slot{transition:border-color .35s}.img-slot:hover{border-color:rgb(var(--orange)/.6)}
+.pill{transition:border-color .25s,color .25s,transform .35s var(--ease)}#skills .pill:hover{border-color:rgb(var(--orange));color:rgb(var(--orange));transform:translateY(-2px)}
+#about li{transition:padding .4s var(--ease),color .3s}#about li:hover{padding-left:.6rem;color:rgb(var(--orange))}
+a.underline{transition:color .25s,text-underline-offset .3s}a.underline:hover{text-underline-offset:7px}
 </style>
 </head>
 <body class="font-sans antialiased">
@@ -167,35 +246,45 @@
 
 <!-- ============ HERO ============ -->
 <section id="home" class="max-w-7xl mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-20">
+  <svg id="traj" class="traj" viewBox="0 0 640 560" aria-hidden="true" focusable="false">
+    <defs><linearGradient id="tg" x1="0" x2="1"><stop offset="0" style="stop-color:rgb(var(--orange));stop-opacity:.15"/><stop offset="1" style="stop-color:rgb(var(--orange))"/></linearGradient></defs>
+    <g style="stroke:rgb(var(--line));stroke-width:1;fill:none"><path d="M0 40H640M0 160H640M0 280H640M0 400H640M0 520H640M160 0V560M320 0V560M480 0V560M640 0V560"/></g>
+    <path id="tp" d="M30 520C120 520 190 40 330 40C450 40 470 380 560 462C590 490 610 520 625 520" style="fill:none;stroke:rgb(var(--mute));stroke-opacity:.5;stroke-width:1;stroke-dasharray:3 7"/>
+    <path id="tt" pathLength="1" d="M30 520C120 520 190 40 330 40C450 40 470 380 560 462C590 490 610 520 625 520" style="fill:none;stroke:url(#tg);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:0 2"/>
+    <g id="tm"></g>
+    <line id="tv" x1="30" y1="520" x2="48" y2="520" style="stroke:rgb(var(--orange));stroke-width:2;stroke-linecap:round"/><circle id="td" r="6" cx="30" cy="520" style="fill:rgb(var(--orange))"/><circle id="th" r="6" cx="30" cy="520" style="fill:none;stroke:rgb(var(--orange))"/>
+    <text id="tr" x="40" y="500" style="font:500 13px 'Geist Mono',monospace;letter-spacing:.08em;fill:rgb(var(--ink))">ALT 0 M</text>
+  </svg>
   <div class="status-row flex flex-wrap items-center justify-between gap-4 font-mono text-xs border-b border-line pb-4">
     <span class="flex items-center gap-3 text-white"><span class="dot"></span>STATUS: THINKING WHAT TO BUILD NEXT</span>
     <span class="flex items-center gap-4"><a href="#contact" class="pill border-orange/60 text-orange hover:bg-orange hover:text-bg transition-colors">OPEN TO INTERNSHIPS</a><span class="text-mute">LOS ANGELES</span></span>
   </div>
 
-  <h1 class="h-mega font-bold text-white mt-14 md:mt-20 max-w-6xl">Print. Test. Fly.</h1>
-  <p class="mt-6 font-mono text-sm md:text-base text-mute">Mechanical engineering student, open to internships.</p>
+  <h1 class="h-mega font-bold text-white mt-14 md:mt-20 max-w-6xl"><span class="wd">Print.</span> <span class="wd">Test.</span> <span class="wd grad">Fly.</span></h1>
+  <p class="mt-8 font-mono text-sm md:text-base text-mute">Mechanical engineering student, open to internships.</p>
 
-  <div class="mt-12 grid md:grid-cols-12 gap-8">
-    <p class="hero-sub md:col-start-6 md:col-span-6 text-lg md:text-xl leading-relaxed text-ink">
+  <div class="mt-10 grid md:grid-cols-12 gap-8">
+    <p class="hero-sub md:col-span-7 lg:col-span-5 text-lg md:text-xl leading-relaxed text-ink">
       Co-founder of MAPC Technologies, specialized in advanced 3D CAD design, 3D printing, and physical prototype development for aerospace and robotics.
     </p>
   </div>
 
-  <div class="hero-cta mt-10 md:ml-[41.6%] flex flex-wrap gap-4">
+  <div class="hero-cta mt-10 flex flex-wrap gap-4">
     <a href="#projects" class="btn bg-orange text-bg px-7 py-3.5 font-mono text-sm font-medium hover:bg-white">Explore projects</a>
     <a href="#contact" class="btn border border-ink/40 text-white px-7 py-3.5 font-mono text-sm hover:border-orange hover:text-orange">Get in touch</a>
     <a href="#contact" id="hero-resume" class="btn border border-ink/40 text-white px-7 py-3.5 font-mono text-sm hover:border-orange hover:text-orange">Request resume</a>
   </div>
-  <p class="mt-8 md:ml-[41.6%] font-mono text-xs text-mute">Busy? <a href="recruiter.html" class="text-orange underline underline-offset-4">Read the one-page version</a>. If not, the work is just below.</p>
+  <p class="mt-8 font-mono text-xs text-mute">Busy? <a href="recruiter.html" class="text-orange underline underline-offset-4">Read the one-page version</a>. If not, the work is just below.</p>
 
-  <div class="hero-stats mt-16 grid sm:grid-cols-3 gap-px bg-line border border-line font-mono text-xs">
+  <div class="hero-stats mt-14 grid sm:grid-cols-3 gap-px bg-line border border-line font-mono text-xs">
     <div class="bg-bg p-5"><p class="text-mute">INSTITUTION</p><p class="mt-2 text-white">CSUN / B.S. MECHANICAL ENGINEERING</p></div>
     <div class="bg-bg p-5"><p class="text-mute">TEAM</p><p class="mt-2 text-white">MAPC TECHNOLOGIES / CO-FOUNDER SINCE 2021</p></div>
     <div class="bg-bg p-5"><p class="text-mute">METHOD</p><p class="mt-2 text-white">BUILD. TEST. REDESIGN.</p></div>
   </div>
 
   <!-- SPOTLIGHT GRID -->
-  <div class="mt-20 grid md:grid-cols-12 gap-6 items-end">
+  <div class="mt-14 flex items-center justify-between font-mono text-xs"><span class="text-orange">[ FEATURED WORK ]</span><a href="#projects" class="text-mute hover:text-orange transition-colors">ALL PROJECTS &darr;</a></div>
+  <div class="mt-4 grid md:grid-cols-12 gap-5 items-stretch">
     <a href="#project-rover" class="spot group md:col-span-4 block">
       <div class="img-slot aspect-[4/5]"><img src="assets/images/rover-detail.jpg" alt="NASA Perseverance Rover CAD Model" class="active"></div>
       <div class="p-5">
@@ -203,7 +292,7 @@
         <h3 class="mt-1 text-xl font-bold text-white group-hover:text-orange transition-colors">NASA Perseverance Rover Model</h3>
       </div>
     </a>
-    <a href="#project-humanoid" class="spot group md:col-span-4 block md:mb-16">
+    <a href="#project-humanoid" class="spot group md:col-span-4 block">
       <div class="img-slot aspect-[3/4]"><img src="assets/images/humanoid-detail.jpg" alt="Humanoid" class="active"></div>
       <div class="p-5">
         <p class="font-mono text-[11px] text-orange">ROBOTICS / 20-DOF MECHANICAL DESIGN</p>
@@ -607,7 +696,7 @@
       <div><p class="font-mono text-[11px] text-mute mb-3">SOFTWARE</p><div class="flex flex-wrap gap-2"><span class="pill">PIPP</span><span class="pill">AUTOSTAKKERT!</span><span class="pill">DEEPSKYSTACKER</span><span class="pill">REGISTAX</span><span class="pill">PHOTOSHOP</span></div></div>
     </div>
   </div>
-  <div class="mt-16 border border-line bg-panel p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+  <div class="mt-12 border border-line bg-panel p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
     <div>
       <p class="font-mono text-xs text-orange">[ FULL ARCHIVE ]</p>
       <p class="mt-2 text-xl font-bold text-white">Every capture, with the details behind it.</p>
@@ -616,11 +705,7 @@
     <a href="astro-catalog.html" class="shrink-0 bg-orange text-bg px-7 py-3.5 font-mono text-sm font-medium hover:bg-white transition-colors text-center">See full astrophotography catalog &rarr;</a>
   </div>
 
-  <div class="mt-16"><h4 class="font-mono text-sm text-orange border-b border-line pb-4">[ GALLERY: MOON ]</h4><p class="mt-4 text-ink/80">One moon, different phases.</p><div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4"><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">MINERAL MOON</span><img src="assets/images/moon-1.jpg" alt="MINERAL MOON" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">MINERAL MOON</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">FULL MOON</span><img src="assets/images/moon-2.jpg" alt="FULL MOON" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">FULL MOON</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">WAXING GIBBOUS</span><img src="assets/images/moon-3.jpg" alt="WAXING GIBBOUS" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">WAXING GIBBOUS</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">WANING GIBBOUS</span><img src="assets/images/moon-4.jpg" alt="WANING GIBBOUS" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">WANING GIBBOUS</figcaption></figure></div></div>
-  
-<div class="mt-16"><h4 class="font-mono text-sm text-orange border-b border-line pb-4">[ GALLERY: PLANETARY ]</h4><p class="mt-4 text-ink/80">Different planets, stacked from video, one telescope.</p><div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4"><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Saturn</span><img src="assets/images/saturn.jpg" alt="Saturn" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">SATURN</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Jupiter</span><img src="assets/images/jupiter.jpg" alt="Jupiter" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">JUPITER</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Mars</span><img src="assets/images/mars.jpg" alt="Mars" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">MARS</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Venus</span><img src="assets/images/venus.jpg" alt="Venus" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">VENUS</figcaption></figure></div></div>
-  
-<div class="mt-16"><h4 class="font-mono text-sm text-orange border-b border-line pb-4">[ GALLERY: DEEP SKY ]</h4><p class="mt-4 text-ink/80">Long-exposure stacks of galaxies and nebulae.</p><div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4"><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Andromeda Galaxy</span><img src="assets/images/andromeda.jpg" alt="Andromeda Galaxy" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">ANDROMEDA GALAXY</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">Orion Nebula</span><img src="assets/images/orion.jpg" alt="Orion Nebula" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">ORION NEBULA</figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">PLEIADES</span><img src="assets/images/deepsky-3.jpg" alt="PLEIADES" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">PLEIADES </figcaption></figure><figure class="m-0"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">HORSEHEAD NEBULA</span><img src="assets/images/deepsky-4.jpg" alt="HORSEHEAD NEBULA" class="active" onerror="this.remove()"></div><figcaption class="mt-2 font-mono text-[11px] text-mute">HORSEHEAD NEBULA</figcaption></figure></div></div>
+  <div class="mt-12"><h4 class="font-mono text-sm text-orange border-b border-line pb-4">[ HIGHLIGHTS ]</h4><div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 astro-hl"><figure class="m-0 group"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">MINERAL MOON</span><img src="assets/images/moon-1.jpg" alt="MINERAL MOON" class="active" onerror="this.remove()"></div><figcaption class="mt-2 flex justify-between font-mono text-[11px] text-mute"><span>MINERAL MOON</span><span class="text-orange">MOON</span></figcaption></figure><figure class="m-0 group"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">SATURN</span><img src="assets/images/saturn.jpg" alt="SATURN" class="active" onerror="this.remove()"></div><figcaption class="mt-2 flex justify-between font-mono text-[11px] text-mute"><span>SATURN</span><span class="text-orange">PLANET</span></figcaption></figure><figure class="m-0 group"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">ANDROMEDA GALAXY</span><img src="assets/images/andromeda.jpg" alt="ANDROMEDA GALAXY" class="active" onerror="this.remove()"></div><figcaption class="mt-2 flex justify-between font-mono text-[11px] text-mute"><span>ANDROMEDA GALAXY</span><span class="text-orange">DEEP SKY</span></figcaption></figure><figure class="m-0 group"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">ORION NEBULA</span><img src="assets/images/orion.jpg" alt="ORION NEBULA" class="active" onerror="this.remove()"></div><figcaption class="mt-2 flex justify-between font-mono text-[11px] text-mute"><span>ORION NEBULA</span><span class="text-orange">DEEP SKY</span></figcaption></figure></div><p class="mt-5 font-mono text-xs text-mute">The rest of the moon, planets and deep sky are in <a href="astro-catalog.html" class="text-orange underline underline-offset-4">the full catalog</a>.</p></div>
 </section>
 
 <!-- ============ MY HUMAN SIDE ============ -->
@@ -1048,27 +1133,28 @@ cf.addEventListener('submit', async e => {
   function paint(){btn.textContent=root.dataset.theme==='light'?'DARK':'LIGHT'}
   paint();
   btn.onclick=function(){root.dataset.theme=root.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('theme',root.dataset.theme)}catch(e){}paint()};
-  function setOpen(a,o){a.classList.toggle('open',o);var b=a.querySelector('.more-btn');if(b){b.textContent=o?'– Less':'+ Details';b.setAttribute('aria-expanded',o)}}
-  document.querySelectorAll('#projects article.card').forEach(function(a){
-    var col=a.querySelector('.md\\:col-span-5'),d=col&&col.querySelector('p.leading-relaxed');
-    if(!d)return;
-    a.classList.add('compact');d.classList.add('desc-clamp');
-    var b=document.createElement('button');b.type='button';b.className='more-btn';b.textContent='+ Details';b.setAttribute('aria-expanded','false');
-    d.after(b);b.onclick=function(){setOpen(a,!a.classList.contains('open'))};
-  });
-
-  /* project order + filters */
-  var wrap=document.querySelector('#projects .max-w-7xl'),cat='aerospace',kids=[].slice.call(wrap.children);
-  kids.forEach(function(k){if(k.tagName==='H3'&&/ROBOTICS/i.test(k.textContent))cat='robotics';if(k.tagName==='H3'||k.tagName==='ARTICLE')k.dataset.cat=cat});
+  /* project list: rows that expand into the full project card */
+  var wrap=document.querySelector('#projects .max-w-7xl'),cat='aerospace',rows=[];
+  [].slice.call(wrap.children).forEach(function(k){if(k.tagName==='H3'&&/ROBOTICS/i.test(k.textContent))cat='robotics';if(k.tagName==='H3'||k.tagName==='ARTICLE')k.dataset.cat=cat});
   var lcc=document.getElementById('project-lcc3'),first=wrap.querySelector('article[data-cat=aerospace]');if(lcc&&first&&first!==lcc)first.before(lcc);
-  ['aerospace','robotics'].forEach(function(c){wrap.querySelectorAll('article[data-cat='+c+']').forEach(function(a,n){var p=a.querySelector('.md\\:col-span-5 > p');if(p)p.textContent=p.textContent.replace(/ENTRY \d+/,'ENTRY '+String(n+1).padStart(2,'0'))})});
+  ['aerospace','robotics'].forEach(function(c){wrap.querySelectorAll('article[data-cat='+c+']').forEach(function(a,n){
+    var num=String(n+1).padStart(2,'0'),ep=a.querySelector('.md\\:col-span-5 > p');if(ep)ep.textContent=ep.textContent.replace(/ENTRY \d+/,'ENTRY '+num);
+    var st='';[].slice.call(a.querySelectorAll('.pill')).forEach(function(p){var m=/STATUS:\s*(.*?)\s*\]/.exec(p.textContent.replace(/\s+/g,' '));if(m&&!st)st=m[1]});
+    var row=document.createElement('div');row.className='prow rv';row.dataset.cat=c;
+    row.innerHTML='<button type="button" class="phead" aria-expanded="false"><span class="pn"></span><span class="pt"></span><span class="pth" aria-hidden="true"></span><span class="ps"></span><span class="pp" aria-hidden="true">+</span></button><div class="pbody"></div>';
+    row.querySelector('.pn').textContent=num;row.querySelector('.pt').textContent=a.querySelector('h4').textContent.replace(/\s*\(.*\)\s*$/,'').trim();
+    var ps=row.querySelector('.ps');if(st){ps.textContent=st;if(/FLIGHT-PROVEN|BUILT AND WORKING/.test(st))ps.classList.add('live')}else ps.classList.add('empty');var im=a.querySelector('.img-slot img');if(im){var ti=document.createElement('img');ti.alt='';ti.src=im.getAttribute('src');ti.onerror=function(){ti.remove()};row.querySelector('.pth').appendChild(ti)}
+    a.before(row);row.querySelector('.pbody').appendChild(a);rows.push(row)})});
+  function setRow(r,o){r.classList.toggle('open',o);r.querySelector('.phead').setAttribute('aria-expanded',o)}
+  function goRow(r){setTimeout(function(){r.scrollIntoView({behavior:'smooth',block:'start'})},70)}
+  wrap.addEventListener('click',function(e){var h=e.target.closest('.phead');if(!h)return;var r=h.parentNode,o=!r.classList.contains('open');rows.forEach(function(x){setRow(x,false)});setRow(r,o);if(o)goRow(r)});
+  function openId(id){var a=id&&document.getElementById(id),r=a&&a.closest('.prow');if(!r)return;rows.forEach(function(x){setRow(x,false)});r.style.display='';setRow(r,true);goRow(r)}
+  addEventListener('hashchange',function(){openId(location.hash.slice(1))});if(location.hash.length>1)setTimeout(function(){openId(location.hash.slice(1))},300);
+  document.querySelectorAll('.spot').forEach(function(sp){sp.addEventListener('click',function(e){var h=sp.getAttribute('href');if(h&&h[0]==='#'){e.preventDefault();history.replaceState(null,'',h);openId(h.slice(1))}})});
   var pf=document.getElementById('proj-filters');
   pf.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;var f=b.dataset.f;
     pf.querySelectorAll('.chip').forEach(function(c){c.setAttribute('aria-pressed',c===b)});
-    wrap.querySelectorAll('[data-cat]').forEach(function(k){k.style.display=(f==='all'||k.dataset.cat===f)?'':'none'})});
-  function fromHash(){var a=location.hash.length>1&&document.getElementById(location.hash.slice(1));if(a&&a.classList.contains('compact'))setOpen(a,true)}
-  addEventListener('hashchange',fromHash);fromHash();
-  document.querySelectorAll('.spot').forEach(function(sp){sp.addEventListener('click',function(){var a=document.getElementById(sp.getAttribute('href').slice(1));if(a&&a.classList.contains('compact'))setOpen(a,true)})});
+    wrap.querySelectorAll('h3[data-cat],.prow').forEach(function(k){k.style.display=(f==='all'||k.dataset.cat===f)?'':'none'})});
   ['hero-resume','nav-resume'].forEach(function(id){document.getElementById(id).addEventListener('click',function(e){e.preventDefault();document.getElementById('contact').scrollIntoView();var t=document.getElementById('resume-toggle');if(t&&t.getAttribute('aria-expanded')!=='true')t.click()})});
   var mm=document.getElementById('more-menu');document.addEventListener('click',function(e){if(mm.open&&(!mm.contains(e.target)||e.target.closest('a')))mm.open=false});
 })();
@@ -1078,6 +1164,38 @@ cf.addEventListener('submit', async e => {
 function set(o){m.hidden=!o;b.setAttribute('aria-expanded',o);b.textContent=o?'CLOSE':'MENU'}
 b.onclick=function(){set(m.hidden)};m.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
 addEventListener('resize',function(){if(innerWidth>=768)set(false)})})();
+</script>
+<script>
+(function(){
+  var svg=document.getElementById('traj'),home=document.getElementById('home');
+  if(svg){
+    var P=svg.querySelector('#tp'),T=svg.querySelector('#tt'),D=svg.querySelector('#td'),H=svg.querySelector('#th'),R=svg.querySelector('#tr'),G=svg.querySelector('#tm'),L=P.getTotalLength(),V=svg.querySelector('#tv'),NS='http://www.w3.org/2000/svg';
+    [[0,'LAUNCH',-4],[.42,'APOGEE',0],[.72,'CHUTE',0],[1,'TOUCHDOWN',-62]].forEach(function(m){var pt=P.getPointAtLength(m[0]*L);
+      var c=document.createElementNS(NS,'circle');c.setAttribute('cx',pt.x);c.setAttribute('cy',pt.y);c.setAttribute('r',2.5);c.style.fill='rgb(var(--mute))';G.appendChild(c);
+      var t=document.createElementNS(NS,'text');t.setAttribute('x',pt.x+m[2]+(m[1]==='LAUNCH'?0:8));t.setAttribute('y',pt.y+(m[1]==='APOGEE'?-14:26));t.textContent=m[1];t.style.cssText='font:500 12px "Geist Mono",monospace;letter-spacing:.1em;fill:rgb(var(--mute))';G.appendChild(t)});
+    var DUR=11000,t0=performance.now();
+    (function f(now){var t=((now-t0)%DUR)/DUR,p=Math.min(1,t/.84),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,q=p*.35+e*.65,pt=P.getPointAtLength(q*L);
+      T.style.strokeDasharray=q+' 2';T.style.opacity=t>.9?Math.max(0,1-(t-.9)/.1):1;
+      D.setAttribute('cx',pt.x);D.setAttribute('cy',pt.y);H.setAttribute('cx',pt.x);H.setAttribute('cy',pt.y);H.setAttribute('r',6+((now/90)%10)*1.4);H.style.opacity=1-((now/90)%10)/10;
+      var alt=Math.max(0,Math.round((520-pt.y)/480*1480));R.textContent='ALT '+alt.toLocaleString('en-US')+' M';R.setAttribute('x',pt.x+(pt.x>430?-96:16));R.setAttribute('y',pt.y<90?pt.y+30:pt.y-14);var a0=P.getPointAtLength(Math.max(0,q*L-3)),a1=P.getPointAtLength(Math.min(L,q*L+3)),dx=a1.x-a0.x,dy=a1.y-a0.y,dl=Math.hypot(dx,dy)||1;V.setAttribute('x1',pt.x+dx/dl*10);V.setAttribute('y1',pt.y+dy/dl*10);V.setAttribute('x2',pt.x+dx/dl*26);V.setAttribute('y2',pt.y+dy/dl*26);
+      D.style.opacity=V.style.opacity=R.style.opacity=t>.93?Math.max(0,1-(t-.93)/.07):1;H.style.display=t>.93?'none':'';
+      requestAnimationFrame(f)})(t0)}
+  var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+  document.querySelectorAll('.h-sec,.contact-title,.spot,.hero-stats>div,.prow').forEach(function(n){n.classList.add('rv');io.observe(n)});
+})();
+</script>
+<script>
+(function(){var links=[].slice.call(document.querySelectorAll('header nav ul a[href^="#"]')),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isIntersecting){links.forEach(function(a){a.classList.remove('is-active')});var a=map[x.target.id];if(a)a.classList.add('is-active')}})},{rootMargin:'-45% 0px -50% 0px'});
+['home'].concat(Object.keys(map)).forEach(function(id){var e=document.getElementById(id);if(e)io.observe(e)})})();
+</script>
+<script>
+(function(){
+  var h=document.querySelector('header'),on=function(){h.classList.toggle('scrolled',scrollY>8)};addEventListener('scroll',on,{passive:true});on();
+  var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isIntersecting){var n=x.target;n.style.transitionDelay=(n.dataset.d||0)+'ms';n.classList.add('in');io.unobserve(n);setTimeout(function(){n.style.transitionDelay=''},1500)}})},{threshold:.1});
+  ['#skills .py-6','#leadership>div','#human .card','#about li','#about .img-slot','#contact form','#contact .space-y-3','.astro-hl figure'].forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(n,i){if(n.classList.contains('rv'))return;n.classList.add('rv');n.dataset.d=(i%5)*80;io.observe(n)})});
+})();
 </script>
 </body>
 </html>
