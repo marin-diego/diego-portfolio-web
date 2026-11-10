@@ -7,12 +7,12 @@
 <meta name="description" content="Astrophotography by Diego Marin: Moon, planets and deep sky, with technique, frame counts and processing notes.">
 <meta name="theme-color" content="#111114">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = { theme: { extend: {
-    fontFamily: { sans: ['"Geist"','system-ui','sans-serif'], mono: ['"Geist Mono"','ui-monospace','monospace'] },
+    fontFamily: { sans: ['"Instrument Sans"','system-ui','sans-serif'], mono: ['"IBM Plex Mono"','ui-monospace','monospace'] },
     colors: Object.fromEntries(['bg','panel','line','alt','ink','mute','orange'].map(k=>[k,`rgb(var(--${k}) / <alpha-value>)`]))
   } } }
 </script>
@@ -24,20 +24,20 @@
   body{background:rgb(var(--bg));color:rgb(var(--ink))}
   ::selection{background:rgb(var(--orange));color:rgb(var(--bg))}
   .h-sec{font-size:clamp(2.5rem,5.5vw,5rem);letter-spacing:-.04em;line-height:.95}
-  .pill{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.03em;border:1px solid rgb(var(--line));background:rgb(var(--alt));padding:.3rem .55rem;color:rgb(var(--ink))}
+  .pill{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.03em;border:1px solid rgb(var(--line));background:rgb(var(--alt));padding:.3rem .55rem;color:rgb(var(--ink))}
   .chip{cursor:pointer}.chip[aria-pressed=true]{border-color:rgb(var(--orange));color:rgb(var(--orange))}
   .tile{display:block;width:100%;text-align:left;background:rgb(var(--panel));border:1px solid rgb(var(--line));transition:border-color .25s;cursor:pointer}
   .tile:hover{border-color:rgb(var(--orange))}
   .thumb{position:relative;aspect-ratio:1;background:#000;overflow:hidden}
   .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font:11px "Geist Mono",monospace;color:#8B8B94}
+  .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font:11px "IBM Plex Mono",monospace;color:#8B8B94}
   a:focus-visible,button:focus-visible{outline:2px solid rgb(var(--orange));outline-offset:3px}
   #modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:1rem;overflow:auto}
   #modal.open{display:flex}
   #modal .box{background:rgb(var(--panel));border:1px solid rgb(var(--line));max-width:72rem;width:100%;max-height:92vh;overflow:auto}
   #modal img{position:relative;z-index:1;width:100%;max-height:80vh;object-fit:contain;background:#000;display:block}
 </style>
-<style>h1,h2,h3,h4{font-family:"Bricolage Grotesque","Geist",system-ui,sans-serif}</style>
+<style>h1,h2,h3,h4{font-family:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif}</style>
 </head>
 <body class="font-sans antialiased">
 <header class="sticky top-0 z-50 bg-bg/85 backdrop-blur border-b border-line">
@@ -71,6 +71,16 @@
 const EXTS = ['jpg','jpeg','png','webp'];   // the page tries each of these for every image id
 const PIPP = 'Frames were processed in PIPP, stacked in AutoStakkert!, and edited with RegiStax 6';
 const ENTRIES = [
+  {
+    date: '2026-11-08', title: 'Saturn', id: 'saturn-11-08-26',
+    notes: 'Captured on November 8th, 2026. I captured three different videos of Saturn as it transitioned through the frame, totaling 5:46 minutes and 10,378 frames. For this capture, I also used a 3x Barlow and a yellow filter. ' + PIPP + '.',
+    tags: [['Technique','Stack'], ['Frames','10,378'], ['Telescope','Celestron C8'], ['Filter','Yellow'], ['Lens','3x Barlow']]
+  },
+  {
+    date: '2026-11-06', title: 'Saturn', id: 'saturn-11-06-26',
+    notes: 'Captured on November 6th, 2026. I captured a 1:41 video of Saturn as it transitioned through the frame. In total, 3,084 frames were captured. ' + PIPP + '.',
+    tags: [['Technique','Stack'], ['Frames','3,084'], ['Telescope','Celestron C8'], ['Lens','2x Barlow']]
+  },
   {
     date: '2026-10-24', title: 'Moon', id: 'moon-10-24-26',
     notes: 'Captured on October 24th, 2026. The moon was divided into two parts, with 225 frames taken of each. They were taken with the telescope’s native focal length. ' + PIPP + '; the two sections were then combined in Microsoft ICE to create the full image.',

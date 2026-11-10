@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diego Marin | Mechanical Engineering &amp; Hardware Systems</title>
+<meta name="description" content="Mechanical engineering student and co-founder of MAPC Technologies. Rockets, capsules, and robots I've designed, 3D printed, and tested.">
+<meta name="theme-color" content="#0A0A0C">
+<link rel="canonical" href="https://diegomarin.dev/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Diego Marin">
+<meta property="og:url" content="https://diegomarin.dev/">
+<meta property="og:title" content="Diego Marin | Mechanical Engineering &amp; Hardware Systems">
+<meta property="og:description" content="Mechanical engineering student and co-founder of MAPC Technologies. Rockets, capsules, and robots I've designed, 3D printed, and tested.">
+<meta property="og:image" content="https://diegomarin.dev/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Diego Marin: Print. Test. Fly.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Diego Marin | Mechanical Engineering &amp; Hardware Systems">
+<meta name="twitter:description" content="Mechanical engineering student and co-founder of MAPC Technologies. Rockets, capsules, and robots I've designed, 3D printed, and tested.">
+<meta name="twitter:image" content="https://diegomarin.dev/assets/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>
+  const ALWAYS_ANIMATE = true;
+  const r = document.documentElement;
+  if (ALWAYS_ANIMATE) r.classList.add('force-motion');
+  if (ALWAYS_ANIMATE || !matchMedia('(prefers-reduced-motion: reduce)').matches) r.classList.add('js');
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      fontFamily: { sans: ['"Geist"', 'system-ui', 'sans-serif'], mono: ['"Geist Mono"', 'ui-monospace', 'monospace'] },
+      colors: Object.fromEntries(['bg','panel','line','alt','ink','mute','orange'].map(k=>[k,`rgb(var(--${k}) / <alpha-value>)`]))
+    } }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; background: rgb(var(--bg)); }
+  body { background-color: rgb(var(--bg)); color: rgb(var(--ink));
+         background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+         background-size: 56px 56px; }
+  ::selection { background: rgb(var(--orange)); color: rgb(var(--bg)); }
+  .h-mega { font-size: clamp(2.6rem, 7.4vw, 7.5rem); letter-spacing: -0.045em; line-height: .95; }
+  .h-sec { font-size: clamp(2.5rem, 5.5vw, 5rem); letter-spacing: -0.04em; line-height: .95; }
+  .contact-title { font-size: clamp(2.75rem, 6vw, 5.25rem); letter-spacing: -0.04em; line-height: .95; }
+
+  .card, .spot { background: rgb(var(--panel)); border: 1px solid rgb(var(--line)); transition: border-color .35s, box-shadow .35s; }
+  .card:hover, .spot:hover { border-color: rgb(var(--orange)); box-shadow: 0 0 0 1px rgba(255,85,0,.3), 0 0 44px -12px rgba(255,85,0,.45); }
+  .pill { font-family: "Geist Mono", monospace; font-size: 11px; letter-spacing: .03em; border: 1px solid rgb(var(--line)); background: rgb(var(--alt)); padding: .3rem .55rem; color: rgb(var(--ink)); }
+
+  .img-slot { position: relative; overflow: hidden; background-color: rgb(var(--alt)); border: 1px solid rgb(var(--line)); }
+  .img-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; }
+  .img-slot img.active { opacity: 1; }
+  .img-slot.contain img { object-fit: contain; }
+
+  .slide-bars { position: absolute; left: 12px; right: 12px; bottom: 12px; display: flex; gap: 4px; z-index: 3; }
+  .slide-bars i { flex: 1; height: 3px; background: rgba(255,255,255,.28); transition: background .4s; }
+  .slide-bars i.on { background: rgb(var(--orange)); }
+
+  @keyframes pulse-dot { 0% { box-shadow: 0 0 0 0 rgba(255,85,0,.7); } 100% { box-shadow: 0 0 0 10px rgba(255,85,0,0); } }
+  .dot { width: 8px; height: 8px; border-radius: 9999px; background: rgb(var(--orange)); animation: pulse-dot 1.6s infinite; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid rgb(var(--orange)); outline-offset: 3px; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .marquee { animation: marquee 45s linear infinite; }
+
+
+  /* ---- media tabs: PHOTOS / VIDEO / 3D ---- */
+  .media-tabs { position: absolute; top: 12px; left: 12px; z-index: 12; display: flex; gap: 4px; }
+  .media-tab { font-family: "Geist Mono", monospace; font-size: 11px; letter-spacing: .06em; padding: .35rem .65rem; color: rgb(var(--ink));
+               background: rgba(10,10,12,.82); border: 1px solid rgb(var(--line)); cursor: pointer; backdrop-filter: blur(4px); transition: color .2s, border-color .2s, background .2s; }
+  .media-tab:hover { border-color: rgb(var(--orange)); color: rgb(var(--orange)); }
+  .media-tab[aria-pressed="true"] { background: rgb(var(--orange)); border-color: rgb(var(--orange)); color: rgb(var(--bg)); }
+  .media-panel { position: absolute; inset: 0; z-index: 10; background: rgb(var(--alt)); border: 1px solid rgb(var(--line)); }
+  .media-panel[hidden] { display: none; }
+  .media-panel video { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
+  .media-panel model-viewer { width: 100%; height: 100%; --poster-color: transparent; background: radial-gradient(circle at 50% 40%, rgb(var(--panel)) 0%, rgb(var(--alt)) 70%); }
+  .media-msg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: 1.5rem;
+               font-family: "Geist Mono", monospace; font-size: 12px; letter-spacing: .06em; color: rgb(var(--mute)); }
+  .media-hint { position: absolute; left: 12px; bottom: 12px; font-family: "Geist Mono", monospace; font-size: 10px; letter-spacing: .06em; color: rgb(var(--mute)); pointer-events: none; }
+
+  /* ---- slideshow: manual controls ---- */
+  .slide-bars { bottom: 4px; }
+  .slide-bars i { box-sizing: content-box; padding: 8px 0; background-clip: content-box; cursor: pointer; }
+  .slide-bars i.on { background-clip: content-box; }
+  .slide-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 40px; height: 56px; display: flex; align-items: center; justify-content: center;
+               font-family: "Geist Mono", monospace; font-size: 22px; line-height: 1; color: #fff; background: rgba(10,10,12,.55); border: 1px solid rgb(var(--line));
+               cursor: pointer; opacity: .55; transition: opacity .2s, border-color .2s, color .2s; }
+  .slide-nav:hover, .slide-nav:focus-visible { opacity: 1; border-color: rgb(var(--orange)); color: rgb(var(--orange)); }
+  .slide-nav.prev { left: 12px; }
+  .slide-nav.next { right: 12px; }
+
+  /* ---- what went wrong ---- */
+  .wrong { border: 1px solid rgb(var(--line)); background: rgb(var(--alt)); }
+  .wrong summary { list-style: none; cursor: pointer; padding: .7rem .9rem; display: flex; justify-content: space-between; align-items: center;
+                   font-family: "Geist Mono", monospace; font-size: 11px; letter-spacing: .06em; color: rgb(var(--ink)); }
+  .wrong summary::-webkit-details-marker { display: none; }
+  .wrong summary::after { content: "+"; color: rgb(var(--orange)); font-size: 15px; }
+  .wrong[open] summary::after { content: "\\2212"; }
+  .wrong summary:hover { color: rgb(var(--orange)); }
+  .wrong .wrong-body { padding: 0 .9rem .9rem; font-size: .95rem; line-height: 1.6; color: #C9C9CF; }
+</style>
+<style>
+  :root{--bg:17 17 20;--panel:27 27 31;--line:46 46 52;--alt:21 21 24;--ink:242 242 244;--mute:163 163 173;--orange:255 85 0}
+  html[data-theme=light]{--bg:248 247 244;--panel:255 255 255;--line:226 224 218;--alt:241 239 234;--ink:24 24 27;--mute:96 96 104;--orange:217 72 0}
+  html[data-theme=light] .text-white{color:rgb(var(--ink))}
+  html[data-theme=light] .hover\:bg-white:hover{background:rgb(var(--ink))}
+  body{background-image:none!important}
+  .marquee-wrap{display:none}
+  .card:hover,.spot:hover{box-shadow:none!important}
+  .card.compact:not(.open) details.wrong,.card.compact:not(.open) .mt-auto{display:none}
+  .card.compact:not(.open) .desc-clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .card.compact:not(.open) .img-slot{min-height:18rem!important}
+  .more-btn{align-self:flex-start;margin-top:1rem;font:500 12px "Geist Mono",monospace;color:rgb(var(--orange))}
+  html[data-theme=light] .media-tab{background:rgba(255,255,255,.9)}
+  html[data-theme=light] .media-tab[aria-pressed="true"]{background:rgb(var(--orange));border-color:rgb(var(--orange));color:#fff}
+  .wrong .wrong-body{color:rgb(var(--ink) / .85)!important}
+  .chip{cursor:pointer}.chip[aria-pressed=true]{border-color:rgb(var(--orange));color:rgb(var(--orange))}
+  #more-menu summary{list-style:none;cursor:pointer}#more-menu summary::-webkit-details-marker{display:none}
+  @media (max-width:767px){
+    [class*="py-24"]{padding-top:4rem!important;padding-bottom:4rem!important}
+    .hero-cta .btn{flex:1 1 100%;text-align:center}
+    .card.compact:not(.open) .img-slot{min-height:14rem!important}
+    .media-tab,.more-btn,.pill.chip,#theme-btn,#nav-resume,#menu-btn{min-height:40px;display:inline-flex;align-items:center}
+    .more-btn{padding:.4rem 0}
+    .pill{overflow-wrap:anywhere}
+  }
+  input,textarea{font-size:16px}
+  body{overflow-x:clip}
+</style>
+<style>
+:root{--ease:cubic-bezier(.16,1,.3,1);--display:"Bricolage Grotesque","Geist",system-ui,sans-serif}
+h1,h2,h3,h4{font-family:var(--display);font-optical-sizing:auto}
+.h-mega{letter-spacing:-.055em;line-height:.9;font-weight:700}
+.h-sec,.contact-title{letter-spacing:-.045em;font-weight:700}
+.font-mono,.pill,.media-tab{font-feature-settings:"zero" 1}
+#home{position:relative;isolation:isolate}
+.h-sec{background:linear-gradient(180deg,rgb(var(--ink)) 35%,rgb(var(--ink)/.5));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.wd{display:inline-block;opacity:0;transform:translateY(55%) rotate(2deg);animation:wordUp 1.2s var(--ease) forwards}
+.wd:nth-child(2){animation-delay:.12s}.wd:nth-child(3){animation-delay:.24s}
+.grad{background:linear-gradient(100deg,rgb(var(--orange)),#ffb27a 45%,rgb(var(--orange)) 90%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:wordUp 1.2s var(--ease) .24s forwards,sheen 7s linear 1.5s infinite}
+@keyframes wordUp{to{opacity:1;transform:none}}
+@keyframes sheen{to{background-position:220% center}}
+.traj{position:absolute;z-index:-1;right:0;top:8.5rem;width:min(44%,38rem);pointer-events:none}
+@media(max-width:1023px){.traj{opacity:.3;width:70%}}
+@media(max-width:767px){.traj{opacity:.35;width:130%;right:-20%;top:9rem}}
+.spot{position:relative;overflow:hidden}
+.spot .img-slot img{transition:transform 1.2s var(--ease),opacity 1s}.spot:hover .img-slot img{transform:scale(1.05)}
+.hero-stats>div{transition:background .4s}.hero-stats>div:hover{background:linear-gradient(135deg,rgb(var(--orange)/.10),rgb(var(--bg)))}
+.btn{transition:all .35s var(--ease)}.btn:hover{transform:translateY(-2px)}.btn:active{transform:scale(.97)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}.rv.in{opacity:1;transform:none}
+#projects .max-w-7xl>h3[data-cat]{margin-bottom:.5rem}
+.prow{position:relative;border-bottom:1px solid rgb(var(--line))}
+.prow::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgb(var(--orange)/.11),transparent 65%);opacity:0;transition:opacity .45s}
+.prow:hover::before,.prow.open::before{opacity:1}
+.prow::after{content:"";position:absolute;left:0;top:0;width:2px;height:0;background:rgb(var(--orange));transition:height .5s var(--ease)}
+.prow:hover::after,.prow.open::after{height:100%}
+.phead{position:relative;z-index:1;width:100%;display:grid;grid-template-columns:3.5rem 1fr auto auto 2rem;gap:1rem;align-items:center;text-align:left;background:none;color:inherit;padding:1.7rem 0;cursor:pointer}
+.pn{font:400 .8rem "Geist Mono",monospace;color:rgb(var(--mute))}
+.pt{font-family:var(--display);font-size:clamp(1.9rem,4.6vw,3.8rem);font-weight:500;letter-spacing:-.045em;line-height:1;transition:transform .6s var(--ease),color .3s}
+.phead:hover .pt,.prow.open .pt{transform:translateX(.6rem);color:rgb(var(--orange))}
+.ps{font:500 .6875rem "Geist Mono",monospace;letter-spacing:.09em;text-transform:uppercase;border:1px solid rgb(var(--line));background:rgb(var(--alt));color:rgb(var(--mute));padding:.35rem .65rem;white-space:nowrap;max-width:20rem;overflow:hidden;text-overflow:ellipsis}
+.ps.live{border-color:rgb(var(--orange));color:rgb(var(--orange));background:rgb(var(--orange)/.07)}
+.pp{font:400 1.6rem "Geist Mono",monospace;color:rgb(var(--orange));text-align:right;transition:transform .5s var(--ease)}
+.prow.open .pp{transform:rotate(45deg)}
+.pbody{display:none;position:relative;z-index:1;padding:0 0 2.75rem}
+.prow.open .pbody{display:block;animation:rowIn .7s var(--ease)}
+.pbody>.card{margin-top:0!important}
+@keyframes rowIn{from{opacity:0;transform:translateY(-12px)}}
+@media(max-width:700px){.phead{grid-template-columns:2.25rem 1fr 1.5rem}.ps,.pth{display:none}}
+@media(prefers-reduced-motion:reduce){.rv,.wd,.grad{opacity:1;transform:none;animation:none}}
+</style>
+<style>
+.spot .img-slot{aspect-ratio:16/11!important}
+.spot .img-slot img{object-position:50% 30%}
+.spot>div.p-5{padding:.95rem 1.1rem 1.1rem!important}
+.spot h3{font-size:1.2rem!important;line-height:1.2}
+.spot{transition:transform .5s var(--ease),border-color .35s}.spot:hover{transform:translateY(-4px)}
+.h-sec{font-size:clamp(2.25rem,4.7vw,4.25rem)!important}
+@media(min-width:768px){[class*="py-24"]{padding-top:5rem!important;padding-bottom:5rem!important}[class*="md:py-40"]{padding-top:7rem!important;padding-bottom:7rem!important}[class*="md:py-32"]{padding-top:6rem!important;padding-bottom:6rem!important}}
+#progress{background:linear-gradient(90deg,rgb(var(--orange)),#ffb27a)!important}
+nav ul a{position:relative;transition:color .25s}
+nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:rgb(var(--orange));transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+nav ul a.is-active{color:rgb(var(--orange))}nav ul a.is-active::after,nav ul a:hover::after{transform:scaleX(1)}
+.pbody>.card{background:linear-gradient(180deg,rgb(var(--panel)),rgb(var(--alt)));box-shadow:0 30px 60px -40px rgba(0,0,0,.5)}
+.astro-hl .img-slot{transition:border-color .3s}.astro-hl figure:hover .img-slot{border-color:rgb(var(--orange))}
+.astro-hl img{transition:transform 1.2s var(--ease),opacity 1s}.astro-hl figure:hover img{transform:scale(1.05)}
+</style>
+<style>
+html{scrollbar-color:rgb(var(--line)) rgb(var(--bg))}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:rgb(var(--bg))}::-webkit-scrollbar-thumb{background:rgb(var(--line));border:2px solid rgb(var(--bg));border-radius:6px}::-webkit-scrollbar-thumb:hover{background:rgb(var(--orange))}
+body,header,section,.card,.pill,.prow,.hero-stats>div,.ps,.btn{transition-property:background-color,border-color,color,box-shadow,transform,opacity;transition-duration:.4s}
+header{transition:box-shadow .4s,background-color .4s,border-color .4s}header.scrolled{box-shadow:0 14px 30px -24px rgba(0,0,0,.55)}
+@keyframes blink{50%{opacity:0}}
+#home h1+p::after{content:"_";color:rgb(var(--orange));margin-left:.2em;animation:blink 1.1s steps(1) infinite}
+.pth{display:block;width:0;height:3.5rem;overflow:hidden;opacity:0;border:1px solid transparent;transition:width .55s var(--ease),opacity .4s,border-color .4s;background:rgb(var(--alt))}
+.pth img{width:100%;height:100%;object-fit:cover;display:block}
+.phead:hover .pth{width:6rem;opacity:1;border-color:rgb(var(--line))}.prow.open .pth{width:0;opacity:0}
+.ps.empty{visibility:hidden}
+.spot .img-slot img{transform:scale(1.08)}.spot.in .img-slot img{transform:scale(1)}.spot.in:hover .img-slot img{transform:scale(1.05)}
+.spot.rv{transition:opacity 1s var(--ease),transform .7s var(--ease),border-color .35s}
+.card.rv{transition:opacity 1s var(--ease),transform 1s var(--ease),border-color .35s,box-shadow .35s}
+.rv.in.card:hover,.rv.in.spot:hover{transform:translateY(-3px)}
+@media(min-width:768px){#leadership [class*="md:mt-40"]{margin-top:6rem!important}#leadership [class*="md:mt-32"]{margin-top:5rem!important}#leadership .mt-24{margin-top:5rem}}
+.img-slot{transition:border-color .35s}.img-slot:hover{border-color:rgb(var(--orange)/.6)}
+.pill{transition:border-color .25s,color .25s,transform .35s var(--ease)}#skills .pill:hover{border-color:rgb(var(--orange));color:rgb(var(--orange));transform:translateY(-2px)}
+#about li{transition:padding .4s var(--ease),color .3s}#about li:hover{padding-left:.6rem;color:rgb(var(--orange))}
+a.underline{transition:color .25s,text-underline-offset .3s}a.underline:hover{text-underline-offset:7px}
+</style>
+<style>
+  #current-build .cb{background:rgb(var(--panel));border:1px solid rgb(var(--line));position:relative;overflow:hidden}
+  #current-build .cb::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:rgb(var(--orange))}
+  #current-build .stage{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  #current-build .stage i{display:block;height:4px;background:rgb(var(--line))}
+  #current-build .stage i.on{background:rgb(var(--orange));animation:cbpulse 2s ease-in-out infinite}
+  #current-build .stage i.done{background:rgb(var(--orange))}
+  #current-build .step{font:10px "Geist Mono",monospace;letter-spacing:.06em;color:rgb(var(--mute))}
+  #current-build .step b{display:block;font-weight:500;color:rgb(var(--ink));margin-top:.3rem}
+  #current-build .step.on b{color:rgb(var(--orange))}
+  #current-build .viz{background:rgb(var(--alt));border-left:1px solid rgb(var(--line))}
+  #current-build svg{width:100%;height:auto;display:block}
+  #current-build .ln{stroke:rgb(var(--ink));stroke-width:9;stroke-linecap:round;fill:none}
+  #current-build .jt{fill:rgb(var(--alt));stroke:rgb(var(--orange));stroke-width:3}
+  #current-build .a1,#current-build .a2,#current-build .a3{transform-box:view-box}
+  #current-build .a1{transform-origin:150px 232px;animation:cbs 7s ease-in-out infinite alternate}
+  #current-build .a2{transform-origin:150px 140px;animation:cbs 5s ease-in-out infinite alternate-reverse}
+  #current-build .a3{transform-origin:232px 96px;animation:cbs 4s ease-in-out infinite alternate}
+  @keyframes cbs{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+  @keyframes cbpulse{50%{opacity:.35}}
+  @media(max-width:767px){#current-build .viz{border-left:0;border-top:1px solid rgb(var(--line))}}
+  @media(prefers-reduced-motion:reduce){#current-build .a1,#current-build .a2,#current-build .a3,#current-build .stage i.on{animation:none}}
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div id="progress" class="fixed top-0 left-0 h-[3px] w-full bg-orange z-[60] origin-left" style="transform:scaleX(0)"></div>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="sticky top-0 z-50 bg-bg/85 backdrop-blur border-b border-line">
+  <nav class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between gap-4">
+    <a href="#home" class="flex items-center gap-3 font-bold tracking-tight text-white"><span class="w-3 h-3 bg-orange"></span>Diego Marin</a>
+    <ul class="hidden md:flex gap-6 lg:gap-8 font-mono text-xs items-center">
+      <li><a href="#projects" class="hover:text-orange">Projects</a></li>
+      <li><a href="#skills" class="hover:text-orange">Skills</a></li>
+      <li><a href="#about" class="hover:text-orange">About &amp; Honors</a></li>
+      <li><a href="recruiter.html" class="hover:text-orange">Summary</a></li>
+      <li class="relative"><details id="more-menu"><summary class="hover:text-orange">More +</summary>
+        <ul class="absolute right-0 mt-4 bg-panel border border-line p-4 space-y-3 min-w-[13rem]">
+          <li><a href="#leadership" class="hover:text-orange">Leadership &amp; Sponsorships</a></li>
+          <li><a href="#astrophotography" class="hover:text-orange">Astrophotography</a></li>
+          <li><a href="#human" class="hover:text-orange">Human Side</a></li>
+        </ul></details></li>
+      <li><a href="#contact" class="hover:text-orange">Contact</a></li>
+    </ul>
+    <div class="flex items-center gap-2 font-mono text-xs">
+      <a href="#contact" id="nav-resume" class="border border-orange/60 text-orange px-2.5 py-1 hover:bg-orange hover:text-bg transition-colors">RESUME</a>
+      <button id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden border border-line px-2.5 py-1">MENU</button>
+      <button id="theme-btn" type="button" aria-label="Switch between dark and light theme" class="border border-line px-2.5 py-1 hover:border-orange hover:text-orange">LIGHT</button>
+    </div>
+  </nav>
+  <div id="mobile-menu" class="md:hidden border-t border-line bg-bg" hidden><ul class="px-6 py-3 font-mono text-sm"><li><a href="#projects" class="block py-3 border-b border-line last:border-0 hover:text-orange">Projects</a></li><li><a href="#skills" class="block py-3 border-b border-line last:border-0 hover:text-orange">Skills</a></li><li><a href="#about" class="block py-3 border-b border-line last:border-0 hover:text-orange">About &amp; Honors</a></li><li><a href="#leadership" class="block py-3 border-b border-line last:border-0 hover:text-orange">Leadership &amp; Sponsorships</a></li><li><a href="#astrophotography" class="block py-3 border-b border-line last:border-0 hover:text-orange">Astrophotography</a></li><li><a href="#human" class="block py-3 border-b border-line last:border-0 hover:text-orange">Human Side</a></li><li><a href="recruiter.html" class="block py-3 border-b border-line last:border-0 hover:text-orange">One-page summary</a></li><li><a href="#contact" class="block py-3 border-b border-line last:border-0 hover:text-orange">Contact</a></li></ul></div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="max-w-7xl mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-20">
+  <svg id="traj" class="traj" viewBox="0 0 640 560" aria-hidden="true" focusable="false">
+    <defs><linearGradient id="tg" x1="0" x2="1"><stop offset="0" style="stop-color:rgb(var(--orange));stop-opacity:.15"/><stop offset="1" style="stop-color:rgb(var(--orange))"/></linearGradient></defs>
+    <g style="stroke:rgb(var(--line));stroke-width:1;fill:none"><path d="M0 40H640M0 160H640M0 280H640M0 400H640M0 520H640M160 0V560M320 0V560M480 0V560M640 0V560"/></g>
+    <path id="tp" d="M30 520C120 520 190 40 330 40C450 40 470 380 560 462C590 490 610 520 625 520" style="fill:none;stroke:rgb(var(--mute));stroke-opacity:.5;stroke-width:1;stroke-dasharray:3 7"/>
+    <path id="tt" pathLength="1" d="M30 520C120 520 190 40 330 40C450 40 470 380 560 462C590 490 610 520 625 520" style="fill:none;stroke:url(#tg);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:0 2"/>
+    <g id="tm"></g>
+    <line id="tv" x1="30" y1="520" x2="48" y2="520" style="stroke:rgb(var(--orange));stroke-width:2;stroke-linecap:round"/><circle id="td" r="6" cx="30" cy="520" style="fill:rgb(var(--orange))"/><circle id="th" r="6" cx="30" cy="520" style="fill:none;stroke:rgb(var(--orange))"/>
+    <text id="tr" x="40" y="500" style="font:500 13px 'Geist Mono',monospace;letter-spacing:.08em;fill:rgb(var(--ink))">ALT 0 M</text>
+  </svg>
+  <div class="status-row flex flex-wrap items-center justify-between gap-4 font-mono text-xs border-b border-line pb-4">
+    <span class="flex items-center gap-3 text-white"><span class="dot"></span><a href="#current-build" class="hover:text-orange transition-colors">STATUS: BUILDING A 6-DOF ROBOTIC ARM</a></span>
+    <span class="flex items-center gap-4"><a href="#contact" class="pill border-orange/60 text-orange hover:bg-orange hover:text-bg transition-colors">OPEN TO INTERNSHIPS</a><span class="text-mute">LOS ANGELES</span></span>
+  </div>
+
+  <h1 class="h-mega font-bold text-white mt-14 md:mt-20 max-w-6xl"><span class="wd">Print.</span> <span class="wd">Test.</span> <span class="wd grad">Fly.</span></h1>
+  <p class="mt-8 font-mono text-sm md:text-base text-mute">Mechanical engineering student, open to internships.</p>
+
+  <div class="mt-10 grid md:grid-cols-12 gap-8">
+    <p class="hero-sub md:col-span-7 lg:col-span-5 text-lg md:text-xl leading-relaxed text-ink">
+      Co-founder of MAPC Technologies, specialized in advanced 3D CAD design, 3D printing, and physical prototype development for aerospace and robotics.
+    </p>
+  </div>
+
+  <div class="hero-cta mt-10 flex flex-wrap gap-4">
+    <a href="#projects" class="btn bg-orange text-bg px-7 py-3.5 font-mono text-sm font-medium hover:bg-white">Explore projects</a>
+    <a href="#contact" class="btn border border-ink/40 text-white px-7 py-3.5 font-mono text-sm hover:border-orange hover:text-orange">Get in touch</a>
+    <a href="#contact" id="hero-resume" class="btn border border-ink/40 text-white px-7 py-3.5 font-mono text-sm hover:border-orange hover:text-orange">Request resume</a>
+  </div>
+  <p class="mt-8 font-mono text-xs text-mute">Busy? <a href="recruiter.html" class="text-orange underline underline-offset-4">Read the one-page version</a>. If not, the work is just below.</p>
+
+  <div class="hero-stats mt-14 grid sm:grid-cols-3 gap-px bg-line border border-line font-mono text-xs">
+    <div class="bg-bg p-5"><p class="text-mute">INSTITUTION</p><p class="mt-2 text-white">CSUN / B.S. MECHANICAL ENGINEERING</p></div>
+    <div class="bg-bg p-5"><p class="text-mute">TEAM</p><p class="mt-2 text-white">MAPC TECHNOLOGIES / CO-FOUNDER SINCE 2021</p></div>
+    <div class="bg-bg p-5"><p class="text-mute">METHOD</p><p class="mt-2 text-white">BUILD. TEST. REDESIGN.</p></div>
+  </div>
+
+  <!-- SPOTLIGHT GRID -->
+  <div class="mt-14 flex items-center justify-between font-mono text-xs"><span class="text-orange">[ FEATURED WORK ]</span><a href="#projects" class="text-mute hover:text-orange transition-colors">ALL PROJECTS &darr;</a></div>
+  <div class="mt-4 grid md:grid-cols-12 gap-5 items-stretch">
+    <a href="#project-rover" class="spot group md:col-span-4 block">
+      <div class="img-slot aspect-[4/5]"><img src="assets/images/rover-detail.jpg" alt="NASA Perseverance Rover CAD Model" class="active"></div>
+      <div class="p-5">
+        <p class="font-mono text-[11px] text-orange">ROBOTICS / MECHANICAL SUSPENSION</p>
+        <h3 class="mt-1 text-xl font-bold text-white group-hover:text-orange transition-colors">NASA Perseverance Rover Model</h3>
+      </div>
+    </a>
+    <a href="#project-humanoid" class="spot group md:col-span-4 block">
+      <div class="img-slot aspect-[3/4]"><img src="assets/images/humanoid-detail.jpg" alt="Humanoid" class="active"></div>
+      <div class="p-5">
+        <p class="font-mono text-[11px] text-orange">ROBOTICS / 20-DOF MECHANICAL DESIGN</p>
+        <h3 class="mt-1 text-xl font-bold text-white group-hover:text-orange transition-colors">Humanoid Robot</h3>
+      </div>
+    </a>
+    <a href="#project-lcc3" class="spot group md:col-span-4 block">
+      <div class="img-slot aspect-[4/5]"><img src="assets/images/lcc-3-1.jpg" alt="LCC-3" class="active"></div>
+      <div class="p-5">
+        <p class="font-mono text-[11px] text-orange">AEROSPACE / FLIGHT-TESTED HARDWARE</p>
+        <h3 class="mt-1 text-xl font-bold text-white group-hover:text-orange transition-colors">Ehécatl LCC-3</h3>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ CURRENT BUILD ============ -->
+<section id="current-build" class="max-w-7xl mx-auto px-6 md:px-10 pb-24">
+  <div class="cb grid md:grid-cols-12">
+    <div class="md:col-span-7 p-6 md:p-10 pl-7 md:pl-12">
+      <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+        <span class="text-orange">[ CURRENT BUILD ]</span>
+        <span class="pill flex items-center gap-2"><span class="dot"></span>UNDER CONSTRUCTION</span>
+      </div>
+      <h2 class="mt-5 text-3xl md:text-5xl font-bold tracking-tight text-white leading-none">6-DOF Robotic Arm</h2>
+      <p class="mt-5 leading-relaxed text-ink">A desktop industrial arm in the style of a Universal Robots cobot, with every part designed and printed by me. The piece I care about most is the gearbox: a stackable 5:1 planetary stage, so I can add stages on top whenever a joint needs more torque.</p>
+      <p class="mt-3 leading-relaxed text-ink">Every joint uses the same 42 mm NEMA 17 motor and the same round 56 mm housing, printed in PLA-CF. Only the motor height changes. Right now I'm finishing the gearbox and working out link lengths.</p>
+      <p class="mt-8 font-mono text-[11px] text-mute">SPEC SHEET</p>
+      <div class="mt-3 flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> UNDER CONSTRUCTION ]</span><span class="pill">[ <span class="text-mute">DOF:</span> 6 + GRIPPER ]</span><span class="pill">[ <span class="text-mute">REACH TARGET:</span> 40 CM ]</span><span class="pill">[ <span class="text-mute">PAYLOAD TARGET:</span> 250 G ]</span><span class="pill">[ <span class="text-mute">ACTUATION:</span> NEMA 17 ]</span><span class="pill">[ <span class="text-mute">TRANSMISSION:</span> 5:1 PLANETARY, STACKABLE ]</span><span class="pill">[ <span class="text-mute">MATERIAL:</span> PLA-CF ]</span></div>
+      <p class="mt-8 font-mono text-[11px] text-mute">BUILD LOG</p>
+      <div class="mt-3 stage" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></div>
+      <div class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-4"><div class="step on">01<b>GEARBOX</b>IN PROGRESS</div><div class="step ">02<b>LINKS &amp; JOINTS</b>NEXT</div><div class="step ">03<b>ELECTRONICS</b>NEXT</div><div class="step ">04<b>ASSEMBLY &amp; TESTS</b>NEXT</div></div>
+    </div>
+    <div class="md:col-span-5 viz p-6 md:p-8 flex flex-col justify-center">
+      <svg viewBox="0 0 300 280" role="img" aria-label="Line drawing of a six-axis robotic arm, slowly moving">
+        <path d="M150 232 A160 160 0 0 1 290 150" style="fill:none;stroke:rgb(var(--mute));stroke-opacity:.5;stroke-dasharray:3 6"/>
+        <path d="M20 250H280" style="stroke:rgb(var(--line));stroke-width:1"/>
+        <rect x="118" y="232" width="64" height="18" style="fill:rgb(var(--alt));stroke:rgb(var(--ink));stroke-width:2"/>
+        <g class="a1"><path class="ln" d="M150 232V140"/>
+          <g class="a2"><path class="ln" d="M150 140L232 96"/>
+            <g class="a3"><path class="ln" d="M232 96L268 128"/><path class="ln" style="stroke-width:3" d="M258 116L278 132M272 142L282 124"/>
+              <circle class="jt" cx="232" cy="96" r="7"/></g>
+            <circle class="jt" cx="150" cy="140" r="8"/></g>
+          <circle class="jt" cx="150" cy="232" r="9"/></g>
+        <text x="20" y="270" style="font:10px 'Geist Mono',monospace;letter-spacing:.08em;fill:rgb(var(--mute))">SCHEMATIC, NOT TO SCALE</text>
+        <text x="206" y="168" style="font:10px 'Geist Mono',monospace;letter-spacing:.08em;fill:rgb(var(--mute))">REACH ~40 CM</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KEYWORD STRIP ============ -->
+<div class="marquee-wrap border-y border-line overflow-hidden py-6" aria-hidden="true">
+  <div class="marquee flex w-max">
+    <div class="flex items-center gap-10 pr-10">
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">ITZANMA III</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">EHÉCATL LCC-3</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-4 CAPSULE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">TVC ROCKET ENGINE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-2 CAPSULE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-1 &amp; EARLY PATHFINDERS</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">AUTONOMOUS MODEL CAR</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">HUMANOID ROBOT</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">NASA PERSEVERANCE ROVER MODEL</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+    </div>
+    <div class="flex items-center gap-10 pr-10">
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">ITZANMA III</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">EHÉCATL LCC-3</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-4 CAPSULE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">TVC ROCKET ENGINE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-2 CAPSULE</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">CTS-1 &amp; EARLY PATHFINDERS</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">AUTONOMOUS MODEL CAR</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">HUMANOID ROBOT</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+      <span class="font-mono text-xl md:text-2xl text-mute whitespace-nowrap">NASA PERSEVERANCE ROVER MODEL</span><span class="w-2.5 h-2.5 bg-orange self-center shrink-0"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-24">
+    <h2 class="h-sec font-bold text-white">Projects</h2>
+    <div id="proj-filters" class="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects"><button type="button" class="pill chip" data-f="all" aria-pressed="true">ALL</button><button type="button" class="pill chip" data-f="aerospace" aria-pressed="false">AEROSPACE</button><button type="button" class="pill chip" data-f="robotics" aria-pressed="false">ROBOTICS</button></div>
+
+    <!-- AEROSPACE & PROPULSION HARDWARE -->
+    <h3 class="mt-20 font-mono text-sm text-orange border-b border-line pb-4">[ AEROSPACE &amp; PROPULSION HARDWARE ]</h3>
+    
+    <!-- Itzanma III (Slideshow) -->
+    <article class="card grid md:grid-cols-12 mt-8" data-video="assets/videos/itzanma-iii.mp4" data-model="assets/models/itzanma-iii.glb">
+      <div class="md:col-span-7 order-1">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/itzanma-III-1.jpg" alt="Itzanma III" class="active">
+          <img src="assets/images/itzanma-III-2.jpg" alt="Itzanma III">
+          <img src="assets/images/itzanma-III-3.jpg" alt="Itzanma III">
+          <img src="assets/images/itzanma-III-4.jpg" alt="Itzanma III">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 01 // LATE 2025 – 2026</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">Itzanma III</h4>
+        <p class="mt-4 leading-relaxed text-ink">Fully redesigned and fully autonomous atmospheric research capsule. Fully 3D printed with PA6-CF (carbon fiber nylon). Features a completely re-engineered active descent control assembly relocated to the base of the vehicle, integrating 3 independently controlled aerodynamic stabilization surfaces for precise trajectory and attitude control during descent.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">A major issue was the low reliability of the fully redesigned cargo released system. Due to position of springs and the alignment rods on each corner of the release plate, sometimes the angle and friction were high enough to stopn the release mechanism from fully releasing. Although this could be solved through iteration, there was not enough time and I decided to shift focus to testing. Due to the poor calibration of the force sensors for engine thrust, readings were not accurate enough. However, this is easily fixed through software.
+</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> GROUND TESTED ]</span><span class="pill">[ <span class="text-mute">PEAK THRUST:</span> 47.1 N ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 3.01 LBS ]</span><span class="pill">[ <span class="text-mute">MATERIAL:</span> PA6-CF ]</span><span class="pill">[ <span class="text-mute">CONSTRUCTION:</span> 3D PRINTED ]</span><span class="pill">[ <span class="text-mute">STABILIZERS:</span> 3 INDEPENDENT ]</span><span class="pill">[ <span class="text-mute">CONTROL:</span> FULLY AUTONOMOUS ]</span><span class="pill">[ <span class="text-mute">DESIGN:</span> FULLY RE-DESIGNED ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Ehecatl LCC-3 (Slideshow) -->
+    <article id="project-lcc3" class="card grid md:grid-cols-12 mt-8" data-video="assets/videos/lcc-3.mp4" data-model="assets/models/lcc-3.glb">
+      <div class="md:col-span-7 order-1 md:order-2">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/lcc-3-1.jpg" alt="LCC-3" class="active">
+          <img src="assets/images/lcc-3-2.jpg" alt="LCC-3">
+          <img src="assets/images/lcc-3-3.jpg" alt="LCC-3">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 md:order-1 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 02 // 2024</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">Ehécatl LCC-3</h4>
+        <p class="mt-4 leading-relaxed text-ink">Fully autonomous, flight-tested experimental research vehicle. Achieved milestone as a pioneering 3D-printed cargo capsule to successfully flight-test. Features a fully integrated mechanical payload door release system, precision drogue parachute deployment architecture, and a three-solid-rocket-motor landing integration system for controlled landing and reuse.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Basic tolerance issues and part strength solved through iteration. During the triple static fire, one of the engines did not light up. After investigation, it was concluded that the failure to ignite was due to a faulty ignitor. However, during the landing attempt, the engine in the same engine bay also failed to ignite; the problem was in the electrical lines. There was also a premature stage separation caused by first-stage design.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> FLIGHT-PROVEN ]</span><span class="pill">[ <span class="text-mute">PEAK THRUST:</span> 47.1 N ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 4.85 LBS ]</span><span class="pill">[ <span class="text-mute">SYSTEMS:</span> PAYLOAD DOOR / DROGUE CHUTE / SOLID ROCKET LANDING ]</span><span class="pill">[ <span class="text-mute">CONTROL:</span> FULLY AUTONOMOUS ]</span><span class="pill">[ <span class="text-mute">CLASSIFICATION:</span> EXPERIMENTAL CARGO CAPSULE ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CTS-4 (Slideshow) -->
+    <article class="card grid md:grid-cols-12 mt-8">
+      <div class="md:col-span-7 order-1">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/cts-4-1.jpg" alt="CTS-4" class="active">
+          <img src="assets/images/cts-4-2.jpg" alt="CTS-4">
+          <img src="assets/images/cts-4-3.jpg" alt="CTS-4">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 03 // 2023</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">CTS-4 Capsule</h4>
+        <p class="mt-4 leading-relaxed text-ink">Lightweight foam-board and fiberglass capsule featuring an apogee-triggered, mechanically deployable flap system designed to increase aerodynamic drag and reduce terminal descent velocity.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body"> Given that the vehicle was not designed using CAD, a major issue present was the imprecise path the flaps followed during release and retraction. Also affected by the lack of precision due to parts being handmade. However, the retractable flap design helped me a lot during the design of the aerodynamic surfaces of the Itzanma III capsule.
+</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> GROUND TESTED ]</span><span class="pill">[ <span class="text-mute">MATERIAL:</span> FOAM BOARD + FIBERGLASS ]</span><span class="pill">[ <span class="text-mute">RELEASE:</span> FLAPS @ APOGEE ]</span><span class="pill">[ <span class="text-mute">MILESTONE:</span> FIRST CAPSULE WITH COMPOSITE MATERIAL ]</span><span class="pill">[ <span class="text-mute">GOAL:</span> DEVELOP FLAP RELEASE SYSTEM PROTOTYPE ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- TVC Rocket Engine -->
+    <article class="card grid md:grid-cols-12 mt-8">
+      <div class="md:col-span-7 order-1 md:order-2">
+        <div class="img-slot aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/engine-1.jpg" alt="TVC Engine" class="active">
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 md:order-1 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 04 // 2023</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">TVC Rocket Engine</h4>
+        <p class="mt-4 leading-relaxed text-ink">A compact experimental solid rocket motor engineered to prototype thrust vector control capabilities. Built entirely from accessible workshop components, the system features a flexible-membrane TVC assembly actively controlled via an onboard Arduino microcontroller. Validated through 5 rigorous static fire test campaigns to evaluate vector actuation, structural resilience, and thrust management.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">The engine parts were handmade, so there was a lack of precision that led to poor attachment between parts and imprecise paths of movement in the TVC system. However, the project laid the foundation of knowledge of rocket engine production along with basic thrust-vector control.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> GROUND TESTED ]</span><span class="pill">[ <span class="text-mute">ARCHITECTURE:</span> SOLID ROCKET MOTOR / TVC ]</span><span class="pill">[ <span class="text-mute">CONTROL:</span> ARDUINO ]</span><span class="pill">[ <span class="text-mute">VALIDATION:</span> 5x SUCCESSFUL STATIC FIRE TESTS ]</span><span class="pill">[ <span class="text-mute">FABRICATION:</span> ACCESSIBLE PROTOTYPE HARDWARE ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CTS-2 (Slideshow) -->
+    <article class="card grid md:grid-cols-12 mt-8">
+      <div class="md:col-span-7 order-1">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/cts-2-1.jpg" alt="CTS-2" class="active">
+          <img src="assets/images/cts-2-2.jpg" alt="CTS-2">
+          <img src="assets/images/cts-2-3.jpg" alt="CTS-2">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 05 // 2022</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">CTS-2 Capsule</h4>
+        <p class="mt-4 leading-relaxed text-ink">A $50-budget experimental flight capsule and a major milestone as the first vehicle in the program to integrate active electronics. Controlled via an onboard Arduino, the system successfully demonstrated braking engine activation during flight. Validated through two pre-flight static test campaigns.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">The capsule’s power supply had to be changed right before flight due to the first stage’s lower thrust than anticipated. This didn’t hurt the vehicle. The capsule’s cheap ultrasonic sensor was mainly affected by the ground surface and weather conditions, so it failed to produce readings precise enough for a successful landing. However, the engine ignition was successful, proving what could be done with limited resources.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> FLIGHT-PROVEN ]</span><span class="pill">[ <span class="text-mute">PEAK THRUST:</span> 10.8 N ]</span><span class="pill">[ <span class="text-mute">BUDGET:</span> $50 PROTOTYPE ]</span><span class="pill">[ <span class="text-mute">AVIONICS:</span> ARDUINO-CONTROLLED ELECTRONICS ]</span><span class="pill">[ <span class="text-mute">MILESTONE:</span> FIRST ELECTRONICS-INTEGRATED FLIGHT CAPSULE ]</span><span class="pill">[ <span class="text-mute">VALIDATION:</span> 2x STATIC TESTS / 1x FLIGHT TEST ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CTS-1 & Early Pathfinders (Slideshow) -->
+    <article class="card grid md:grid-cols-12 mt-8">
+      <div class="md:col-span-7 order-1 md:order-2">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/others-1.jpg" alt="Pathfinders" class="active">
+          <img src="assets/images/others-2.jpg" alt="Pathfinders">
+          <img src="assets/images/others-3.jpg" alt="Pathfinders">
+          <img src="assets/images/others-4.jpg" alt="Pathfinders">
+          <img src="assets/images/others-5.jpg" alt="Pathfinders">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 md:order-1 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 06 // 2021</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">CTS-1 &amp; Early Pathfinders</h4>
+        <p class="mt-4 leading-relaxed text-ink">The first prototypes were built at age 12 from foam board, metal tape, and hot glue, then advanced to fiberglass, and then to 3D printing. Together they show my progress over the years and my learning curve.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Given that the vehicles were hand-made from cardboard, foamboard, and hot glue, they were significantly weak and imprecise. The ones that had electronics, they were also poorly made and often lacked soldering; instead, a header-pin approach was taken. However, without them, none of my other projects would exist.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">MATERIAL:</span> FOAM BOARD + METAL TAPE + HOT GLUE ]</span><span class="pill">[ <span class="text-mute">PROGRESSION:</span> FOAM BOARD → FIBERGLASS → 3D PRINTING ]</span><span class="pill">[ <span class="text-mute">YEAR ONE:</span> 2021 ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ROBOTICS & MECHANICAL SYSTEMS -->
+    <h3 class="mt-24 font-mono text-sm text-orange border-b border-line pb-4">[ ROBOTICS &amp; MECHANICAL SYSTEMS ]</h3>
+
+    <!-- Telescope Filter Wheel (Slideshow) -->
+    <article id="project-filter-wheel" class="card grid md:grid-cols-12 mt-8" data-video="assets/videos/wheel.mp4">
+      <div class="md:col-span-7 order-1 md:order-2">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/wheel-1.jpg" alt="Telescope filter wheel" class="active">
+          <img src="assets/images/wheel-2.jpg" alt="Telescope filter wheel, second view">
+          <img src="assets/images/wheel-3.jpg" alt="Telescope filter wheel, third view">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 md:order-1 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 01 // 2026</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">Telescope Filter Wheel</h4>
+        <!-- DRAFT: edit this description -->
+        <p class="mt-4 leading-relaxed text-ink">A filter wheel for my telescope camera. It has nine slots: seven for filters, one empty for a clear view, and one closed slot that blocks the light completely. The design is modular, and an Arduino controls it. I also designed a companion app for the telescope. It pairs with the wheel, tells it which filter to rotate into place, and takes the pictures, so a set of shots through different filters runs without touching the setup.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Initially controlled wheel positioning using an open-loop step-count method. However, accumulated motor slip and step drift over multiple rotations led to filter slot misalignment. Resolved this by designing a custom mechanical indexing pattern that triggers limit switches upon exact slot alignment, providing reliable closed-loop position feedback to the Arduino for precise slot registration</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> BUILT AND WORKING ]</span><span class="pill">[ <span class="text-mute">FILTER SLOTS:</span> 9 ]</span><span class="pill">[ <span class="text-mute">FILTERS:</span> 7 ]</span><span class="pill">[ <span class="text-mute">CLEAR VIEW:</span> 1 ]</span><span class="pill">[ <span class="text-mute">DARK / CLOSED:</span> 1 ]</span><span class="pill">[ <span class="text-mute">DESIGN:</span> MODULAR ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 600 G ]</span><span class="pill">[ <span class="text-mute">CONTROL:</span> ARDUINO ]</span></div>
+        </div>
+      </div>
+    </article>
+    
+    <!-- Autonomous RC Car -->
+    <article class="card grid md:grid-cols-12 mt-8" data-model="assets/models/car.glb">
+      <div class="md:col-span-7 order-1">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/rc-car-1.jpg" alt="RC Car" class="active">
+          <img src="assets/images/rc-car-2.jpg" alt="RC Car">
+          <img src="assets/images/rc-car-3.jpg" alt="RC Car">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 02 // 2025 – 2026</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">Autonomous Model Car (In Development)</h4>
+        <p class="mt-4 leading-relaxed text-ink">A custom 1/10-scale 4WD mechanical chassis engineered for outdoor autonomous navigation, powered by a Raspberry Pi 5 and BTS7960 high-current motor drivers. Features custom structural mounting brackets integrating an advanced sensor suite: a NEO-M8N GPS for real-world route navigation, an MPU9250 IMU for precise heading and orientation, and a COIN-D6 LiDAR dedicated to real-time environmental mapping and obstacle avoidance.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Ran into normal issues with component tolerances due to a lack of precision on some spec sheets, magnified through 3D printing. Also dealt with an issue on the 7.4V-to-5V step-down converter to make sure the microcontroller and 5V components could operate safely. Faced some problems printing the wheels with TPU as well, but it turned out to be a slicer setup issue rather than a design flaw. </p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> IN DEVELOPMENT ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 11 LBS ]</span><span class="pill">[ <span class="text-mute">SCALE:</span> 1/10 ]</span><span class="pill">[ <span class="text-mute">DRIVE:</span> 4WD ]</span><span class="pill">[ <span class="text-mute">COMPUTE:</span> RASPBERRY PI 5 ]</span><span class="pill">[ <span class="text-mute">MOTOR DRIVERS:</span> BTS7960 ]</span><span class="pill">[ <span class="text-mute">NAVIGATION:</span> NEO-M8N GPS ]</span><span class="pill">[ <span class="text-mute">ORIENTATION:</span> MPU9250 IMU ]</span><span class="pill">[ <span class="text-mute">PERCEPTION:</span> COIN-D6 LIDAR ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Humanoid Robot (Slideshow) -->
+    <article id="project-humanoid" class="card grid md:grid-cols-12 mt-8" data-video="assets/videos/humanoid.mp4" data-model="assets/models/humanoid.glb">
+      <div class="md:col-span-7 order-1 md:order-2">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/humanoid-detail.jpg" alt="Humanoid" class="active">
+          <img src="assets/images/humanoid-1.jpg" alt="Humanoid">
+          <img src="assets/images/humanoid-2.jpg" alt="Humanoid">
+          <img src="assets/images/humanoid-3.jpg" alt="Humanoid">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 md:order-1 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 03 // 2025</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">Humanoid Robot</h4>
+        <p class="mt-4 leading-relaxed text-ink">Designed in Fusion 360 in one week and assembled in four days. Features 20 degrees of freedom (DOF) with a modular joint architecture actuated by MG996R servos, 3D printed entirely in carbon-fiber engineering filaments.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">Had no issues during design and fabrication. However, while adapting the IR camera module to fit inside the head space, the light sensors broke; I desoldered them and soldered new ones to fix it. During testing, I noticed a lot of servo jitter in parts facing high stress because the hinges were mounted directly onto the servo shafts. </p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> FULLY BUILT / SOFTWARE IN DEVELOPMENT ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 8 LBS ]</span><span class="pill">[ <span class="text-mute">CAD:</span> FUSION 360 ]</span><span class="pill">[ <span class="text-mute">DOF:</span> 20 ]</span><span class="pill">[ <span class="text-mute">ACTUATORS:</span> MG996R SERVOS ]</span><span class="pill">[ <span class="text-mute">MATERIAL:</span> CARBON-FIBER FILAMENT ]</span><span class="pill">[ <span class="text-mute">BUILD:</span> 1 WK DESIGN / 4 DAYS ASSEMBLY ]</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Perseverance Rover (Slideshow) -->
+    <article id="project-rover" class="card grid md:grid-cols-12 mt-8" data-video="assets/videos/rover.mp4" data-model="assets/models/rover.glb">
+      <div class="md:col-span-7 order-1">
+        <div class="img-slot slideshow aspect-[16/10] md:aspect-auto md:h-full md:min-h-[26rem]">
+          <img src="assets/images/rover-detail.jpg" alt="Rover" class="active">
+          <img src="assets/images/rover-1.jpg" alt="Rover">
+          <img src="assets/images/rover-2.jpg" alt="Rover">
+          <img src="assets/images/rover-3.jpg" alt="Rover">
+          <div class="slide-bars"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 order-2 p-6 md:p-10 flex flex-col">
+        <p class="font-mono text-xs text-orange">ENTRY 04 // 2023</p>
+        <h4 class="mt-3 text-3xl font-bold tracking-tight text-white">NASA Perseverance Rover Model</h4>
+        <p class="mt-4 leading-relaxed text-ink">Designed from scratch in under two months while teaching myself Fusion 360. Features a fully functional, 3D-printed mechanical rocker-bogie suspension system accurately mimicking NASA's rover geometry. Engineered with autonomous self-driving capabilities utilizing onboard sonic sensors for real-time obstacle avoidance, alongside live data transmission telemetry loops.</p>
+        <details class="wrong mt-6">
+          <summary>WHAT WENT WRONG</summary>
+          <!-- EDIT ME: replace this placeholder with what actually went wrong on this project -->
+          <p class="wrong-body">This was my first time 3D printing and designing, so I had a lot of trouble with tolerances. I also didn’t know about print layer orientation, so some parts that were exposed to high forces failed. All of these problems were solved through iteration, but most importantly, they taught me many skills that I now frequently use when working on other projects.</p>
+        </details>
+        <div class="mt-auto pt-8">
+          <p class="font-mono text-[11px] text-mute mb-3">SPEC SHEET</p>
+          <div class="flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> GROUND TESTED ]</span><span class="pill">[ <span class="text-mute">WEIGHT:</span> 20 LBS ]</span><span class="pill">[ <span class="text-mute">CAD:</span> FUSION 360 ]</span><span class="pill">[ <span class="text-mute">MECHANISM:</span> ROCKER-BOGIE ]</span><span class="pill">[ <span class="text-mute">AUTONOMY:</span> SONIC SENSORS / OBSTACLE AVOIDANCE ]</span><span class="pill">[ <span class="text-mute">TELEMETRY:</span> REAL-TIME DATA TRANSMISSION ]</span><span class="pill">[ <span class="text-mute">DESIGN TIME:</span> &lt; 2 MONTHS ]</span></div>
+        </div>
+      </div>
+    </article>
+
+
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="border-t border-line bg-alt">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-24">
+    <h2 class="h-sec font-bold text-white">Skills</h2>
+    <div class="mt-14 divide-y divide-line border-y border-line"><div class="grid md:grid-cols-12 gap-4 py-6"><p class="md:col-span-3 font-mono text-xs text-orange">[ CAD &amp; SIMULATION ]</p><div class="md:col-span-9 flex flex-wrap gap-2"><span class="pill">AUTODESK FUSION 360</span><span class="pill">FEA STRUCTURAL ANALYSIS</span><span class="pill">GENERATIVE DESIGN</span></div></div><div class="grid md:grid-cols-12 gap-4 py-6"><p class="md:col-span-3 font-mono text-xs text-orange">[ ELECTRONICS &amp; EMBEDDED HARDWARE ]</p><div class="md:col-span-9 flex flex-wrap gap-2"><span class="pill">CUSTOM PCB DESIGN (EASYEDA)</span><span class="pill">EMBEDDED HARDWARE INTEGRATION</span><span class="pill">ARDUINO &amp; RASPBERRY PI</span><span class="pill">SENSOR INTEGRATION</span></div></div><div class="grid md:grid-cols-12 gap-4 py-6"><p class="md:col-span-3 font-mono text-xs text-orange">[ RAPID PROTOTYPING &amp; MATERIALS ]</p><div class="md:col-span-9 flex flex-wrap gap-2"><span class="pill">ADDITIVE MANUFACTURING (PA-CF, PETG, TPU, ABS, RESIN)</span><span class="pill">COMPOSITE LAYUP &amp; FABRICATION</span><span class="pill">PRECISION HARDWARE ASSEMBLY</span></div></div><div class="grid md:grid-cols-12 gap-4 py-6"><p class="md:col-span-3 font-mono text-xs text-orange">[ TESTING &amp; VALIDATION ]</p><div class="md:col-span-9 flex flex-wrap gap-2"><span class="pill">SYSTEM &amp; SUBSYSTEM TESTING</span><span class="pill">STATIC FIRES &amp; FLIGHT TESTING</span><span class="pill">FAILURE ANALYSIS</span></div></div></div>
+  </div>
+</section>
+
+<!-- ============ LEADERSHIP, SPONSORSHIPS & GRANTS ============ -->
+<section id="leadership" class="border-t border-line max-w-7xl mx-auto px-6 md:px-10 py-24 md:py-40">
+  <h2 class="h-sec font-bold text-white max-w-4xl">Leadership, sponsorships &amp; grants</h2>
+
+  <div class="mt-24 md:mt-32 grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+    <div class="md:col-span-7">
+      <div class="img-slot aspect-square md:aspect-[4/3]"><img src="assets/images/mapc.jpg" alt="MAPC Technologies" class="active"></div>
+    </div>
+    <div class="md:col-span-5">
+      <p class="font-mono text-xs text-orange">CO-FOUNDER &amp; TEAM LEAD // 2021 – PRESENT</p>
+      <h3 class="mt-3 text-3xl font-bold tracking-tight text-white">MAPC Technologies</h3>
+      <p class="mt-4 leading-relaxed text-ink">Co-founded a student aerospace team at age 12 to design, build, and test experimental flight capsules, pathfinder rockets, and recovery systems. Responsible for developing all electronic systems, including the complete design, fabrication, and testing of all capsule second-stages. Independently driven through the full engineering cycle of over 10 flight capsules, alongside custom systems for launch pad automation.</p>
+    </div>
+  </div>
+
+  <div class="mt-24 md:mt-40 grid md:grid-cols-12 gap-8 md:gap-16 items-center">
+    <div class="md:col-span-5 order-2 md:order-1">
+      <p class="font-mono text-xs text-orange">SENIOR BOARD // 2025 – 2026</p>
+      <h3 class="mt-3 text-3xl font-bold tracking-tight text-white">Grover Cleveland Charter High School</h3>
+      <p class="mt-4 leading-relaxed text-ink">Senior Board member and multi-committee chair, leading the Senior Class Apparel Committee to manage the end-to-end design, production, and distribution of custom class wear for a student body of over 600. Spearheaded direct coordination with manufacturing vendors to optimize production timelines, while engineering an efficient logistics and distribution framework to handle high-volume delivery under tight deadlines.</p>
+    </div>
+    <div class="md:col-span-7 order-1 md:order-2">
+      <div class="img-slot aspect-square md:aspect-[4/3]"><img src="assets/images/senior board.jpg" alt="Senior Board" class="active"></div>
+    </div>
+  </div>
+
+  <div class="mt-24 md:mt-40 border-t border-line pt-10 grid md:grid-cols-12 gap-8">
+    <div class="md:col-span-5">
+      <p class="font-mono text-xs text-orange">2025</p>
+      <h3 class="mt-3 text-3xl font-bold tracking-tight text-white">Industry sponsorships &amp; equipment</h3>
+    </div>
+    <ul class="md:col-span-6 md:col-start-7 text-lg space-y-3">
+      <li><span class="text-white font-semibold">SUNLU:</span> <span class="text-ink">PA6-CF and PA12-CF nylon</span></li>
+      <li><span class="text-white font-semibold">AMOLEN:</span> <span class="text-ink">PLA Carbon Fiber &amp; High-Speed PLA</span></li>
+      <li><span class="text-white font-semibold">ANYCUBIC:</span> <span class="text-ink">Kobra S1 Combo enclosed 3D printer and spools of various materials</span></li>
+    </ul>
+  </div>
+
+  <div class="mt-24 md:mt-40 border-t border-line pt-10">
+    <h3 class="text-3xl font-bold tracking-tight text-white">Grants received</h3>
+    <div class="mt-16 grid md:grid-cols-2 gap-20 md:gap-0 text-center">
+      <div class="flex flex-col items-center md:px-10">
+        <h4 class="text-2xl font-bold tracking-tight text-white">Bagel Fund Grantee</h4>
+        <p class="mt-2 font-mono text-sm text-orange">$450 // 2025</p>
+        <div class="img-slot contain w-full max-w-xs aspect-square mt-8"><img src="assets/images/bagel-fund.jpg" alt="Bagel Fund" class="active"></div>
+      </div>
+      <div class="flex flex-col items-center md:px-10">
+        <h4 class="text-2xl font-bold tracking-tight text-white">Medici Project Grantee</h4>
+        <p class="mt-2 font-mono text-sm text-orange">1517 FUND // $1,000 // 2024</p>
+        <div class="img-slot contain w-full max-w-xs aspect-square mt-8"><img src="assets/images/1517-fund.jpg" alt="1517 Fund" class="active"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASTROPHOTOGRAPHY ============ -->
+<section id="astrophotography" class="border-t border-line max-w-7xl mx-auto px-6 md:px-10 py-24">
+  <h2 class="h-sec font-bold text-white">Astrophotography</h2>
+  <div class="mt-14 grid md:grid-cols-12 gap-8 md:gap-16">
+    <div class="md:col-span-5">
+      <p class="font-mono text-xs text-orange">OUTSIDE THE WORKSHOP // SINCE AGE 7</p>
+      <h3 class="mt-3 text-3xl font-bold tracking-tight text-white">Pointing the telescope up.</h3>
+      <p class="mt-4 leading-relaxed text-ink">I started astrophotography at age 7 when I received my first telescope, a 127EQ reflector. At 12, I upgraded to a refractor scope and began capturing planetary targets, alongside deep sky photography using a DSLR and a 55-250mm lens to pull in targets like the Andromeda Galaxy and the Orion Nebula. Now, I've got my hands on a vintage 1980s 8-inch C8 Cassegrain. With it, I'm planning to capture high-detail planetary images, build time-lapses, and explore concepts like planetary rotation using entirely my own collected data.</p>
+    </div>
+    <div class="md:col-span-7 space-y-8">
+      <div><p class="font-mono text-[11px] text-mute mb-3">TARGETS</p><div class="flex flex-wrap gap-2"><span class="pill">ANDROMEDA GALAXY</span><span class="pill">ORION NEBULA</span><span class="pill">SATURN</span><span class="pill">JUPITER</span><span class="pill">MARS</span><span class="pill">VENUS</span><span class="pill">MOON</span><span class="pill">SUN</span></div></div>
+      <div><p class="font-mono text-[11px] text-mute mb-3">PROCESSING</p><p class="leading-relaxed text-ink">Deep sky images are built from long-exposure image stacking (integration): many individual exposures, aligned and combined to pull faint detail out of the noise. Planets are captured as video and stacked from only the sharpest frames, a technique known as lucky imaging.</p></div>
+      <div><p class="font-mono text-[11px] text-mute mb-3">SOFTWARE</p><div class="flex flex-wrap gap-2"><span class="pill">PIPP</span><span class="pill">AUTOSTAKKERT!</span><span class="pill">DEEPSKYSTACKER</span><span class="pill">REGISTAX</span><span class="pill">PHOTOSHOP</span></div></div>
+    </div>
+  </div>
+  <div class="mt-12 border border-line bg-panel p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    <div>
+      <p class="font-mono text-xs text-orange">[ FULL ARCHIVE ]</p>
+      <p class="mt-2 text-xl font-bold text-white">Every capture, with the details behind it.</p>
+      <p class="mt-1 text-ink/80">Sorted by year, newest first, with frame counts, technique and processing notes.</p>
+    </div>
+    <a href="astro-catalog.html" class="shrink-0 bg-orange text-bg px-7 py-3.5 font-mono text-sm font-medium hover:bg-white transition-colors text-center">See full astrophotography catalog &rarr;</a>
+  </div>
+
+  <div class="mt-12"><h4 class="font-mono text-sm text-orange border-b border-line pb-4">[ HIGHLIGHTS ]</h4><div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 astro-hl"><figure class="m-0 group"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">MINERAL MOON</span><img src="assets/images/moon-1.jpg" alt="MINERAL MOON" class="active" onerror="this.remove()"></div><figcaption class="mt-2 flex justify-between font-mono text-[11px] text-mute"><span>MINERAL MOON</span><span class="text-orange">MOON</span></figcaption></figure><figure class="m-0 group"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">SATURN</span><img src="assets/images/saturn.jpg" alt="SATURN" class="active" onerror="this.remove()"></div><figcaption class="mt-2 flex justify-between font-mono text-[11px] text-mute"><span>SATURN</span><span class="text-orange">PLANET</span></figcaption></figure><figure class="m-0 group"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">ANDROMEDA GALAXY</span><img src="assets/images/andromeda.jpg" alt="ANDROMEDA GALAXY" class="active" onerror="this.remove()"></div><figcaption class="mt-2 flex justify-between font-mono text-[11px] text-mute"><span>ANDROMEDA GALAXY</span><span class="text-orange">DEEP SKY</span></figcaption></figure><figure class="m-0 group"><div class="img-slot aspect-square"><span class="absolute inset-0 flex items-center justify-center font-mono text-[11px] text-mute text-center p-3">ORION NEBULA</span><img src="assets/images/orion.jpg" alt="ORION NEBULA" class="active" onerror="this.remove()"></div><figcaption class="mt-2 flex justify-between font-mono text-[11px] text-mute"><span>ORION NEBULA</span><span class="text-orange">DEEP SKY</span></figcaption></figure></div><p class="mt-5 font-mono text-xs text-mute">The rest of the moon, planets and deep sky are in <a href="astro-catalog.html" class="text-orange underline underline-offset-4">the full catalog</a>.</p></div>
+</section>
+
+<!-- ============ MY HUMAN SIDE ============ -->
+<section id="human" class="border-t border-line max-w-7xl mx-auto px-6 md:px-10 py-24 md:py-32">
+  <h2 class="h-sec font-bold text-white">My human side</h2>
+
+  <blockquote class="mt-12 md:mt-16 max-w-5xl">
+    <p class="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.1]"><span class="text-orange">&ldquo;</span>Nothing is impossible, you are just not spending enough time on it.<span class="text-orange">&rdquo;</span></p>
+  </blockquote>
+
+  <div class="mt-8 grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+    <div class="md:col-span-7">
+      <p class="text-lg leading-relaxed text-ink">My life changed when I was five years old, watching TV. I was playing with Legos on the floor, and out of the sudden a random movie started playing. It was “Fly Me to the Moon,” a story told through the perspective of a group of flies whose curiosity led them to get on board a Saturn V and fly to the moon along with the human astronauts. This was the first time I saw a rocket, and probably the first time I saw any close-ups of the moon. At that age, I already had an interest in the sky, especially at night, but I never imagined it was possible to reach the moon. Since then, I knew I wanted to be an aerospace engineer, although I didn’t know what aerospace or engineering was. My life has revolved around space since I was little, and now that I am older, this passion grows more and more. Just like the flies, my curiosity led me here, but rather than going to the moon, I want to be the one building the rockets.</p>
+    </div>
+    <div class="md:col-span-5">
+      <div class="img-slot contain aspect-[4/3]"><img src="assets/images/drawing-1.jpg" alt="Drawing" class="active"></div>
+    </div>
+  </div>
+
+  <div class="mt-16 grid md:grid-cols-12 gap-6">
+    <div class="card p-6 md:p-8 md:col-span-4">
+      <p class="font-mono text-xs text-orange">[ FREE TIME ]</p>
+      <ul class="mt-5 space-y-3 font-mono text-sm text-white">
+        <li><span class="text-orange">//</span> Working out</li>
+        <li><span class="text-orange">//</span> Listening to music</li>
+        <li><span class="text-orange">//</span> Evening walks</li>
+	<li><span class="text-orange">//</span> Cooking</li>
+	<li><span class="text-orange">//</span> Photography</li>
+	<li><span class="text-orange">//</span> Video-making</li>
+	<li><span class="text-orange">//</span> Listening to podcasts</li>
+        <li><span class="text-orange">//</span> Biking</li>
+      </ul>
+    </div>
+
+    <div class="card p-6 md:p-8 md:col-span-4">
+      <p class="font-mono text-xs text-orange">[ ON REPEAT ]</p>
+      <p class="mt-5 font-mono text-[11px] text-mute">FAVORITE ARTIST</p>
+      <!-- EDIT ME: your favorite artist -->
+      <p class="mt-1 text-xl font-bold text-white">Latin Mafia</p>
+      <p class="mt-5 font-mono text-[11px] text-mute">FAVORITE SONG</p>
+      <!-- EDIT ME: your favorite song -->
+      <p class="mt-1 text-xl font-bold text-white">Vivo Si Me Exiges</p>
+      <button type="button" id="song-btn" class="mt-6 border border-ink/40 text-white px-4 py-2.5 font-mono text-xs hover:border-orange hover:text-orange transition-colors">&#9654; PLAY CLIP</button>
+      <div class="mt-3 h-[3px] bg-line"><div id="song-prog" class="h-full bg-orange" style="width:0"></div></div>
+      <p id="song-msg" class="mt-2 font-mono text-[11px] text-mute" role="status" aria-live="polite"></p>
+      <!-- EDIT ME: put your clip at assets/audio/song-clip.mp3 and set the start/end seconds below -->
+      <audio id="song-audio" src="assets/audio/song-clip.mp3" preload="none" data-start="23" data-end="60"></audio>
+    </div>
+
+    <div class="card p-6 md:p-8 md:col-span-4">
+      <p class="font-mono text-xs text-orange">[ THE GOAL ]</p>
+      <!-- EDIT ME: draft goal paragraph -->
+      <p class="mt-5 leading-relaxed text-ink">Working toward a B.S. in Mechanical Engineering and a future M.S. in Aerospace Engineering at UCLA. My goal is to design reusable flight hardware for aerospace companies focusing on rapid reusability launch systems, contributing to humanity’s efforts of expanding to outer space.</p>
+    </div>
+  </div>
+
+  <div class="mt-6 grid md:grid-cols-2 gap-6">
+    <div class="card p-6 md:p-8 flex items-center justify-between gap-6">
+      <div>
+        <p class="font-mono text-xs text-orange">[ AVAILABILITY ]</p>
+        <p class="mt-3 flex items-center gap-3 text-xl font-bold text-white"><span class="dot"></span>Open to internships</p>
+      </div>
+      <a href="#contact" class="shrink-0 border border-ink/40 text-white px-4 py-2.5 font-mono text-xs hover:border-orange hover:text-orange transition-colors">Get in touch</a>
+    </div>
+    <div class="card p-6 md:p-8">
+      <p class="font-mono text-xs text-orange">[ NOW BUILDING ]</p>
+      <p class="mt-3 text-xl font-bold text-white">Astrophotography Setup</p>
+      <p class="mt-1 font-mono text-xs text-mute">PUTTING TOGETHER MY DREAM ASTROPHOTOGRAPHY SETUP FOR BOTH DEEP SKY AND PLANETARY IMAGING</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT, EDUCATION, HONORS ============ -->
+<section id="about" class="border-t border-line bg-alt">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-24 grid md:grid-cols-12 gap-12">
+    <div class="md:col-span-4">
+      <h2 class="h-sec font-bold text-white">About &amp; honors</h2>
+      <div class="img-slot aspect-[4/5] mt-10"><img src="assets/images/portrait.jpg" alt="Portrait" class="active"></div>
+    </div>
+    <div class="md:col-span-7 md:col-start-6 space-y-16">
+      <div>
+        <h3 class="font-mono text-sm text-orange border-b border-line pb-4">[ EDUCATION ]</h3>
+        <div class="mt-6"><h4 class="text-xl font-bold tracking-tight text-white">California State University, Northridge (CSUN)</h4><p class="mt-1 font-mono text-sm text-mute">B.S. MECHANICAL ENGINEERING / MINOR: ELECTRICAL ENGINEERING</p></div>
+        <div class="mt-8"><h4 class="text-xl font-bold tracking-tight text-white">Grover Cleveland Charter High School</h4><p class="mt-1 font-mono text-sm text-mute">GRADUATED WITH HONORS</p><p class="mt-4 leading-relaxed text-ink"><span class="text-white font-semibold">Relevant AP coursework:</span> AP Calculus BC, AP Statistics, AP Computer Science, AP Physics, AP Lit, AP Spanish Language &amp; Lit, AP European History, APUSH, AP Government.</p></div>
+      </div>
+      <div>
+       <h3 class="font-mono text-sm text-orange border-b border-line pb-4">[ HONORS &amp; AWARDS ]</h3>
+        <ul class="mt-2 divide-y divide-line">
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">HSF Scholar</span><span class="font-mono text-sm text-orange shrink-0">2026</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">College Board National Recognition Program</span><span class="font-mono text-sm text-orange shrink-0">2025</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">AP Scholar with Distinction Award</span><span class="font-mono text-sm text-orange shrink-0">2026</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">Graduated high school with honors</span><span class="font-mono text-sm text-orange shrink-0">2026</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">State Seal of Biliteracy for Spanish</span><span class="font-mono text-sm text-orange shrink-0">2025/2026</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">Bagel Fund Grantee</span><span class="font-mono text-sm text-orange shrink-0">2025</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">1517 Medici Grantee</span><span class="font-mono text-sm text-orange shrink-0">2024</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">Invited Scholar, National Youth Leadership Forum: Engineering</span><span class="font-mono text-sm text-orange shrink-0">2023, 2024, 2025</span></li>
+          <li class="py-4 flex justify-between gap-6"><span class="text-ink">President's Education Awards</span><span class="font-mono text-sm text-orange shrink-0">2019, 2022</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="border-t border-line">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-24 grid md:grid-cols-12 gap-12 md:gap-16">
+    <div class="md:col-span-6 min-w-0">
+      <h2 class="contact-title font-bold text-white break-words">Let's build something.</h2>
+      <div class="mt-12 space-y-3 font-mono text-sm">
+        <p><span class="text-mute">EMAIL:</span> <a class="text-white underline underline-offset-4 decoration-orange hover:text-orange" href="mailto:dmarin0013j@gmail.com">dmarin0013j@gmail.com</a></p>
+        <p><span class="text-mute">INSTAGRAM:</span> <a class="text-white underline underline-offset-4 decoration-orange hover:text-orange" href="https://www.instagram.com/diego_mapc" target="_blank" rel="noopener">@diego_mapc</a></p>
+        <p><span class="text-mute">LINKEDIN:</span> <a class="text-white underline underline-offset-4 decoration-orange hover:text-orange" href="https://www.linkedin.com/in/marin-diego" target="_blank" rel="noopener">linkedin.com/in/marin-diego</a></p>
+        <div>
+          <p><span class="text-mute">RESUME:</span> <button type="button" id="resume-toggle" aria-expanded="false" aria-controls="resume-form" class="text-white underline underline-offset-4 decoration-orange hover:text-orange">Request a copy</button></p>
+          <form id="resume-form" class="mt-4 space-y-4 border border-line bg-panel p-5 max-w-md" hidden>
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="_subject" value="Resume request">
+            <input type="hidden" name="_captcha" value="false">
+            <div>
+              <label for="rname" class="block font-mono text-xs text-mute">NAME</label>
+              <input id="rname" name="name" type="text" required class="mt-2 w-full bg-bg border border-line px-3 py-2.5 text-white focus:border-orange">
+            </div>
+            <div>
+              <label for="remail" class="block font-mono text-xs text-mute">EMAIL</label>
+              <input id="remail" name="email" type="email" required class="mt-2 w-full bg-bg border border-line px-3 py-2.5 text-white focus:border-orange">
+            </div>
+            <div>
+              <label for="rnote" class="block font-mono text-xs text-mute">COMPANY OR REASON (OPTIONAL)</label>
+              <input id="rnote" name="company_or_reason" type="text" class="mt-2 w-full bg-bg border border-line px-3 py-2.5 text-white focus:border-orange">
+            </div>
+            <button type="submit" class="bg-orange text-bg px-6 py-2.5 font-mono text-xs font-medium hover:bg-white">Send request</button>
+            <p id="resume-status" class="font-mono text-xs" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <form id="contact-form" class="md:col-span-6 min-w-0 md:pt-4 space-y-8" action="https://formsubmit.co/dmarin0013j@gmail.com" method="POST">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="_subject" value="New portfolio message">
+      <input type="hidden" name="_captcha" value="false">
+      <div>
+        <label for="name" class="block font-mono text-xs text-mute">NAME</label>
+        <input id="name" name="name" type="text" required class="mt-2 w-full bg-panel border border-line px-4 py-3 text-white focus:border-orange">
+      </div>
+      <div>
+        <label for="email" class="block font-mono text-xs text-mute">EMAIL</label>
+        <input id="email" name="email" type="email" required class="mt-2 w-full bg-panel border border-line px-4 py-3 text-white focus:border-orange">
+      </div>
+      <div>
+        <label for="message" class="block font-mono text-xs text-mute">MESSAGE</label>
+        <textarea id="message" name="message" rows="4" required class="mt-2 w-full bg-panel border border-line px-4 py-3 text-white focus:border-orange"></textarea>
+      </div>
+      <button type="submit" class="btn bg-orange text-bg px-8 py-3.5 font-mono text-sm font-medium hover:bg-white">Send message</button>
+      <p id="form-status" class="font-mono text-xs" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="border-t border-line">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-8 font-mono text-xs text-mute flex justify-between">
+    <span>DIEGO MARIN // LOS ANGELES </span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+<!-- SLIDESHOW SCRIPT: auto-advance plus manual arrows, dots and swipe -->
+<script>
+document.querySelectorAll('.slideshow').forEach(slot => {
+  const imgs = slot.querySelectorAll('img');
+  const bars = slot.querySelectorAll('.slide-bars i');
+  if (imgs.length < 2) return;
+  let idx = 0, timer = null;
+
+  const show = n => {
+    imgs[idx].classList.remove('active');
+    if (bars[idx]) bars[idx].classList.remove('on');
+    idx = (n + imgs.length) % imgs.length;
+    imgs[idx].classList.add('active');
+    if (bars[idx]) bars[idx].classList.add('on');
+  };
+  const start = () => { clearInterval(timer); timer = setInterval(() => show(idx + 1), 4500); };
+  const manual = n => { show(n); start(); };   // restarts the countdown so your pick stays for a full interval
+
+  [['prev', '\u2039', 'Previous image', -1], ['next', '\u203A', 'Next image', 1]].forEach(([cls, ch, label, d]) => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'slide-nav ' + cls; btn.textContent = ch; btn.setAttribute('aria-label', label);
+    btn.addEventListener('click', () => manual(idx + d));
+    slot.appendChild(btn);
+  });
+  bars.forEach((bar, i) => bar.addEventListener('click', () => manual(i)));
+
+  let x0 = null;
+  slot.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  slot.addEventListener('touchend', e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) manual(idx + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  start();
+});
+</script>
+
+<!-- MEDIA TABS: PHOTOS / VIDEO / 3D -->
+<script>
+(() => {
+  let mvLoader = null;
+  const loadModelViewer = () => mvLoader || (mvLoader = new Promise((res, rej) => {
+    const sc = document.createElement('script');
+    sc.type = 'module';
+    sc.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js';
+    sc.onload = res; sc.onerror = rej;
+    document.head.appendChild(sc);
+  }));
+
+  document.querySelectorAll('article[data-video], article[data-model]').forEach(card => {
+    const slot = card.querySelector('.img-slot.slideshow');
+    if (!slot) return;
+    const col = slot.parentElement;
+    col.classList.add('relative');
+    const name = card.querySelector('h4').textContent.trim();
+    const poster = slot.querySelector('img') ? slot.querySelector('img').getAttribute('src') : '';
+
+    const defs = [];
+    if (card.dataset.model) defs.push(['model', '3D']);
+    if (card.dataset.video) defs.push(['video', 'VIDEO']);
+    defs.push(['photos', 'PHOTOS']);
+
+    const bar = document.createElement('div');
+    bar.className = 'media-tabs';
+    const buttons = {}, panels = {};
+    let current = defs[0][0];
+    let userPicked = false;
+
+    const message = (panel, text) => { panel.innerHTML = '<div class="media-msg">[ ' + text + ' ]</div>'; };
+
+    const build = {
+      video() {
+        const p = document.createElement('div');
+        p.className = 'media-panel'; p.hidden = true;
+        const v = document.createElement('video');
+        v.controls = true; v.playsInline = true; v.preload = 'metadata';
+        v.setAttribute('aria-label', name + ' test footage');
+        v.addEventListener('error', () => { message(p, 'VIDEO COMING SOON'); if (!userPicked && current === 'video') show('photos', true); });
+        v.src = card.dataset.video + '#t=0.1';   // shows the video's own first frame as the preview
+        p.appendChild(v);
+        return p;
+      },
+      model() {
+        const p = document.createElement('div');
+        p.className = 'media-panel'; p.hidden = true;
+        message(p, 'LOADING 3D MODEL...');
+        loadModelViewer().then(() => {
+          const mv = document.createElement('model-viewer');
+          mv.setAttribute('src', card.dataset.model);
+          mv.setAttribute('alt', 'Interactive 3D model of ' + name);
+          mv.setAttribute('camera-controls', '');
+          mv.setAttribute('auto-rotate', '');
+          mv.setAttribute('auto-rotate-delay', '2500');
+          mv.setAttribute('environment-image', 'neutral');
+          mv.setAttribute('exposure', '1.05');
+          mv.setAttribute('shadow-intensity', '1.2');
+          mv.setAttribute('shadow-softness', '0.9');
+          mv.setAttribute('touch-action', 'pan-y');
+          mv.setAttribute('interaction-prompt', 'none');
+          mv.setAttribute('disable-zoom', '');
+          // zoom only while the pointer is actively on the model, so page scrolling is never hijacked
+          mv.addEventListener('pointerdown', () => mv.removeAttribute('disable-zoom'));
+          mv.addEventListener('pointerleave', () => mv.setAttribute('disable-zoom', ''));
+          mv.addEventListener('load', () => {
+            // log what the file actually contains (open the browser console, F12, to inspect)
+            if (mv.model) console.log('[3D] ' + name, mv.model.materials.map(m => ({
+              name: m.name,
+              baseColor: m.pbrMetallicRoughness.baseColorFactor.map(v => +v.toFixed(2)),
+              hasTexture: !!m.pbrMetallicRoughness.baseColorTexture.texture
+            })));
+            p.querySelectorAll('.media-msg').forEach(n => n.remove());
+            const h = document.createElement('div');
+            h.className = 'media-hint';
+            h.textContent = 'DRAG TO ROTATE // CLICK + SCROLL TO ZOOM';
+            p.appendChild(h);
+          });
+          mv.addEventListener('error', () => { mv.remove(); message(p, '3D MODEL COMING SOON'); if (!userPicked && current === 'model') show('photos', true); });
+          p.innerHTML = '';
+          p.appendChild(mv);
+        }).catch(() => { message(p, '3D VIEWER UNAVAILABLE'); if (!userPicked && current === 'model') show('photos', true); });
+        return p;
+      }
+    };
+
+    const show = (key, quiet) => {
+      if (key !== 'photos' && !panels[key]) {
+        panels[key] = build[key]();
+        col.appendChild(panels[key]);
+      }
+      Object.keys(panels).forEach(k => {
+        panels[k].hidden = (k !== key);
+        const v = panels[k].querySelector('video');
+        if (v && k !== key) v.pause();
+      });
+      Object.keys(buttons).forEach(k => buttons[k].setAttribute('aria-pressed', String(k === key)));
+      if (key === 'video' && !quiet) {
+        const vid = panels.video.querySelector('video');
+        if (vid) { const pr = vid.play(); if (pr && pr.catch) pr.catch(() => {}); }
+      }
+      current = key;
+    };
+
+    defs.forEach(([key, label]) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'media-tab';
+      b.textContent = label;
+      b.setAttribute('aria-pressed', String(key === defs[0][0]));
+      b.addEventListener('click', () => { userPicked = true; show(key); });
+      buttons[key] = b;
+      bar.appendChild(b);
+    });
+    col.appendChild(bar);
+
+    const first = defs[0][0];
+    if (first !== 'photos') {
+      const io = new IntersectionObserver(entries => {
+        if (entries.some(e => e.isIntersecting)) {
+          io.disconnect();
+          if (!userPicked) show(first, true);
+        }
+      }, { rootMargin: '300px' });
+      io.observe(card);
+    }
+  });
+})();
+</script>
+
+<!-- RESUME REQUEST + SONG CLIP -->
+<script>
+(() => {
+  const t = document.getElementById('resume-toggle'), f = document.getElementById('resume-form');
+  if (t && f) {
+    t.addEventListener('click', () => {
+      f.hidden = !f.hidden;
+      t.setAttribute('aria-expanded', String(!f.hidden));
+      if (!f.hidden) f.querySelector('input[name=name]').focus();
+    });
+    f.addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = f.querySelector('button[type=submit]'), st = document.getElementById('resume-status');
+      btn.disabled = true; st.className = 'font-mono text-xs text-mute'; st.textContent = '[ SENDING... ]';
+      const data = Object.fromEntries(new FormData(f));
+      try {
+        const r = await fetch('https://formsubmit.co/ajax/dmarin0013j@gmail.com', {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data)
+        });
+        const d = await r.json().catch(() => ({}));
+        if (!r.ok || d.success === 'false' || d.success === false) throw new Error(d.message || ('HTTP ' + r.status));
+        f.reset(); st.className = 'font-mono text-xs text-orange'; st.textContent = '[ REQUEST SENT. I WILL EMAIL IT TO YOU ]';
+      } catch (err) {
+        console.error('[resume request] send failed:', err);
+        const href = 'mailto:dmarin0013j@gmail.com?subject=' + encodeURIComponent('Resume request from ' + (data.name || '')) +
+                     '&body=' + encodeURIComponent('Hi Diego, could I get a copy of your resume?\n\n' + (data.name || '') + ' / ' + (data.email || '') + (data.company_or_reason ? '\n' + data.company_or_reason : ''));
+        st.className = 'font-mono text-xs text-orange'; st.textContent = '[ SEND FAILED. ';
+        const a = document.createElement('a'); a.href = href; a.textContent = 'EMAIL ME DIRECTLY'; a.className = 'underline underline-offset-4';
+        st.appendChild(a); st.appendChild(document.createTextNode(' ]'));
+      } finally { btn.disabled = false; }
+    });
+  }
+
+  const a = document.getElementById('song-audio'), b = document.getElementById('song-btn'),
+        p = document.getElementById('song-prog'), m = document.getElementById('song-msg');
+  if (a && b) {
+    const s0 = +a.dataset.start || 0, e0 = +a.dataset.end || 30;
+    const label = on => { b.innerHTML = on ? '&#10074;&#10074; PAUSE' : '&#9654; PLAY CLIP'; };
+    b.addEventListener('click', () => {
+      if (!a.paused) { a.pause(); label(false); return; }
+      if (a.currentTime < s0 || a.currentTime >= e0) a.currentTime = s0;
+      m.textContent = '';
+      const pr = a.play();
+      if (pr && pr.then) pr.then(() => label(true)).catch(() => { m.textContent = '[ CLIP COMING SOON ]'; label(false); });
+    });
+    a.addEventListener('timeupdate', () => {
+      p.style.width = Math.min(100, Math.max(0, (a.currentTime - s0) / (e0 - s0) * 100)) + '%';
+      if (a.currentTime >= e0) { a.pause(); a.currentTime = s0; p.style.width = '0'; label(false); }
+    });
+    a.addEventListener('ended', () => { p.style.width = '0'; label(false); });
+    a.addEventListener('error', () => { m.textContent = '[ CLIP COMING SOON ]'; label(false); });
+  }
+})();
+</script>
+
+<!-- CONTACT FORM SCRIPT -->
+<script>
+const cf = document.getElementById('contact-form');
+cf.addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = cf.querySelector('button[type=submit]'), st = document.getElementById('form-status');
+  btn.disabled = true; btn.textContent = 'Sending...'; st.textContent = ''; st.className = 'font-mono text-xs text-mute';
+  try {
+    const r = await fetch('https://formsubmit.co/ajax/dmarin0013j@gmail.com', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(cf)))
+    });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok || d.success === 'false' || d.success === false) throw new Error(d.message || ('HTTP ' + r.status));
+    cf.reset(); st.textContent = '[ MESSAGE SENT ]'; st.className = 'font-mono text-xs text-orange';
+  } catch (err) {
+    console.error('[contact form] send failed:', err);
+    const data = Object.fromEntries(new FormData(cf));
+    const href = 'mailto:dmarin0013j@gmail.com?subject=' + encodeURIComponent('Portfolio message from ' + (data.name || '')) +
+                 '&body=' + encodeURIComponent((data.message || '') + '\n\n' + (data.name || '') + ' / ' + (data.email || ''));
+    st.className = 'font-mono text-xs text-orange';
+    st.textContent = '[ SEND FAILED. ';
+    const a = document.createElement('a');
+    a.href = href; a.textContent = 'EMAIL ME DIRECTLY'; a.className = 'underline underline-offset-4';
+    st.appendChild(a); st.appendChild(document.createTextNode(' ]'));
+  }
+  btn.disabled = false; btn.textContent = 'Send message';
+});
+</script>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById('theme-btn');
+  function paint(){btn.textContent=root.dataset.theme==='light'?'DARK':'LIGHT'}
+  paint();
+  btn.onclick=function(){root.dataset.theme=root.dataset.theme==='light'?'dark':'light';try{localStorage.setItem('theme',root.dataset.theme)}catch(e){}paint()};
+  /* project list: rows that expand into the full project card */
+  var wrap=document.querySelector('#projects .max-w-7xl'),cat='aerospace',rows=[];
+  [].slice.call(wrap.children).forEach(function(k){if(k.tagName==='H3'&&/ROBOTICS/i.test(k.textContent))cat='robotics';if(k.tagName==='H3'||k.tagName==='ARTICLE')k.dataset.cat=cat});
+  var lcc=document.getElementById('project-lcc3'),first=wrap.querySelector('article[data-cat=aerospace]');if(lcc&&first&&first!==lcc)first.before(lcc);
+  ['aerospace','robotics'].forEach(function(c){wrap.querySelectorAll('article[data-cat='+c+']').forEach(function(a,n){
+    var num=String(n+1).padStart(2,'0'),ep=a.querySelector('.md\\:col-span-5 > p');if(ep)ep.textContent=ep.textContent.replace(/ENTRY \d+/,'ENTRY '+num);
+    var st='';[].slice.call(a.querySelectorAll('.pill')).forEach(function(p){var m=/STATUS:\s*(.*?)\s*\]/.exec(p.textContent.replace(/\s+/g,' '));if(m&&!st)st=m[1]});
+    var row=document.createElement('div');row.className='prow rv';row.dataset.cat=c;
+    row.innerHTML='<button type="button" class="phead" aria-expanded="false"><span class="pn"></span><span class="pt"></span><span class="pth" aria-hidden="true"></span><span class="ps"></span><span class="pp" aria-hidden="true">+</span></button><div class="pbody"></div>';
+    row.querySelector('.pn').textContent=num;row.querySelector('.pt').textContent=a.querySelector('h4').textContent.replace(/\s*\(.*\)\s*$/,'').trim();
+    var ps=row.querySelector('.ps');if(st){ps.textContent=st;if(/FLIGHT-PROVEN|BUILT AND WORKING/.test(st))ps.classList.add('live')}else ps.classList.add('empty');var im=a.querySelector('.img-slot img');if(im){var ti=document.createElement('img');ti.alt='';ti.src=im.getAttribute('src');ti.onerror=function(){ti.remove()};row.querySelector('.pth').appendChild(ti)}
+    a.before(row);row.querySelector('.pbody').appendChild(a);rows.push(row)})});
+  function setRow(r,o){r.classList.toggle('open',o);r.querySelector('.phead').setAttribute('aria-expanded',o)}
+  function goRow(r){setTimeout(function(){r.scrollIntoView({behavior:'smooth',block:'start'})},70)}
+  wrap.addEventListener('click',function(e){var h=e.target.closest('.phead');if(!h)return;var r=h.parentNode,o=!r.classList.contains('open');rows.forEach(function(x){setRow(x,false)});setRow(r,o);if(o)goRow(r)});
+  function openId(id){var a=id&&document.getElementById(id),r=a&&a.closest('.prow');if(!r)return;rows.forEach(function(x){setRow(x,false)});r.style.display='';setRow(r,true);goRow(r)}
+  addEventListener('hashchange',function(){openId(location.hash.slice(1))});if(location.hash.length>1)setTimeout(function(){openId(location.hash.slice(1))},300);
+  document.querySelectorAll('.spot').forEach(function(sp){sp.addEventListener('click',function(e){var h=sp.getAttribute('href');if(h&&h[0]==='#'){e.preventDefault();history.replaceState(null,'',h);openId(h.slice(1))}})});
+  var pf=document.getElementById('proj-filters');
+  pf.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;var f=b.dataset.f;
+    pf.querySelectorAll('.chip').forEach(function(c){c.setAttribute('aria-pressed',c===b)});
+    wrap.querySelectorAll('h3[data-cat],.prow').forEach(function(k){k.style.display=(f==='all'||k.dataset.cat===f)?'':'none'})});
+  ['hero-resume','nav-resume'].forEach(function(id){document.getElementById(id).addEventListener('click',function(e){e.preventDefault();document.getElementById('contact').scrollIntoView();var t=document.getElementById('resume-toggle');if(t&&t.getAttribute('aria-expanded')!=='true')t.click()})});
+  var mm=document.getElementById('more-menu');document.addEventListener('click',function(e){if(mm.open&&(!mm.contains(e.target)||e.target.closest('a')))mm.open=false});
+})();
+</script>
+<script>
+(function(){var b=document.getElementById('menu-btn'),m=document.getElementById('mobile-menu');
+function set(o){m.hidden=!o;b.setAttribute('aria-expanded',o);b.textContent=o?'CLOSE':'MENU'}
+b.onclick=function(){set(m.hidden)};m.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
+addEventListener('resize',function(){if(innerWidth>=768)set(false)})})();
+</script>
+<script>
+(function(){
+  var svg=document.getElementById('traj'),home=document.getElementById('home');
+  if(svg){
+    var P=svg.querySelector('#tp'),T=svg.querySelector('#tt'),D=svg.querySelector('#td'),H=svg.querySelector('#th'),R=svg.querySelector('#tr'),G=svg.querySelector('#tm'),L=P.getTotalLength(),V=svg.querySelector('#tv'),NS='http://www.w3.org/2000/svg';
+    [[0,'LAUNCH',-4],[.42,'APOGEE',0],[.72,'CHUTE',0],[1,'TOUCHDOWN',-62]].forEach(function(m){var pt=P.getPointAtLength(m[0]*L);
+      var c=document.createElementNS(NS,'circle');c.setAttribute('cx',pt.x);c.setAttribute('cy',pt.y);c.setAttribute('r',2.5);c.style.fill='rgb(var(--mute))';G.appendChild(c);
+      var t=document.createElementNS(NS,'text');t.setAttribute('x',pt.x+m[2]+(m[1]==='LAUNCH'?0:8));t.setAttribute('y',pt.y+(m[1]==='APOGEE'?-14:26));t.textContent=m[1];t.style.cssText='font:500 12px "Geist Mono",monospace;letter-spacing:.1em;fill:rgb(var(--mute))';G.appendChild(t)});
+    var DUR=11000,t0=performance.now();
+    (function f(now){var t=((now-t0)%DUR)/DUR,p=Math.min(1,t/.84),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,q=p*.35+e*.65,pt=P.getPointAtLength(q*L);
+      T.style.strokeDasharray=q+' 2';T.style.opacity=t>.9?Math.max(0,1-(t-.9)/.1):1;
+      D.setAttribute('cx',pt.x);D.setAttribute('cy',pt.y);H.setAttribute('cx',pt.x);H.setAttribute('cy',pt.y);H.setAttribute('r',6+((now/90)%10)*1.4);H.style.opacity=1-((now/90)%10)/10;
+      var alt=Math.max(0,Math.round((520-pt.y)/480*1480));R.textContent='ALT '+alt.toLocaleString('en-US')+' M';R.setAttribute('x',pt.x+(pt.x>430?-96:16));R.setAttribute('y',pt.y<90?pt.y+30:pt.y-14);var a0=P.getPointAtLength(Math.max(0,q*L-3)),a1=P.getPointAtLength(Math.min(L,q*L+3)),dx=a1.x-a0.x,dy=a1.y-a0.y,dl=Math.hypot(dx,dy)||1;V.setAttribute('x1',pt.x+dx/dl*10);V.setAttribute('y1',pt.y+dy/dl*10);V.setAttribute('x2',pt.x+dx/dl*26);V.setAttribute('y2',pt.y+dy/dl*26);
+      D.style.opacity=V.style.opacity=R.style.opacity=t>.93?Math.max(0,1-(t-.93)/.07):1;H.style.display=t>.93?'none':'';
+      requestAnimationFrame(f)})(t0)}
+  var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+  document.querySelectorAll('.h-sec,.contact-title,.spot,.hero-stats>div,.prow').forEach(function(n){n.classList.add('rv');io.observe(n)});
+})();
+</script>
+<script>
+(function(){var links=[].slice.call(document.querySelectorAll('header nav ul a[href^="#"]')),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isIntersecting){links.forEach(function(a){a.classList.remove('is-active')});var a=map[x.target.id];if(a)a.classList.add('is-active')}})},{rootMargin:'-45% 0px -50% 0px'});
+['home'].concat(Object.keys(map)).forEach(function(id){var e=document.getElementById(id);if(e)io.observe(e)})})();
+</script>
+<script>
+(function(){
+  var h=document.querySelector('header'),on=function(){h.classList.toggle('scrolled',scrollY>8)};addEventListener('scroll',on,{passive:true});on();
+  var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isIntersecting){var n=x.target;n.style.transitionDelay=(n.dataset.d||0)+'ms';n.classList.add('in');io.unobserve(n);setTimeout(function(){n.style.transitionDelay=''},1500)}})},{threshold:.1});
+  ['#skills .py-6','#leadership>div','#human .card','#about li','#about .img-slot','#contact form','#contact .space-y-3','.astro-hl figure'].forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(n,i){if(n.classList.contains('rv'))return;n.classList.add('rv');n.dataset.d=(i%5)*80;io.observe(n)})});
+})();
+</script>
+</body>
+</html>
