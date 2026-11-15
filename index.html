@@ -223,16 +223,24 @@ a.underline{transition:color .25s,text-underline-offset .3s}a.underline:hover{te
   #current-build .step.on b{color:rgb(var(--orange))}
   #current-build .viz{background:rgb(var(--alt));border-left:1px solid rgb(var(--line))}
   #current-build svg{width:100%;height:auto;display:block}
-  #current-build .ln{stroke:rgb(var(--ink));stroke-width:9;stroke-linecap:round;fill:none}
-  #current-build .jt{fill:rgb(var(--alt));stroke:rgb(var(--orange));stroke-width:3}
-  #current-build .a1,#current-build .a2,#current-build .a3{transform-box:view-box}
-  #current-build .a1{transform-origin:150px 232px;animation:cbs 7s ease-in-out infinite alternate}
-  #current-build .a2{transform-origin:150px 140px;animation:cbs 5s ease-in-out infinite alternate-reverse}
-  #current-build .a3{transform-origin:232px 96px;animation:cbs 4s ease-in-out infinite alternate}
-  @keyframes cbs{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+  #current-build .viz svg{overflow:visible;--w:242 242 244;--k:20 20 24;--d:30 30 34}
+  html[data-theme=light] #current-build .viz svg{--w:255 255 255}
+  #current-build .wh{fill:rgb(var(--w));stroke:rgb(var(--ink));stroke-width:3;stroke-linejoin:round}
+  #current-build .bk{fill:rgb(var(--k));stroke:rgb(var(--ink)/.6);stroke-width:3;stroke-linejoin:round}
+  #current-build .sm{fill:none;stroke:rgb(var(--d));stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  #current-build .bs{fill:none;stroke:rgb(255 255 255/.28);stroke-width:2.5}
+  #current-build .vt,#current-build .dt{fill:rgb(var(--d))}
+  #current-build .vk{fill:rgb(255 255 255/.4)}
+  #current-build .sc{fill:rgb(255 255 255/.5)}
+  #current-build .jt{fill:rgb(var(--alt));stroke:rgb(var(--orange));stroke-width:7}
+  #current-build .jr{fill:none;stroke:rgb(var(--orange));stroke-width:6}
+  #current-build .tx{font:26px "IBM Plex Mono",monospace;letter-spacing:.08em;fill:rgb(var(--mute))}
+  #current-build .ex,#current-build .dl{fill:none;stroke:rgb(var(--mute));stroke-width:2}
+  #current-build .ex{stroke-dasharray:6 8;stroke-opacity:.6}
+  #current-build .fl{fill:rgb(var(--mute))}
   @keyframes cbpulse{50%{opacity:.35}}
   @media(max-width:767px){#current-build .viz{border-left:0;border-top:1px solid rgb(var(--line))}}
-  @media(prefers-reduced-motion:reduce){#current-build .a1,#current-build .a2,#current-build .a3,#current-build .stage i.on{animation:none}}
+  @media(prefers-reduced-motion:reduce){#current-build .stage i.on{animation:none}}
   .grad{padding:.05em .1em .28em;margin:-.05em -.1em -.28em}
 </style>
 <style>
@@ -243,6 +251,13 @@ a.underline{transition:color .25s,text-underline-offset .3s}a.underline:hover{te
   #models-modal .mbox{background:rgb(var(--panel));border:1px solid rgb(var(--line));width:100%;max-width:64rem;max-height:94vh;overflow:auto}
   #models-modal model-viewer{width:100%;height:min(62vh,34rem);background:radial-gradient(circle at 50% 40%,rgb(var(--panel)) 0%,rgb(var(--alt)) 70%);--poster-color:transparent}
   #models-modal .mtab{cursor:pointer}#models-modal .mtab[aria-selected=true]{border-color:rgb(var(--orange));color:rgb(var(--orange))}
+  #uc-modal{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:1rem}
+  #uc-modal.open{display:flex}
+  #uc-modal .ubox{background:rgb(var(--panel));border:1px solid rgb(var(--line));width:100%;max-width:34rem;position:relative;overflow:hidden}
+  #uc-modal .ubox::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:rgb(var(--orange))}
+  #uc-modal .ustripe{height:6px;background:repeating-linear-gradient(135deg,rgb(var(--orange)) 0 12px,rgb(var(--bg)) 12px 24px)}
+  #models-modal .mbox{box-shadow:inset 3px 0 0 rgb(var(--orange))}
+  #models-modal .ustripe{height:6px;position:sticky;top:0;z-index:2;background:repeating-linear-gradient(135deg,rgb(var(--orange)) 0 12px,rgb(var(--bg)) 12px 24px)}
 </style>
 </head>
 <body class="font-sans antialiased">
@@ -358,22 +373,74 @@ a.underline{transition:color .25s,text-underline-offset .3s}a.underline:hover{te
       <p class="mt-8 font-mono text-[11px] text-mute">BUILD LOG</p>
       <div class="mt-3 stage" aria-hidden="true"><i class="done"></i><i class="on"></i><i></i><i></i></div>
       <div class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-4"><div class="step done">01<b>GEARBOX</b>DONE</div><div class="step on">02<b>LINKS &amp; JOINTS</b>IN PROGRESS</div><div class="step ">03<b>ELECTRONICS</b>NEXT</div><div class="step ">04<b>ASSEMBLY &amp; TESTS</b>NEXT</div></div>
-      <button type="button" id="models-btn" class="mt-8 inline-flex items-center gap-3 border border-orange text-orange px-5 py-3 font-mono text-xs tracking-widest hover:bg-orange hover:text-bg transition-colors" aria-haspopup="dialog">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>MODELS<span class="text-mute">/ 2</span></button>
+      <div class="mt-8 flex flex-wrap gap-3"><button type="button" id="models-btn" class="inline-flex items-center gap-3 border border-orange text-orange px-5 py-3 font-mono text-xs tracking-widest hover:bg-orange hover:text-bg transition-colors" aria-haspopup="dialog">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>MODELS<span class="text-mute">/ 2</span></button><button type="button" class="uc-btn inline-flex items-center gap-3 border border-orange text-orange px-5 py-3 font-mono text-xs tracking-widest hover:bg-orange hover:text-bg transition-colors" aria-haspopup="dialog" data-uc="COM">COM</button><button type="button" class="uc-btn inline-flex items-center gap-3 border border-orange text-orange px-5 py-3 font-mono text-xs tracking-widest hover:bg-orange hover:text-bg transition-colors" aria-haspopup="dialog" data-uc="STLs">STL'S</button><button type="button" class="uc-btn inline-flex items-center gap-3 border border-orange text-orange px-5 py-3 font-mono text-xs tracking-widest hover:bg-orange hover:text-bg transition-colors" aria-haspopup="dialog" data-uc="Documentation">DOCUMENTATION</button></div>
     </div>
     <div class="md:col-span-5 viz p-6 md:p-8 flex flex-col justify-center">
-      <svg viewBox="0 0 300 280" role="img" aria-label="Line drawing of a six-axis robotic arm, slowly moving">
-        <path d="M150 232 A160 160 0 0 1 290 150" style="fill:none;stroke:rgb(var(--mute));stroke-opacity:.5;stroke-dasharray:3 6"/>
-        <path d="M20 250H280" style="stroke:rgb(var(--line));stroke-width:1"/>
-        <rect x="118" y="232" width="64" height="18" style="fill:rgb(var(--alt));stroke:rgb(var(--ink));stroke-width:2"/>
-        <g class="a1"><path class="ln" d="M150 232V140"/>
-          <g class="a2"><path class="ln" d="M150 140L232 96"/>
-            <g class="a3"><path class="ln" d="M232 96L268 128"/><path class="ln" style="stroke-width:3" d="M258 116L278 132M272 142L282 124"/>
-              <circle class="jt" cx="232" cy="96" r="7"/></g>
-            <circle class="jt" cx="150" cy="140" r="8"/></g>
-          <circle class="jt" cx="150" cy="232" r="9"/></g>
-        <text x="20" y="270" style="font:10px 'IBM Plex Mono',monospace;letter-spacing:.08em;fill:rgb(var(--mute))">SCHEMATIC, NOT TO SCALE</text>
-        <text x="206" y="168" style="font:10px 'IBM Plex Mono',monospace;letter-spacing:.08em;fill:rgb(var(--mute))">REACH ~40 CM</text>
+      <svg viewBox="70 -60 1030 650" role="img" aria-label="Side-view line drawing of the six-axis robotic arm, slowly moving">
+        <!-- ground + reach dimension -->
+        <path d="M70 500H1100" style="stroke:rgb(var(--line));stroke-width:3"/>
+        <path class="ex" d="M195 505V558M1070 215V558"/>
+        <path class="dl" d="M195 545H1070"/>
+        <path class="fl" d="M195 545l24-9v18zM1070 545l-24-9v18z"/>
+        <text class="tx" x="632" y="530" text-anchor="middle">REACH ~40 CM</text>
+
+        <!-- base: flared vented shell, J1 gearbox cylinder, neck -->
+        <path class="bk" d="M100 500V434Q102 392 128 366H266Q292 392 295 434V500Z"/>
+        <g class="vk"><rect x="169" y="384" width="10" height="30" rx="5"/><rect x="190" y="384" width="10" height="30" rx="5"/><rect x="211" y="384" width="10" height="30" rx="5"/>
+        <rect x="169" y="430" width="10" height="38" rx="5"/><rect x="190" y="430" width="10" height="38" rx="5"/><rect x="211" y="430" width="10" height="38" rx="5"/></g>
+        <rect class="wh" x="147" y="188" width="100" height="42"/>
+        <rect class="bk" x="133" y="225" width="125" height="142"/>
+        <path class="bs" d="M133 252H258M133 342H258"/>
+        <rect class="bk" x="124" y="355" width="142" height="12" rx="3"/>
+        <ellipse class="jr" cx="195" cy="298" rx="66" ry="13"/>
+        <text class="tx" x="282" y="306">J1</text>
+        <!-- J2 shoulder housing ring -->
+        <circle class="bk" cx="195" cy="148" r="60"/>
+        <text class="tx" x="195" y="62" text-anchor="middle">J2</text>
+
+        <g class="a1"><animateTransform attributeName="transform" type="rotate" dur="16s" begin="0s" repeatCount="indefinite" calcMode="spline" keyTimes="0;.25;.5;.75;1" keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1" values="0 195 148;-4 195 148;0 195 148;4 195 148;0 195 148"/>
+          <!-- forearm, swings about J3 -->
+          <g class="a2"><animateTransform attributeName="transform" type="rotate" dur="10s" repeatCount="indefinite" calcMode="spline" keyTimes="0;.25;.5;.75;1" keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1" values="0 497 148;-6 497 148;0 497 148;6 497 148;0 497 148"/>
+            <path class="wh" d="M497 100H598Q622 98 640 86H690V210H640Q622 198 598 196H497Z"/>
+            <g class="vt"><rect x="628" y="97" width="50" height="7" rx="3.5"/><rect x="628" y="113" width="50" height="7" rx="3.5"/><rect x="628" y="129" width="50" height="7" rx="3.5"/><rect x="628" y="196" width="50" height="6" rx="3"/></g>
+            <rect class="bk" x="685" y="82" width="70" height="132"/>
+            <path class="bs" d="M705 82V214"/>
+            <ellipse class="jr" cx="720" cy="148" rx="12" ry="70"/>
+            <text class="tx" x="720" y="62" text-anchor="middle">J4</text>
+            <rect class="wh" x="755" y="96" width="45" height="104"/>
+            <path class="sm" d="M778 96V200"/>
+            <rect class="wh" x="795" y="92" width="65" height="112"/>
+            <!-- wrist and tool, swing about J5 -->
+            <g class="a3"><animateTransform attributeName="transform" type="rotate" dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;.25;.5;.75;1" keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1" values="0 850 148;-8 850 148;0 850 148;8 850 148;0 850 148"/>
+              <rect class="wh" x="850" y="92" width="146" height="112"/>
+              <path class="sm" d="M926 92L966 124M926 204L966 172"/>
+              <rect class="bk" x="995" y="88" width="66" height="120"/>
+              <path class="bs" d="M1012 88V208"/>
+              <rect class="bk" x="1061" y="100" width="9" height="96" rx="2"/>
+              <ellipse class="jr" cx="1028" cy="148" rx="12" ry="64"/>
+              <text class="tx" x="1028" y="62" text-anchor="middle">J6</text>
+            </g>
+            <circle class="bk" cx="850" cy="148" r="58"/>
+            <circle class="wh" cx="850" cy="148" r="46"/>
+            <circle class="sm" cx="850" cy="148" r="28"/>
+            <circle class="jt" cx="850" cy="148" r="20"/>
+            <text class="tx" x="850" y="66" text-anchor="middle">J5</text>
+          </g>
+          <!-- upper arm: stadium body, teardrop cover seam, split lines -->
+          <path class="wh" d="M195 99H497V197H195A49 49 0 0 1 195 99Z"/>
+          <path class="sm" d="M209 108L315 146L211 187A42 42 0 1 1 209 108Z"/>
+          <path class="sm" d="M428 99V197M443 99V197"/>
+          <circle class="dt" cx="414" cy="148" r="4"/>
+          <circle class="jt" cx="195" cy="148" r="20"/>
+          <!-- J3 elbow: round end cap with NEMA 17 motor face -->
+          <circle class="bk" cx="497" cy="148" r="58"/>
+          <rect class="bk" x="455" y="106" width="84" height="84" rx="12"/>
+          <g class="sc"><circle cx="466" cy="117" r="5"/><circle cx="528" cy="117" r="5"/><circle cx="466" cy="179" r="5"/><circle cx="528" cy="179" r="5"/></g>
+          <circle class="jt" cx="497" cy="148" r="20"/>
+          <text class="tx" x="497" y="62" text-anchor="middle">J3</text>
+        </g>
+        <text class="tx" x="80" y="584">SIDE VIEW, SIMPLIFIED FROM CAD</text>
       </svg>
     </div>
   </div>
@@ -1269,6 +1336,7 @@ var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isInterse
 </script>
 <div id="models-modal" role="dialog" aria-modal="true" aria-labelledby="models-title">
   <div class="mbox">
+    <div class="ustripe" aria-hidden="true"></div>
     <div class="flex items-center justify-between gap-4 p-4 md:p-5 border-b border-line">
       <div><p class="font-mono text-[11px] text-orange">[ CURRENT BUILD ]</p><h3 id="models-title" class="text-xl font-bold text-white">Gearbox models</h3></div>
       <button type="button" id="models-close" class="font-mono text-xs text-mute hover:text-orange">CLOSE [ESC]</button>
@@ -1312,6 +1380,37 @@ var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isInterse
   modal.addEventListener('click',function(e){if(e.target===modal)closeM();var t=e.target.closest('.mtab');if(t)show(t.dataset.m)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))closeM()});
 })();
+</script>
+<div id="uc-modal" role="dialog" aria-modal="true" aria-labelledby="uc-title">
+  <div class="ubox">
+    <div class="ustripe" aria-hidden="true"></div>
+    <div class="flex items-center justify-between gap-4 p-4 md:p-5 border-b border-line pl-6 md:pl-7">
+      <div><p class="font-mono text-[11px] text-orange">[ CURRENT BUILD ]</p><h3 id="uc-title" class="text-xl font-bold text-white"></h3></div>
+      <button type="button" id="uc-close" class="font-mono text-xs text-mute hover:text-orange">CLOSE [ESC]</button>
+    </div>
+    <div class="p-6 md:p-8 pl-7 md:pl-10">
+      <span class="pill inline-flex items-center gap-2"><span class="dot"></span>UNDER CONSTRUCTION</span>
+      <p id="uc-msg" class="mt-5 leading-relaxed text-ink"></p>
+      <p class="mt-5 font-mono text-[11px] text-mute">CHECK BACK SOON.</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var modal=document.getElementById('uc-modal'),title=document.getElementById('uc-title'),msg=document.getElementById('uc-msg'),close=document.getElementById('uc-close'),last=null;
+  var T={COM:'The COM section is still being put together. It will be added once the links and joints are finished.',
+         STLs:'The STL files will be posted here once the design is finalized and every part has been printed and tested.',
+         Documentation:'The documentation is being written alongside the build. It will be posted here as the arm comes together.'};
+  function openM(k,btn){last=btn;title.textContent=k;msg.textContent=T[k];modal.classList.add('open');document.body.style.overflow='hidden';close.focus()}
+  function closeM(){modal.classList.remove('open');document.body.style.overflow='';if(last)last.focus()}
+  document.querySelectorAll('.uc-btn').forEach(function(b){b.addEventListener('click',function(){openM(b.dataset.uc,b)})});
+  close.addEventListener('click',closeM);
+  modal.addEventListener('click',function(e){if(e.target===modal)closeM()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))closeM()});
+})();
+</script>
+<script>
+(function(){var s=document.querySelector('#current-build .viz svg');if(s&&s.pauseAnimations&&matchMedia('(prefers-reduced-motion: reduce)').matches)s.pauseAnimations()})();
 </script>
 </body>
 </html>
