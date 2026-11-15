@@ -70,7 +70,64 @@
    ========================================================== */
 const EXTS = ['jpg','jpeg','png','webp'];   // the page tries each of these for every image id
 const PIPP = 'Frames were processed in PIPP, stacked in AutoStakkert!, and edited with RegiStax 6';
+const CU_NOTE = (len, pct) => 'Captured on November 14th, 2026. I captured a video of this region of the Moon as it transitioned through the frame, totaling ' + len + ', and used ' + pct + ' of the best frames. For this capture, I also used a 3x barlow. I then processed the video in PIPP, stacked in AutoStakkert!, and edited with RegiStax 6.';
+const CU_TAGS = pct => [['Technique','Stack'], ['Frames', pct], ['Telescope','Celestron C8'], ['Lens','3x Barlow']];
 const ENTRIES = [
+  {
+    date: '2026-11-14', title: 'Moon close up 1', id: 'moon-cu1-11-14-26',
+    notes: CU_NOTE('52 seconds', '80%'),
+    tags: CU_TAGS('80%')
+  },
+  {
+    date: '2026-11-14', title: 'Moon close up 2', id: 'moon-cu2-11-14-26',
+    notes: CU_NOTE('1:11 minutes', '80%'),
+    tags: CU_TAGS('80%')
+  },
+  {
+    date: '2026-11-14', title: 'Moon close up 3', id: 'moon-cu3-11-14-26',
+    notes: CU_NOTE('50 seconds', '85%'),
+    tags: CU_TAGS('85%')
+  },
+  {
+    date: '2026-11-14', title: 'Moon close up 4', id: 'moon-cu4-11-14-26',
+    notes: CU_NOTE('59 seconds', '80%'),
+    tags: CU_TAGS('80%')
+  },
+  {
+    date: '2026-11-14', title: 'Moon close up 5', id: 'moon-cu5-11-14-26',
+    notes: CU_NOTE('51 seconds', '80%'),
+    tags: CU_TAGS('80%')
+  },
+  {
+    date: '2026-11-14', title: 'Moon close up 6', id: 'moon-cu6-11-14-26',
+    notes: CU_NOTE('18 seconds', '80%'),
+    tags: CU_TAGS('80%')
+  },
+  {
+    date: '2026-11-14', title: 'Moon close up 7', id: 'moon-cu7-11-14-26',
+    notes: CU_NOTE('18 seconds', '50%'),
+    tags: CU_TAGS('50%')
+  },
+  {
+    date: '2026-11-14', title: 'Moon close up 8', id: 'moon-cu8-11-14-26',
+    notes: CU_NOTE('45 seconds', '85%'),
+    tags: CU_TAGS('85%')
+  },
+  {
+    date: '2026-11-14', title: 'Moon close up 9', id: 'moon-cu9-11-14-26',
+    notes: CU_NOTE('37 seconds', '70%'),
+    tags: CU_TAGS('70%')
+  },
+  {
+    date: '2026-11-14', title: 'Moon close up 10', id: 'moon-cu10-11-14-26',
+    notes: CU_NOTE('26 seconds', '90%'),
+    tags: CU_TAGS('90%')
+  },
+  {
+    date: '2026-11-14', title: 'Moon close up 11', id: 'moon-cu11-11-14-26',
+    notes: CU_NOTE('27 seconds', '80%'),
+    tags: CU_TAGS('80%')
+  },
   {
     date: '2026-11-08', title: 'Saturn', id: 'saturn-11-08-26',
     notes: 'Captured on November 8th, 2026. I captured three different videos of Saturn as it transitioned through the frame, totaling 5:46 minutes and 10,378 frames. For this capture, I also used a 3x Barlow and a yellow filter. ' + PIPP + '.',
