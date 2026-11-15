@@ -235,6 +235,15 @@ a.underline{transition:color .25s,text-underline-offset .3s}a.underline:hover{te
   @media(prefers-reduced-motion:reduce){#current-build .a1,#current-build .a2,#current-build .a3,#current-build .stage i.on{animation:none}}
   .grad{padding:.05em .1em .28em;margin:-.05em -.1em -.28em}
 </style>
+<style>
+  #current-build .step.done b{color:rgb(var(--ink))}
+  #current-build .step.done{color:rgb(var(--orange))}
+  #models-modal{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:1rem}
+  #models-modal.open{display:flex}
+  #models-modal .mbox{background:rgb(var(--panel));border:1px solid rgb(var(--line));width:100%;max-width:64rem;max-height:94vh;overflow:auto}
+  #models-modal model-viewer{width:100%;height:min(62vh,34rem);background:radial-gradient(circle at 50% 40%,rgb(var(--panel)) 0%,rgb(var(--alt)) 70%);--poster-color:transparent}
+  #models-modal .mtab{cursor:pointer}#models-modal .mtab[aria-selected=true]{border-color:rgb(var(--orange));color:rgb(var(--orange))}
+</style>
 </head>
 <body class="font-sans antialiased">
 
@@ -343,12 +352,14 @@ a.underline{transition:color .25s,text-underline-offset .3s}a.underline:hover{te
       </div>
       <h2 class="mt-5 text-3xl md:text-5xl font-bold tracking-tight text-white leading-none">6-DOF Robotic Arm</h2>
       <p class="mt-5 leading-relaxed text-ink">A desktop industrial arm in the style of a Universal Robots cobot, with every part designed and printed by me. The piece I care about most is the gearbox: a stackable 5:1 planetary stage, so I can add stages on top whenever a joint needs more torque.</p>
-      <p class="mt-3 leading-relaxed text-ink">Every joint uses the same 42 mm NEMA 17 motor and the same round 56 mm housing, printed in PLA-CF. Only the motor height changes. Right now I'm finishing the gearbox and working out link lengths.</p>
+      <p class="mt-3 leading-relaxed text-ink">Every joint uses the same 42 mm NEMA 17 motor and the same round 56 mm housing, printed in PLA-CF. Only the motor height changes. The gearbox is done, so now I'm designing the links and joints around it.</p>
       <p class="mt-8 font-mono text-[11px] text-mute">SPEC SHEET</p>
       <div class="mt-3 flex flex-wrap gap-2"><span class="pill">[ <span class="text-mute">STATUS:</span> UNDER CONSTRUCTION ]</span><span class="pill">[ <span class="text-mute">DOF:</span> 6 + GRIPPER ]</span><span class="pill">[ <span class="text-mute">REACH TARGET:</span> 40 CM ]</span><span class="pill">[ <span class="text-mute">PAYLOAD TARGET:</span> 250 G ]</span><span class="pill">[ <span class="text-mute">ACTUATION:</span> NEMA 17 ]</span><span class="pill">[ <span class="text-mute">TRANSMISSION:</span> 5:1 PLANETARY, STACKABLE ]</span><span class="pill">[ <span class="text-mute">MATERIAL:</span> PLA-CF ]</span></div>
       <p class="mt-8 font-mono text-[11px] text-mute">BUILD LOG</p>
-      <div class="mt-3 stage" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></div>
-      <div class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-4"><div class="step on">01<b>GEARBOX</b>IN PROGRESS</div><div class="step ">02<b>LINKS &amp; JOINTS</b>NEXT</div><div class="step ">03<b>ELECTRONICS</b>NEXT</div><div class="step ">04<b>ASSEMBLY &amp; TESTS</b>NEXT</div></div>
+      <div class="mt-3 stage" aria-hidden="true"><i class="done"></i><i class="on"></i><i></i><i></i></div>
+      <div class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-4"><div class="step done">01<b>GEARBOX</b>DONE</div><div class="step on">02<b>LINKS &amp; JOINTS</b>IN PROGRESS</div><div class="step ">03<b>ELECTRONICS</b>NEXT</div><div class="step ">04<b>ASSEMBLY &amp; TESTS</b>NEXT</div></div>
+      <button type="button" id="models-btn" class="mt-8 inline-flex items-center gap-3 border border-orange text-orange px-5 py-3 font-mono text-xs tracking-widest hover:bg-orange hover:text-bg transition-colors" aria-haspopup="dialog">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>MODELS<span class="text-mute">/ 2</span></button>
     </div>
     <div class="md:col-span-5 viz p-6 md:p-8 flex flex-col justify-center">
       <svg viewBox="0 0 300 280" role="img" aria-label="Line drawing of a six-axis robotic arm, slowly moving">
@@ -1254,6 +1265,52 @@ var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isInterse
   var io=new IntersectionObserver(function(l){l.forEach(function(x){if(x.isIntersecting){var n=x.target;n.style.transitionDelay=(n.dataset.d||0)+'ms';n.classList.add('in');io.unobserve(n);setTimeout(function(){n.style.transitionDelay=''},1500)}})},{threshold:.1});
   ['#skills .py-6','#leadership>div','#human .card','#about li','#about .img-slot','#contact form','#contact .space-y-3','.astro-hl figure'].forEach(function(sel){
     document.querySelectorAll(sel).forEach(function(n,i){if(n.classList.contains('rv'))return;n.classList.add('rv');n.dataset.d=(i%5)*80;io.observe(n)})});
+})();
+</script>
+<div id="models-modal" role="dialog" aria-modal="true" aria-labelledby="models-title">
+  <div class="mbox">
+    <div class="flex items-center justify-between gap-4 p-4 md:p-5 border-b border-line">
+      <div><p class="font-mono text-[11px] text-orange">[ CURRENT BUILD ]</p><h3 id="models-title" class="text-xl font-bold text-white">Gearbox models</h3></div>
+      <button type="button" id="models-close" class="font-mono text-xs text-mute hover:text-orange">CLOSE [ESC]</button>
+    </div>
+    <div class="flex flex-wrap gap-2 p-4 md:p-5" role="tablist" aria-label="Choose a model">
+      <button type="button" role="tab" class="pill mtab" data-m="one" aria-selected="true">ONE-STAGE GEARBOX</button>
+      <button type="button" role="tab" class="pill mtab" data-m="two" aria-selected="false">TWO-STAGE GEARBOX</button>
+    </div>
+    <div id="models-stage"></div>
+    <div class="p-4 md:p-5 border-t border-line">
+      <p id="models-note" class="leading-relaxed text-ink"></p>
+      <p class="mt-3 font-mono text-[11px] text-mute">DRAG TO ROTATE. SCROLL OR PINCH TO ZOOM.</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var M={one:{src:'assets/models/gearbox-one-stage.glb',alt:'Interactive 3D model of the one-stage planetary gearbox',note:'One planetary stage at 5:1. This is the building block: same 56 mm round housing, same NEMA 17 mount.'},
+         two:{src:'assets/models/gearbox-two-stage.glb',alt:'Interactive 3D model of the two-stage planetary gearbox',note:'Two stages stacked for more torque. Each stage adds another 5:1, so the two together give 25:1 in a slightly taller housing.'}};
+  var modal=document.getElementById('models-modal'),stage=document.getElementById('models-stage'),note=document.getElementById('models-note'),open=document.getElementById('models-btn'),last=null,cur='one',loader=null;
+  function load(){return loader||(loader=new Promise(function(res,rej){if(window.customElements&&customElements.get('model-viewer'))return res();var sc=document.createElement('script');sc.type='module';sc.src='https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js';sc.onload=res;sc.onerror=rej;document.head.appendChild(sc)}))}
+  function show(k){cur=k;
+    modal.querySelectorAll('.mtab').forEach(function(t){t.setAttribute('aria-selected',t.dataset.m===k)});
+    note.textContent=M[k].note;
+    stage.innerHTML='<div class="font-mono text-xs text-mute p-10 text-center">[ LOADING 3D MODEL... ]</div>';
+    load().then(function(){
+      if(cur!==k)return;
+      var mv=document.createElement('model-viewer');
+      mv.setAttribute('src',M[k].src);mv.setAttribute('alt',M[k].alt);
+      mv.setAttribute('camera-controls','');mv.setAttribute('environment-image','neutral');mv.setAttribute('exposure','1.05');
+      mv.setAttribute('shadow-intensity','1.2');mv.setAttribute('shadow-softness','0.9');mv.setAttribute('interaction-prompt','none');
+      if(!matchMedia('(prefers-reduced-motion: reduce)').matches){mv.setAttribute('auto-rotate','');mv.setAttribute('auto-rotate-delay','2500')}
+      mv.addEventListener('error',function(){stage.innerHTML='<div class="font-mono text-xs text-mute p-10 text-center">[ MODEL FILE NOT FOUND: '+M[k].src+' ]</div>'});
+      stage.innerHTML='';stage.appendChild(mv);
+    }).catch(function(){stage.innerHTML='<div class="font-mono text-xs text-mute p-10 text-center">[ 3D VIEWER FAILED TO LOAD ]</div>'});
+  }
+  function openM(){last=document.activeElement;modal.classList.add('open');document.body.style.overflow='hidden';show(cur);document.getElementById('models-close').focus()}
+  function closeM(){modal.classList.remove('open');document.body.style.overflow='';stage.innerHTML='';if(last)last.focus()}
+  open.addEventListener('click',openM);
+  document.getElementById('models-close').addEventListener('click',closeM);
+  modal.addEventListener('click',function(e){if(e.target===modal)closeM();var t=e.target.closest('.mtab');if(t)show(t.dataset.m)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&modal.classList.contains('open'))closeM()});
 })();
 </script>
 </body>
