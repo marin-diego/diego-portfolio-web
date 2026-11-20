@@ -70,9 +70,59 @@
    ========================================================== */
 const EXTS = ['jpg','jpeg','png','webp'];   // the page tries each of these for every image id
 const PIPP = 'Frames were processed in PIPP, stacked in AutoStakkert!, and edited with RegiStax 6';
-const CU_NOTE = (len, pct) => 'Captured on November 14th, 2026. I captured a video of this region of the Moon as it transitioned through the frame, totaling ' + len + ', and used ' + pct + ' of the best frames. For this capture, I also used a 3x barlow. I then processed the video in PIPP, stacked in AutoStakkert!, and edited with RegiStax 6.';
+const CU_NOTE = (len, pct, day = '14th') => 'Captured on November ' + day + ', 2026. I captured a video of this region of the Moon as it transitioned through the frame, totaling ' + len + ', and used ' + pct + ' of the best frames. For this capture, I also used a 3x barlow. I then processed the video in PIPP, stacked in AutoStakkert!, and edited with RegiStax 6.';
 const CU_TAGS = pct => [['Technique','Stack'], ['Frames', pct], ['Telescope','Celestron C8'], ['Lens','3x Barlow']];
 const ENTRIES = [
+  {
+    date: '2026-11-15', title: 'Moon close up 1', id: 'moon-cu1-11-15-26',
+    notes: CU_NOTE('25 seconds', '80%', '15th'),
+    tags: CU_TAGS('80%')
+  },
+  {
+    date: '2026-11-15', title: 'Moon close up 2', id: 'moon-cu2-11-15-26',
+    notes: CU_NOTE('25 seconds', '80%', '15th'),
+    tags: CU_TAGS('80%')
+  },
+  {
+    date: '2026-11-15', title: 'Moon close up 3', id: 'moon-cu3-11-15-26',
+    notes: CU_NOTE('25 seconds', '94%', '15th'),
+    tags: CU_TAGS('94%')
+  },
+  {
+    date: '2026-11-15', title: 'Moon close up 4', id: 'moon-cu4-11-15-26',
+    notes: CU_NOTE('48 seconds', '72%', '15th'),
+    tags: CU_TAGS('72%')
+  },
+  {
+    date: '2026-11-15', title: 'Moon close up 5', id: 'moon-cu5-11-15-26',
+    notes: CU_NOTE('30 seconds', '95%', '15th'),
+    tags: CU_TAGS('95%')
+  },
+  {
+    date: '2026-11-15', title: 'Moon close up 6', id: 'moon-cu6-11-15-26',
+    notes: CU_NOTE('41 seconds', '94%', '15th'),
+    tags: CU_TAGS('94%')
+  },
+  {
+    date: '2026-11-15', title: 'Moon close up 7', id: 'moon-cu7-11-15-26',
+    notes: CU_NOTE('39 seconds', '94%', '15th'),
+    tags: CU_TAGS('94%')
+  },
+  {
+    date: '2026-11-15', title: 'Moon close up 8', id: 'moon-cu8-11-15-26',
+    notes: CU_NOTE('30 seconds', '80%', '15th'),
+    tags: CU_TAGS('80%')
+  },
+  {
+    date: '2026-11-15', title: 'Moon close up 9', id: 'moon-cu9-11-15-26',
+    notes: CU_NOTE('36 seconds', '90%', '15th'),
+    tags: CU_TAGS('90%')
+  },
+  {
+    date: '2026-11-15', title: 'Moon close up 10', id: 'moon-cu10-11-15-26',
+    notes: CU_NOTE('27 seconds', '96%', '15th'),
+    tags: CU_TAGS('96%')
+  },
   {
     date: '2026-11-14', title: 'Moon close up 1', id: 'moon-cu1-11-14-26',
     notes: CU_NOTE('52 seconds', '80%'),
@@ -175,9 +225,18 @@ const ENTRIES = [
   }
 ];
 
+/* Nov 17 gallery: one shared description. cu13 isn't in the folder yet; add 13 to this list when you have it. */
+const NOV17 = [1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22,23];
+NOV17.forEach(n => ENTRIES.push({
+  date: '2026-11-17', title: 'Moon close up ' + n, id: 'moon-cu' + n + '-11-17-26',
+  notes: 'This image is part of a gallery I captured on November 17th, 2026. I captured a video of this region of the Moon as it transitioned through the frame. The average length of each video was 18 seconds, and I used a range of 60-90% of the best frames. For this capture, I also used a 3x barlow. I then processed the video in PIPP, stacked in AutoStakkert!, and edited with RegiStax 6.',
+  tags: [['Technique','Stack'], ['Telescope','Celestron C8'], ['Lens','3x Barlow']]
+}));
+
 const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt = d => { const [y, m, day] = d.split('-').map(Number); return MONTHS[m - 1] + ' ' + day + ', ' + y; };
+const tileTitle = e => e.title.replace(/\s+\d+$/, '');   // grid view hides the trailing number; the popup keeps it
 const catOf = e => /moon/i.test(e.title) ? 'Moon' : /saturn|jupiter|mars|venus|mercury|uranus|neptune/i.test(e.title) ? 'Planets' : 'Deep sky';
 const candidates = e => [e.id, ...(e.alt || [])].flatMap(n => EXTS.map(x => 'assets/astro-catalog/' + n + '.' + x));
 function tryNext(img) {
@@ -195,7 +254,7 @@ function render() {
   const years = [...new Set(list.map(e => e.date.slice(0, 4)))];
   document.getElementById('catalog').innerHTML = list.length ? years.map(y =>
     '<section class="mt-12"><h2 class="font-mono text-sm text-orange border-b border-line pb-3">[ ' + y + ' ]</h2><div class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">' +
-    list.filter(e => e.date.startsWith(y)).map(e => '<button type="button" class="tile" data-id="' + esc(e.id) + '"><div class="thumb"><span class="ph">[ ' + esc(e.title) + ' ]</span>' + img(e) + '</div><div class="p-3"><p class="font-mono text-[10px] text-orange">' + fmt(e.date) + ' / ' + catOf(e).toUpperCase() + '</p><h3 class="mt-1 text-sm font-bold text-white leading-snug">' + esc(e.title) + '</h3></div></button>').join('') +
+    list.filter(e => e.date.startsWith(y)).map(e => '<button type="button" class="tile" data-id="' + esc(e.id) + '"><div class="thumb"><span class="ph">[ ' + esc(tileTitle(e)) + ' ]</span>' + img(e) + '</div><div class="p-3"><p class="font-mono text-[10px] text-orange">' + fmt(e.date) + ' / ' + catOf(e).toUpperCase() + '</p><h3 class="mt-1 text-sm font-bold text-white leading-snug">' + esc(tileTitle(e)) + '</h3></div></button>').join('') +
     '</div></section>').join('') : '<p class="mt-12 text-mute">Nothing here yet.</p>';
 }
 const fl = document.getElementById('filters');
